@@ -1,7 +1,7 @@
 package com.andersenlab.hotel.domain;
 
 import com.andersenlab.hotel.port.external.ClientStore;
-import com.andersenlab.hotel.port.usecase.CalculateClientStayCurrentPrice;
+import com.andersenlab.hotel.port.usecase.CalculateClientStayCurrentPriceUseCase;
 import com.andersenlab.hotel.port.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.port.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.port.usecase.ListClientsUseCase;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 final class ClientService
-        implements CalculateClientStayCurrentPrice,
+        implements CalculateClientStayCurrentPriceUseCase,
         CheckInClientUseCase,
         CheckOutClientUseCase,
         ListClientsUseCase,

@@ -4,7 +4,7 @@ import com.andersenlab.hotel.port.external.ApartmentStore;
 import com.andersenlab.hotel.port.external.ClientStore;
 import com.andersenlab.hotel.port.usecase.AddApartmentUseCase;
 import com.andersenlab.hotel.port.usecase.AdjustApartmentPriceUseCase;
-import com.andersenlab.hotel.port.usecase.CalculateClientStayCurrentPrice;
+import com.andersenlab.hotel.port.usecase.CalculateClientStayCurrentPriceUseCase;
 import com.andersenlab.hotel.port.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.port.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.port.usecase.ListApartmentsUseCase;
@@ -33,7 +33,7 @@ public final class HotelModule {
         return apartmentService;
     }
 
-    public CalculateClientStayCurrentPrice calcClientStayCurrentPrice() {
+    public CalculateClientStayCurrentPriceUseCase calcClientStayCurrentPrice() {
         return clientService;
     }
 
