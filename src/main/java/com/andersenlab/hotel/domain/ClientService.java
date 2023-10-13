@@ -6,6 +6,7 @@ import com.andersenlab.hotel.port.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.port.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.port.usecase.ListClientsUseCase;
 import com.andersenlab.hotel.port.usecase.RegisterClientUseCase;
+import com.andersenlab.hotel.port.usecase.exception.ClientIsAlreadyExistsException;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +25,7 @@ final class ClientService
     }
 
     @Override
-    public void calculate(UUID id) {
+    public void calculatePrice(UUID id) {
 
     }
 
@@ -40,11 +41,18 @@ final class ClientService
 
     @Override
     public List<ClientView> list(Sort sort) {
-        return null;
+        return clientStore.findAllSorted(ClientStore.Sort.valueOf(sort.toString()))
+                .stream()
+                .map(Client::new)
+                .map(Client::view)
+                .toList();
     }
 
     @Override
     public void register(UUID id, String name) {
+        if (clientStore.has(id)) {
+            throw new ClientIsAlreadyExistsException();
+        }
 
     }
 
