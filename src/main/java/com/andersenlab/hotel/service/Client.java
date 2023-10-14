@@ -1,7 +1,7 @@
-package com.andersenlab.hotel.domain;
+package com.andersenlab.hotel.service;
 
-import com.andersenlab.hotel.port.external.ClientStore;
-import com.andersenlab.hotel.port.usecase.ListClientsUseCase;
+import com.andersenlab.hotel.repository.ClientStore;
+import com.andersenlab.hotel.usecase.ListClientsUseCase;
 
 import java.util.UUID;
 

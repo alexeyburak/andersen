@@ -1,4 +1,4 @@
-package com.andersenlab.hotel.port.usecase;
+package com.andersenlab.hotel.usecase;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

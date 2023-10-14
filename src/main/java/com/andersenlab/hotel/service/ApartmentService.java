@@ -1,10 +1,11 @@
-package com.andersenlab.hotel.domain;
+package com.andersenlab.hotel.service;
 
-import com.andersenlab.hotel.port.external.ApartmentStore;
-import com.andersenlab.hotel.port.usecase.AddApartmentUseCase;
-import com.andersenlab.hotel.port.usecase.AdjustApartmentPriceUseCase;
-import com.andersenlab.hotel.port.usecase.ListApartmentsUseCase;
-import com.andersenlab.hotel.port.usecase.exception.ApartmentWithSameIdExists;
+import com.andersenlab.hotel.repository.inmemory.InMemoryApartmentStore;
+import com.andersenlab.hotel.repository.ApartmentStore;
+import com.andersenlab.hotel.usecase.AddApartmentUseCase;
+import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
+import com.andersenlab.hotel.usecase.ListApartmentsUseCase;
+import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,9 +21,17 @@ final class ApartmentService
 
     private static final Logger LOG = LoggerFactory.getLogger(ApartmentService.class);
     private final ApartmentStore apartmentStore;
+    private static ApartmentService instance;
 
-    ApartmentService(ApartmentStore apartmentStore) {
-        this.apartmentStore = apartmentStore;
+    protected ApartmentService() {
+        this.apartmentStore = InMemoryApartmentStore.getInstance();
+    }
+
+    public static ApartmentService getInstance() {
+        if(instance == null){
+            instance = new ApartmentService();
+        }
+        return instance;
     }
 
     @Override

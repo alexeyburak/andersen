@@ -1,21 +1,27 @@
-package com.andersenlab.hotel.application;
+package com.andersenlab.hotel.repository.inmemory;
 
-import com.andersenlab.hotel.port.external.ClientStore;
+import com.andersenlab.hotel.repository.ClientStore;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public final class InMemoryClientStore implements ClientStore {
+    private final Map<UUID, ClientEntity> map;
+    private static InMemoryClientStore instance;
 
-    private final Map<UUID, ClientEntity> map = new HashMap<>();
-    private final Map<Sort, Comparator<ClientEntity>> comparators = Map.of(
-            Sort.ID, Comparator.comparing(ClientEntity::id),
-            Sort.NAME, Comparator.comparing(ClientEntity::name),
-            Sort.STATUS, Comparator.comparing(ClientEntity::status)
-    );
+    protected InMemoryClientStore(){
+        map = new HashMap<>();
+    }
+
+    public static InMemoryClientStore getInstance() {
+        if(instance == null){
+            instance = new InMemoryClientStore();
+        }
+        return instance;
+    }
+
 
     @Override
     public void save(ClientEntity clientEntity) {
@@ -25,7 +31,7 @@ public final class InMemoryClientStore implements ClientStore {
     @Override
     public Collection<ClientEntity> findAllSorted(Sort sort) {
         return map.values().stream()
-                .sorted(comparators.get(sort))
+                .sorted(sort.getComparator())
                 .toList();
     }
 

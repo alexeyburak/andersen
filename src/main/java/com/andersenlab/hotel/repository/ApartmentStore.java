@@ -1,11 +1,15 @@
-package com.andersenlab.hotel.port.external;
+package com.andersenlab.hotel.repository;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.UUID;
 
-public interface ApartmentStore {
+public interface ApartmentStore  {
 
     void save(ApartmentEntity apartmentEntity);
 
@@ -17,8 +21,15 @@ public interface ApartmentStore {
 
     ApartmentEntity getById(UUID id);
 
+
+    @Getter
+    @AllArgsConstructor
     enum Sort {
-        ID, PRICE, CAPACITY, AVAILABILITY
+        ID(Comparator.comparing(ApartmentEntity::id)), PRICE(Comparator.comparing(ApartmentEntity::price)),
+        CAPACITY(Comparator.comparing(ApartmentEntity::capacity)),
+        AVAILABILITY(Comparator.comparing(ApartmentEntity::availability));
+
+        private Comparator<ApartmentEntity> comparator;
     }
 
     enum ApartmentStatus {

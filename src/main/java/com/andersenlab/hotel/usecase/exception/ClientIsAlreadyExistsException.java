@@ -1,3 +1,3 @@
-package com.andersenlab.hotel.port.usecase.exception;
+package com.andersenlab.hotel.usecase.exception;
 
 public final class ClientIsAlreadyExistsException extends RuntimeException {}

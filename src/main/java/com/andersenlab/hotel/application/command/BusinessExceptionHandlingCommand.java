@@ -1,13 +1,11 @@
 package com.andersenlab.hotel.application.command;
 
-import com.andersenlab.hotel.port.usecase.exception.ApartmentWithSameIdExists;
-import com.andersenlab.hotel.port.usecase.exception.ClientIsAlreadyExistsException;
+import com.andersenlab.hotel.application.CustomErrorMessage;
+import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
+import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
 
 import java.io.PrintStream;
 import java.util.List;
-
-import static com.andersenlab.hotel.application.ErrorMessage.APARTMENT_IS_ALREADY_EXISTS;
-import static com.andersenlab.hotel.application.ErrorMessage.CLIENT_IS_ALREADY_EXISTS;
 
 
 public final class BusinessExceptionHandlingCommand implements Command {
@@ -28,9 +26,9 @@ public final class BusinessExceptionHandlingCommand implements Command {
         try {
             original.execute(output, arguments);
         } catch (ApartmentWithSameIdExists e) {
-            output.println(APARTMENT_IS_ALREADY_EXISTS);
+            output.println(CustomErrorMessage.APARTMENT_IS_ALREADY_EXISTS.getMessage());
         } catch (ClientIsAlreadyExistsException e) {
-            output.println(CLIENT_IS_ALREADY_EXISTS);
+            output.println(CustomErrorMessage.CLIENT_IS_ALREADY_EXISTS.getMessage());
         }
     }
 

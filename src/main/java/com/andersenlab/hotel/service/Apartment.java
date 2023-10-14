@@ -1,12 +1,11 @@
-package com.andersenlab.hotel.domain;
+package com.andersenlab.hotel.service;
 
-import com.andersenlab.hotel.port.external.ApartmentStore;
-import com.andersenlab.hotel.port.usecase.ListApartmentsUseCase;
+import com.andersenlab.hotel.repository.ApartmentStore;
+import com.andersenlab.hotel.usecase.ListApartmentsUseCase;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.UUID;
-
 final class Apartment {
 
     private final ApartmentStore.ApartmentEntity entity;
@@ -16,7 +15,8 @@ final class Apartment {
     }
 
     Apartment(UUID id, BigDecimal price, BigInteger capacity, boolean availability) {
-        this(new ApartmentStore.ApartmentEntity(id, price, capacity, availability, ApartmentStore.ApartmentStatus.AVAILABLE));
+        this(new ApartmentStore.ApartmentEntity(id, price, capacity, availability,
+                ApartmentStore.ApartmentStatus.AVAILABLE));
     }
 
     ListApartmentsUseCase.ApartmentView view() {
@@ -28,5 +28,4 @@ final class Apartment {
                 ListApartmentsUseCase.ApartmentStatus.valueOf(entity.status().toString())
         );
     }
-
 }

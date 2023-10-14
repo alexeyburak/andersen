@@ -1,9 +1,9 @@
 package com.andersenlab.hotel.application.command;
 
+import com.andersenlab.hotel.application.CustomErrorMessage;
+
 import java.io.PrintStream;
 import java.util.List;
-
-import static com.andersenlab.hotel.application.ErrorMessage.WRONG_ARGUMENTS;
 
 public final class GenericExceptionHandlingCommand implements Command {
 
@@ -23,7 +23,7 @@ public final class GenericExceptionHandlingCommand implements Command {
         try {
             original.execute(output, arguments);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
-            output.println(WRONG_ARGUMENTS);
+            output.println(CustomErrorMessage.WRONG_ARGUMENTS.getMessage());
         }
     }
 

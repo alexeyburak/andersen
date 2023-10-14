@@ -1,12 +1,13 @@
-package com.andersenlab.hotel.domain;
+package com.andersenlab.hotel.service;
 
-import com.andersenlab.hotel.port.external.ClientStore;
-import com.andersenlab.hotel.port.usecase.CalculateClientStayCurrentPriceUseCase;
-import com.andersenlab.hotel.port.usecase.CheckInClientUseCase;
-import com.andersenlab.hotel.port.usecase.CheckOutClientUseCase;
-import com.andersenlab.hotel.port.usecase.ListClientsUseCase;
-import com.andersenlab.hotel.port.usecase.RegisterClientUseCase;
-import com.andersenlab.hotel.port.usecase.exception.ClientIsAlreadyExistsException;
+import com.andersenlab.hotel.repository.inmemory.InMemoryClientStore;
+import com.andersenlab.hotel.repository.ClientStore;
+import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
+import com.andersenlab.hotel.usecase.CheckInClientUseCase;
+import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
+import com.andersenlab.hotel.usecase.ListClientsUseCase;
+import com.andersenlab.hotel.usecase.RegisterClientUseCase;
+import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,11 +20,17 @@ final class ClientService
         RegisterClientUseCase {
 
     private final ClientStore clientStore;
-
-    ClientService(ClientStore clientStore) {
-        this.clientStore = clientStore;
+    private static ClientService instance;
+    protected ClientService() {
+        this.clientStore = InMemoryClientStore.getInstance();
     }
 
+    public static ClientService getInstance() {
+        if (instance == null) {
+            instance = new ClientService();
+        }
+        return instance;
+    }
     @Override
     public void calculatePrice(UUID id) {
 
