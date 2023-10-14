@@ -26,11 +26,11 @@ public interface ClientStore {
         NAME(Comparator.comparing(ClientEntity::name)),
         STATUS(Comparator.comparing(ClientEntity::status));
 
-        private Comparator<ClientEntity> comparator;
+        private final Comparator<ClientEntity> comparator;
     }
 
-    enum ClientStatus { //TODO add
-        NEW
+    enum ClientStatus {
+        NEW, ADVANCED, BANNED
     }
 
     record ClientEntity(UUID id, String name, ClientStatus status) {}
