@@ -1,0 +1,48 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{66} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <property name = "repository-file" value = "logs/repository"/>
+    <property name = "service-file" value = "logs/service"/>
+
+    <appender name="repository" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${repository-file}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${repository-file}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>100GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{66} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="service" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${service-file}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${service-file}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>100GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{66} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <logger name="repository-logger" level="INFO" additivity="true">
+        <appender-ref ref="repository"/>
+    </logger>
+
+    <logger name="service-logger" level="INFO" additivity="true">
+        <appender-ref ref="service"/>
+    </logger>
+</configuration>
