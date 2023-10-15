@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
-public class CalculatePrice implements Command {
+public final class CalculateClientStayCurrentPriceCommand implements Command {
+
     private final CalculateClientStayCurrentPriceUseCase useCase;
+
     @Override
     public void execute(PrintStream output, List<String> arguments) {
         useCase.calculatePrice(UUID.fromString(arguments.get(1)));

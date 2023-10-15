@@ -8,12 +8,19 @@ import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
-public class CheckIn implements Command {
+public final class CheckInClientCommand implements Command {
+
+    private static final String CHECK_IN_MESSAGE = "Client was checked in";
+
     private final CheckInClientUseCase useCase;
 
     @Override
     public void execute(PrintStream output, List<String> arguments) {
-        useCase.checkIn(UUID.fromString(arguments.get(1)), UUID.fromString(arguments.get(2)));
-        output.println("Client checked in");
+        UUID clientId = UUID.fromString(arguments.get(1));
+        UUID apartmentId = UUID.fromString(arguments.get(2));
+
+        useCase.checkIn(clientId, apartmentId);
+
+        output.println(CHECK_IN_MESSAGE);
     }
 }
