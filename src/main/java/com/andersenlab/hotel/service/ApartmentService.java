@@ -14,7 +14,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.UUID;
 
-final class ApartmentService
+public final class ApartmentService
         implements AddApartmentUseCase,
         AdjustApartmentPriceUseCase,
         ListApartmentsUseCase {
@@ -25,6 +25,10 @@ final class ApartmentService
 
     protected ApartmentService() {
         this.apartmentStore = InMemoryApartmentStore.getInstance();
+    }
+
+    protected ApartmentService(final ApartmentStore apartmentStore) {
+        this.apartmentStore = apartmentStore;
     }
 
     public static ApartmentService getInstance() {
@@ -48,7 +52,7 @@ final class ApartmentService
     @Override
     public void adjust(UUID id, BigDecimal newPrice) {
         ApartmentStore.ApartmentEntity entity = apartmentStore.getById(id);
-
+        //Todo
         LOG.info("Adjust apartment price. ID: {}", id);
     }
 

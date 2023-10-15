@@ -29,7 +29,7 @@ public interface ApartmentStore  {
         CAPACITY(Comparator.comparing(ApartmentEntity::capacity)),
         AVAILABILITY(Comparator.comparing(ApartmentEntity::availability));
 
-        private Comparator<ApartmentEntity> comparator;
+        private final Comparator<ApartmentEntity> comparator;
     }
 
     enum ApartmentStatus {

@@ -12,7 +12,7 @@ import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
 import java.util.List;
 import java.util.UUID;
 
-final class ClientService
+public final class ClientService
         implements CalculateClientStayCurrentPriceUseCase,
         CheckInClientUseCase,
         CheckOutClientUseCase,
@@ -60,7 +60,6 @@ final class ClientService
         if (clientStore.has(id)) {
             throw new ClientIsAlreadyExistsException();
         }
-
     }
 
 }
