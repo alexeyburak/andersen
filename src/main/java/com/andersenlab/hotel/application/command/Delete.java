@@ -18,6 +18,5 @@ public class Delete implements Command {//TODO Change to service
             case "client" -> InMemoryClientStore.getInstance().delete(UUID.fromString(arguments.get(2)));
             default -> throw new IllegalArgumentException("Unknown argument");
         }
-
     }
 }
