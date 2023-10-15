@@ -25,7 +25,8 @@ public interface ApartmentStore  {
     @Getter
     @AllArgsConstructor
     enum Sort {
-        ID(Comparator.comparing(ApartmentEntity::id)), PRICE(Comparator.comparing(ApartmentEntity::price)),
+        ID(Comparator.comparing(ApartmentEntity::id)),
+        PRICE(Comparator.comparing(ApartmentEntity::price)),
         CAPACITY(Comparator.comparing(ApartmentEntity::capacity)),
         AVAILABILITY(Comparator.comparing(ApartmentEntity::availability));
 

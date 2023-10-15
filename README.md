@@ -114,7 +114,7 @@ Retrieves and displays the *details of the apartment* with the **specified** UUI
 get_all apartment sort
 ```
 
-***'sort'*** param have to contain [ ID CAPACITY AVAILABILITY ]
+***'sort'*** param have to contain [ ID CAPACITY AVAILABILITY PRICE ]
 
 Retrieves and displays *list of all apartments* with **specified** sort param.
 
