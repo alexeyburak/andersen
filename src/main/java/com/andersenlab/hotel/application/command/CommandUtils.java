@@ -36,6 +36,7 @@ public class CommandUtils {
     }
 
     private static void execute(Command command, PrintStream output, List<String> args) {
-        new BusinessExceptionHandlingCommand(new GenericExceptionHandlingCommand(command)).execute(output, args);
+        new BusinessExceptionHandlingCommand(new GenericExceptionHandlingCommand(command));
+        command.execute(output, args);
     }
 }
