@@ -11,17 +11,16 @@ public final class InMemoryClientStore implements ClientStore {
     private final Map<UUID, ClientEntity> map;
     private static InMemoryClientStore instance;
 
-    protected InMemoryClientStore(){
+    protected InMemoryClientStore() {
         map = new HashMap<>();
     }
 
     public static InMemoryClientStore getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new InMemoryClientStore();
         }
         return instance;
     }
-
 
     @Override
     public void save(ClientEntity clientEntity) {

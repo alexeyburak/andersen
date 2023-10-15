@@ -8,9 +8,18 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class InMemoryClientStoreTest {
     InMemoryClientStore target;
-    ClientStore.ClientEntity client1, client2, client3, client4, client5;
+    ClientStore.ClientEntity client1;
+    ClientStore.ClientEntity client2;
+    ClientStore.ClientEntity client3;
+    ClientStore.ClientEntity client4;
+    ClientStore.ClientEntity client5;
+
     @BeforeEach
     void setUp() {
         target = new InMemoryClientStore();
@@ -30,56 +39,62 @@ class InMemoryClientStoreTest {
     }
 
     @Test
-    void saveSingleTest() {
+    void save_SingleEntity_ShouldSaveEntityInStore() {
         target.save(client1);
 
         int actualSize = target.findAllSorted(ClientStore.Sort.ID).size();
 
-        Assertions.assertEquals(1, actualSize);
-        Assertions.assertTrue(target.has(client1.id()));
+        assertEquals(1, actualSize);
+        assertTrue(target.has(client1.id()));
     }
 
     @Test
-    void saveMultipleTest() {
+    void save_MultipleEntity_ShouldSaveEntityInStore() {
         target.save(client2);
         target.save(client3);
 
         int actualSize = target.findAllSorted(ClientStore.Sort.ID).size();
 
-        Assertions.assertEquals(2, actualSize);
-        Assertions.assertTrue(target.has(client2.id()));
-        Assertions.assertTrue(target.has(client3.id()));
+        assertEquals(2, actualSize);
+        assertTrue(target.has(client2.id()));
+        assertTrue(target.has(client3.id()));
     }
 
     @Test
-    void deleteExistingTest() {
+    void delete_ExistingEntity_ShouldDeleteEntityFromStore() {
         target.save(client1);
+
         target.delete(client1.id());
-        Assertions.assertFalse(target.has(client1.id()));
+
+        assertFalse(target.has(client1.id()));
     }
 
     @Test
-    void deleteNonExistingTest() {
+    void delete_NonExistingEntity_ShouldDeleteEntityFromStore() {
         target.delete(client1.id());
-        Assertions.assertFalse(target.has(client1.id()));
+
+        assertFalse(target.has(client1.id()));
     }
 
     @Test
-    void getExistingTest() {
+    void getById_ExistingEntity_ShouldReturnEntityFromStore() {
         target.save(client1);
+
         ClientStore.ClientEntity actual = target.getById(client1.id());
-        Assertions.assertEquals(client1, actual);
+
+        assertEquals(client1, actual);
     }
 
     @Test
-    void getNonExistingTest() {
+    void getById_NonExistingEntity_ShouldReturnNullEntity() {
         ClientStore.ClientEntity actual = target.getById(client1.id());
+
         Assertions.assertNotEquals(client1, actual);
         Assertions.assertNull(actual);
     }
 
     @Test
-    void sortIdTest() {
+    void findAllSorted_EntityId_ShouldSortEntitiesFromStoreById() {
         target.save(client5);
         target.save(client4);
         target.save(client3);
@@ -87,13 +102,13 @@ class InMemoryClientStoreTest {
         List<ClientStore.ClientEntity> sorted = (List<ClientStore.ClientEntity>)
                 target.findAllSorted(ClientStore.Sort.ID);
 
-        Assertions.assertEquals(client3, sorted.get(0));
-        Assertions.assertEquals(client4, sorted.get(1));
-        Assertions.assertEquals(client5, sorted.get(2));
+        assertEquals(client3, sorted.get(0));
+        assertEquals(client4, sorted.get(1));
+        assertEquals(client5, sorted.get(2));
     }
 
     @Test
-    void sortNameTest() {
+    void findAllSorted_EntityName_ShouldSortEntitiesFromStoreByName() {
         target.save(client5);
         target.save(client4);
         target.save(client3);
@@ -101,13 +116,13 @@ class InMemoryClientStoreTest {
         List<ClientStore.ClientEntity> sorted = (List<ClientStore.ClientEntity>)
                 target.findAllSorted(ClientStore.Sort.NAME);
 
-        Assertions.assertEquals(client3, sorted.get(0));
-        Assertions.assertEquals(client4, sorted.get(1));
-        Assertions.assertEquals(client5, sorted.get(2));
+        assertEquals(client3, sorted.get(0));
+        assertEquals(client4, sorted.get(1));
+        assertEquals(client5, sorted.get(2));
     }
 
     @Test
-    void sortStatusTest() {
+    void findAllSorted_EntityStatus_ShouldSortEntitiesFromStoreByStatus() {
         target.save(client3);
         target.save(client4);
         target.save(client5);
@@ -115,19 +130,20 @@ class InMemoryClientStoreTest {
         List<ClientStore.ClientEntity> sorted = (List<ClientStore.ClientEntity>)
                 target.findAllSorted(ClientStore.Sort.STATUS);
 
-        Assertions.assertEquals(ClientStore.ClientStatus.NEW, sorted.get(0).status());
-        Assertions.assertEquals(ClientStore.ClientStatus.ADVANCED, sorted.get(1).status());
-        Assertions.assertEquals(ClientStore.ClientStatus.BANNED, sorted.get(2).status());
+        assertEquals(ClientStore.ClientStatus.NEW, sorted.get(0).status());
+        assertEquals(ClientStore.ClientStatus.ADVANCED, sorted.get(1).status());
+        assertEquals(ClientStore.ClientStatus.BANNED, sorted.get(2).status());
     }
 
     @Test
-    void hasExistingTest() {
+    void has_ExistingEntity_ShouldReturnTrue() {
         target.save(client1);
-        Assertions.assertTrue(target.has(client1.id()));
+
+        assertTrue(target.has(client1.id()));
     }
 
     @Test
-    void hasNonExistingTest() {
-        Assertions.assertFalse(target.has(client1.id()));
+    void has_NonExistingEntity_ShouldReturnFalse() {
+        assertFalse(target.has(client1.id()));
     }
 }

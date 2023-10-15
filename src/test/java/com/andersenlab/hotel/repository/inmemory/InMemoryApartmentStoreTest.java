@@ -10,10 +10,18 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class InMemoryApartmentStoreTest {
     InMemoryApartmentStore target;
+    ApartmentStore.ApartmentEntity apartment1;
+    ApartmentStore.ApartmentEntity apartment2;
+    ApartmentStore.ApartmentEntity apartment3;
+    ApartmentStore.ApartmentEntity apartment4;
+    ApartmentStore.ApartmentEntity apartment5;
 
-    ApartmentStore.ApartmentEntity apartment1, apartment2, apartment3, apartment4, apartment5;
     @BeforeEach
     void setUp() {
         target = new InMemoryApartmentStore();
@@ -41,49 +49,54 @@ class InMemoryApartmentStoreTest {
     }
 
     @Test
-    void saveSingleTest() {
+    void save_SingleEntity_ShouldSaveEntityInStore() {
         target.save(apartment1);
 
         int actualSize = target.findAllSorted(ApartmentStore.Sort.ID).size();
 
-        Assertions.assertEquals(1, actualSize);
-        Assertions.assertTrue(target.has(apartment1.id()));
+        assertEquals(1, actualSize);
+        assertTrue(target.has(apartment1.id()));
     }
 
     @Test
-    void saveMultipleTest() {
+    void save_MultipleEntity_ShouldSaveEntitiesInStore() {
         target.save(apartment2);
         target.save(apartment3);
 
         int actualSize = target.findAllSorted(ApartmentStore.Sort.ID).size();
 
-        Assertions.assertEquals(2, actualSize);
-        Assertions.assertTrue(target.has(apartment3.id()));
-        Assertions.assertTrue(target.has(apartment2.id()));
+        assertEquals(2, actualSize);
+        assertTrue(target.has(apartment3.id()));
+        assertTrue(target.has(apartment2.id()));
     }
 
     @Test
-    void deleteExistingTest() {
+    void delete_ExistingEntity_ShouldDeleteEntityFromStore() {
         target.save(apartment1);
+
         target.delete(apartment1.id());
-        Assertions.assertFalse(target.has(apartment1.id()));
+
+        assertFalse(target.has(apartment1.id()));
     }
 
     @Test
-    void deleteNonExistingTest() {
+    void delete_NonExistingEntity_ShouldDeleteEntityFromStore() {
         target.delete(apartment1.id());
-        Assertions.assertFalse(target.has(apartment1.id()));
+
+        assertFalse(target.has(apartment1.id()));
     }
 
     @Test
-    void getExistingTest() {
+    void getById_ExistingEntity_ShouldReturnEntityFromStore() {
         target.save(apartment1);
+
         ApartmentStore.ApartmentEntity actual = target.getById(apartment1.id());
-        Assertions.assertEquals(apartment1, actual);
+
+        assertEquals(apartment1, actual);
     }
 
     @Test
-    void getNonExistingTest() {
+    void getById_ExistingEntity_ShouldReturnNullEntity() {
         ApartmentStore.ApartmentEntity actual = target.getById(apartment1.id());
 
         Assertions.assertNotEquals(apartment1, actual);
@@ -91,7 +104,7 @@ class InMemoryApartmentStoreTest {
     }
 
     @Test
-    void sortIdTest() {
+    void findAllSorted_EntityId_ShouldSortEntitiesFromStoreById() {
         target.save(apartment3);
         target.save(apartment4);
         target.save(apartment5);
@@ -99,13 +112,13 @@ class InMemoryApartmentStoreTest {
         List<ApartmentStore.ApartmentEntity> sorted = (List<ApartmentStore.ApartmentEntity>)
                 target.findAllSorted(ApartmentStore.Sort.ID);
 
-        Assertions.assertEquals(apartment3, sorted.get(0));
-        Assertions.assertEquals(apartment4, sorted.get(1));
-        Assertions.assertEquals(apartment5, sorted.get(2));
+        assertEquals(apartment3, sorted.get(0));
+        assertEquals(apartment4, sorted.get(1));
+        assertEquals(apartment5, sorted.get(2));
     }
 
     @Test
-    void sortPriceTest() {
+    void findAllSorted_EntityPrice_ShouldSortEntitiesFromStoreByPrice() {
         target.save(apartment3);
         target.save(apartment4);
         target.save(apartment5);
@@ -113,13 +126,13 @@ class InMemoryApartmentStoreTest {
         List<ApartmentStore.ApartmentEntity> sorted = (List<ApartmentStore.ApartmentEntity>)
                 target.findAllSorted(ApartmentStore.Sort.PRICE);
 
-        Assertions.assertEquals(apartment4, sorted.get(0));
-        Assertions.assertEquals(apartment5, sorted.get(1));
-        Assertions.assertEquals(apartment3, sorted.get(2));
+        assertEquals(apartment4, sorted.get(0));
+        assertEquals(apartment5, sorted.get(1));
+        assertEquals(apartment3, sorted.get(2));
     }
 
     @Test
-    void sortCapacityTest() {
+    void findAllSorted_EntityCapacity_ShouldSortEntitiesFromStoreByCapacity() {
         target.save(apartment3);
         target.save(apartment4);
         target.save(apartment5);
@@ -127,13 +140,13 @@ class InMemoryApartmentStoreTest {
         List<ApartmentStore.ApartmentEntity> sorted = (List<ApartmentStore.ApartmentEntity>)
                 target.findAllSorted(ApartmentStore.Sort.CAPACITY);
 
-        Assertions.assertEquals(apartment5, sorted.get(0));
-        Assertions.assertEquals(apartment4, sorted.get(1));
-        Assertions.assertEquals(apartment3, sorted.get(2));
+        assertEquals(apartment5, sorted.get(0));
+        assertEquals(apartment4, sorted.get(1));
+        assertEquals(apartment3, sorted.get(2));
     }
 
     @Test
-    void sortAvailabilityTest() {
+    void findAllSorted_EntityAvailability_ShouldSortEntitiesFromStoreByAvailability() {
         target.save(apartment5);
         target.save(apartment3);
         target.save(apartment4);
@@ -141,19 +154,20 @@ class InMemoryApartmentStoreTest {
         List<ApartmentStore.ApartmentEntity> sorted = (List<ApartmentStore.ApartmentEntity>)
                 target.findAllSorted(ApartmentStore.Sort.AVAILABILITY);
 
-        Assertions.assertFalse(sorted.get(0).availability());
-        Assertions.assertTrue(sorted.get(1).availability());
-        Assertions.assertTrue(sorted.get(2).availability());
+        assertFalse(sorted.get(0).availability());
+        assertTrue(sorted.get(1).availability());
+        assertTrue(sorted.get(2).availability());
     }
 
     @Test
-    void hasExistingTest() {
+    void has_ExistingEntity_ShouldReturnTrue() {
         target.save(apartment1);
-        Assertions.assertTrue(target.has(apartment1.id()));
+
+        assertTrue(target.has(apartment1.id()));
     }
 
     @Test
-    void hasNonExistingTest() {
-        Assertions.assertFalse(target.has(apartment1.id()));
+    void has_NonExistingEntity_ShouldReturnFalse() {
+        assertFalse(target.has(apartment1.id()));
     }
 }
