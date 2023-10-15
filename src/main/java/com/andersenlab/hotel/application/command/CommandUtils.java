@@ -5,6 +5,7 @@ import org.apache.commons.lang3.EnumUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class CommandUtils {
 
     @SneakyThrows
     public static void run() {
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); //TODO maybe use in try with resources
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         final List<Commands> allCommands = Arrays.stream(Commands.values()).toList();
         Commands chosenComand;
         do {
@@ -30,11 +31,11 @@ public class CommandUtils {
             String userInput = reader.readLine();
             List<String> args = Arrays.stream(userInput.split(" ")).toList();
             chosenComand = EnumUtils.getEnum(Commands.class, args.get(0).toUpperCase());
-            chosenComand.getCommand().execute(System.out, args);
+            execute(chosenComand.getCommand(), System.out, args);
         } while (chosenComand != Commands.EXIT);
     }
 
-    private static boolean isArgsValid(String args) { //TODO
-        return false;
+    private static void execute(Command command, PrintStream output, List<String> args) {
+        new BusinessExceptionHandlingCommand(new GenericExceptionHandlingCommand(command)).execute(output, args);
     }
 }
