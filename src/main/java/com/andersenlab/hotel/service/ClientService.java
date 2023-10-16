@@ -1,5 +1,6 @@
 package com.andersenlab.hotel.service;
 
+import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.repository.inmemory.InMemoryClientStore;
 import com.andersenlab.hotel.repository.ClientStore;
 import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
@@ -19,8 +20,9 @@ public final class ClientService
         ListClientsUseCase,
         RegisterClientUseCase {
 
-    private final ClientStore clientStore;
+    private final InMemoryClientStore clientStore;
     private static ClientService instance;
+
     protected ClientService() {
         this.clientStore = InMemoryClientStore.getInstance();
     }
@@ -31,6 +33,7 @@ public final class ClientService
         }
         return instance;
     }
+
     @Override
     public void calculatePrice(UUID id) {
 
@@ -39,12 +42,13 @@ public final class ClientService
     @Override
     public void checkIn(UUID clientId, UUID apartmentId) {
 
-    }
-
-    @Override
-    public void checkOut(UUID clientId, UUID apartmentId) {
 
     }
+
+//    @Override
+//    public void checkOut(UUID clientId, UUID apartmentId) {
+//        com.andersenlab.hotel.model.Client client = clientStore.getById(clientId).orElseThrow(()->new IllegalArgumentException("Wrong client id"));
+//    }
 
     @Override
     public List<ClientView> list(Sort sort) {
@@ -57,9 +61,13 @@ public final class ClientService
 
     @Override
     public void register(UUID id, String name) {
-        if (clientStore.has(id)) {
+        if (clientStore.hasIn(id)) {
             throw new ClientIsAlreadyExistsException();
         }
     }
 
+    @Override
+    public void checkOut(UUID clientId, UUID apartmentId) {
+
+    }
 }

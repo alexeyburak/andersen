@@ -34,4 +34,7 @@ public interface ClientStore {
     }
 
     record ClientEntity(UUID id, String name, ClientStatus status) {}
+
+
+
 }
