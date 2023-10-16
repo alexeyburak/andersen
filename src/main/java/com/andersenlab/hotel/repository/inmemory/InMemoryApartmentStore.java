@@ -17,7 +17,7 @@ public final class InMemoryApartmentStore implements ApartmentStore {
     } //TODO ask about this when code-review
 
     public static InMemoryApartmentStore getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new InMemoryApartmentStore();
         }
         return instance;
