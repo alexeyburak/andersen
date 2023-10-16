@@ -4,5 +4,5 @@ import java.util.UUID;
 
 public interface CalculateClientStayCurrentPriceUseCase {
 
-    void calculatePrice(UUID id);
+    double calculatePrice(UUID id);
 }

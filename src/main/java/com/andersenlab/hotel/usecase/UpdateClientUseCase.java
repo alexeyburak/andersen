@@ -2,7 +2,7 @@ package com.andersenlab.hotel.usecase;
 
 import com.andersenlab.hotel.model.Client;
 
-public interface RegisterClientUseCase {
+public interface UpdateClientUseCase {
 
-    void register(Client client);
+    void update(Client client);
 }

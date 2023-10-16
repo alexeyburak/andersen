@@ -2,7 +2,9 @@ package com.andersenlab.hotel.model;
 
 import lombok.Data;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 public class Client {

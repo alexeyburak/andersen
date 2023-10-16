@@ -14,6 +14,8 @@ public final class CalculateClientStayCurrentPriceCommand implements Command {
 
     @Override
     public void execute(PrintStream output, List<String> arguments) {
-        useCase.calculatePrice(UUID.fromString(arguments.get(1)));
+        double price = useCase.calculatePrice(UUID.fromString(arguments.get(1)));
+
+        output.println("Price for all apartments: " + price);
     }
 }

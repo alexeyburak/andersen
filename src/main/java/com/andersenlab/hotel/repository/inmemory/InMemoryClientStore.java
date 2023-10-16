@@ -1,62 +1,50 @@
 package com.andersenlab.hotel.repository.inmemory;
 
-
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientSort;
-import com.andersenlab.hotel.repository.CrudRepository;
+import com.andersenlab.hotel.repository.ClientStore;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public final class InMemoryClientStore implements CrudRepository<Client> {
-    private final Map<UUID, Client> map;
-    private static InMemoryClientStore instance;
+public final class InMemoryClientStore implements ClientStore {
 
-    protected InMemoryClientStore() {
-        map = new HashMap<>();
-    }
-
-    public static InMemoryClientStore getInstance() {
-        if (instance == null) {
-            instance = new InMemoryClientStore();
-        }
-        return instance;
-    }
+    private final Map<UUID, Client> clients = new HashMap<>();
 
     @Override
     public void save(Client client) {
-        map.put(client.getId(), client);
+        clients.put(client.getId(), client);
     }
 
+    @Override
+    public void update(Client client) {
+        clients.put(client.getId(), client);
+    }
 
+    @Override
     public Collection<Client> findAllSorted(ClientSort sort) {
-        return map.values().stream()
+        return clients.values()
+                .stream()
                 .sorted(sort.getComparator())
                 .toList();
     }
 
     @Override
     public void delete(UUID id) {
-        map.remove(id);
+        clients.remove(id);
     }
 
     @Override
-    public boolean hasIn(UUID id) {
-        return map.containsKey(id);
+    public boolean has(UUID id) {
+        return clients.containsKey(id);
     }
 
     @Override
     public Optional<Client> getById(UUID id) {
-        return Optional.ofNullable(map.get(id));
-    }
-
-    @Override
-    public Collection<Client> findAll() {
-        return new ArrayList<>(map.values());
+        return Optional.ofNullable(clients.get(id));
     }
 }
 

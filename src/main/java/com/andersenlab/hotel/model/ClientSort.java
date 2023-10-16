@@ -12,5 +12,5 @@ public enum ClientSort {
     NAME(Comparator.comparing(Client::getName)),
     STATUS(Comparator.comparing(Client::getStatus));
 
-    private Comparator<Client> comparator;
+    private final Comparator<Client> comparator;
 }
