@@ -1,12 +1,28 @@
 package com.andersenlab.hotel.model;
 
-import com.andersenlab.hotel.usecase.ListClientsUseCase;
 import lombok.Data;
 
-import java.util.UUID;
+import java.util.*;
+
 @Data
 public class Client {
     private UUID id;
     private String name;
-    private ListClientsUseCase.ClientStatus status;
+    private ClientStatus status;
+    private Set<ApartmentEntity> apartments;
+
+    public Client(UUID id, String name, ClientStatus status, Set<ApartmentEntity> apartments) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.apartments = apartments;
+    }
+
+    public Client(UUID id, String name, ClientStatus status) {
+        this(id, name, status, new HashSet<>());
+    }
+
+    public Client() {
+        this(UUID.randomUUID(), "user", ClientStatus.NEW);
+    }
 }
