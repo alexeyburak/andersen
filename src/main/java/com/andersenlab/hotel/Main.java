@@ -16,11 +16,11 @@ public class Main {
         ).run();*/
     }
 
-    private static HotelModule module() {
-        return new HotelModule(
-                new InMemoryClientStore(),
-                new InMemoryApartmentStore()
-        );
-    }
+//    private static HotelModule module() {
+//        return new HotelModule(
+//                new InMemoryClientStore(),
+//                new InMemoryApartmentStore()
+//        );
+//    }
 
 }
