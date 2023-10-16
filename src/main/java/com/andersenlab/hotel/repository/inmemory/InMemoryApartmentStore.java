@@ -7,7 +7,11 @@ import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 public class InMemoryApartmentStore implements CrudRepository<Apartment> {
     private static final Logger log = LoggerFactory.getLogger(InMemoryApartmentStore.class);
@@ -20,7 +24,7 @@ public class InMemoryApartmentStore implements CrudRepository<Apartment> {
     }
 
     public static InMemoryApartmentStore getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new InMemoryApartmentStore();
         }
         return instance;

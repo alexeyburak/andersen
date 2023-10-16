@@ -5,7 +5,12 @@ import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientSort;
 import com.andersenlab.hotel.repository.CrudRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 public final class InMemoryClientStore implements CrudRepository<Client> {
     private final Map<UUID, Client> map;
@@ -21,7 +26,6 @@ public final class InMemoryClientStore implements CrudRepository<Client> {
         }
         return instance;
     }
-
 
     @Override
     public void save(Client client) {
