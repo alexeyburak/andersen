@@ -3,8 +3,6 @@ package com.andersenlab.hotel.service;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.repository.inmemory.InMemoryApartmentStore;
 import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -19,7 +17,6 @@ public class ApartmentService implements AdjustApartmentPriceUseCase{
         if (instance == null) {
             instance = new ApartmentService();
         }
-
         return instance;
     }
 
@@ -30,12 +27,12 @@ public class ApartmentService implements AdjustApartmentPriceUseCase{
         return inMemoryApartmentStore.findAll();
     }
 
-    public void delete(Apartment apartment) {
+    public void delete(UUID apartment) {
         inMemoryApartmentStore.delete(apartment);
     }
 
 
-    public boolean hasIn(Apartment apartment) {
+    public boolean hasIn(UUID apartment) {
         return inMemoryApartmentStore.hasIn(apartment);
     }
 
@@ -45,11 +42,8 @@ public class ApartmentService implements AdjustApartmentPriceUseCase{
 
     @Override
     public void adjust(UUID id, BigDecimal newPrice) {
-        Optional<Apartment> apartment = inMemoryApartmentStore.getById(id);
-        if (apartment.isPresent()){
-            Apartment updatedApartment = new Apartment
-                    (apartment.get().getId(),newPrice, apartment.get().getCapacity(), apartment.get().isAvailability());
-            inMemoryApartmentStore.save(updatedApartment);
-        }
+        inMemoryApartmentStore.getById(id).ifPresent(a -> inMemoryApartmentStore.save(
+                        new Apartment(a.getId(),newPrice, a.getCapacity(), a.isAvailability())));
+
     }
 }

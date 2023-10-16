@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-@Slf4j
 public class InMemoryApartmentStore implements CrudRepository<Apartment> {
     private static final Logger log = LoggerFactory.getLogger(InMemoryApartmentStore.class);
 
@@ -45,9 +44,9 @@ public class InMemoryApartmentStore implements CrudRepository<Apartment> {
     }
 
     @Override
-    public void delete(Apartment apartment) {
-        if (apartments.containsKey(apartment.getId())){
-            apartments.remove(apartment.getId());
+    public void delete(UUID id) {
+        if (apartments.containsKey(id)){
+            apartments.remove(id);
         }
         else {
             log.info("Object wasn't removed because of absence in data base");
@@ -55,14 +54,14 @@ public class InMemoryApartmentStore implements CrudRepository<Apartment> {
     }
 
     @Override
-    public boolean hasIn(Apartment apartment) {
-        return apartments.containsKey(apartment.getId());
+    public boolean hasIn(UUID id) {
+        return apartments.containsKey(id);
     }
 
     @Override
     public Optional<Apartment> getById(UUID id) {
         if (!apartments.containsKey(id)) {
-            log.info("No apartment with id " + id);
+            log.info("No apartment with id {}", id);
         }
         return Optional.ofNullable(apartments.get(id));
     }

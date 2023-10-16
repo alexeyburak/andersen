@@ -10,9 +10,9 @@ public interface CrudRepository<T>{
 
     Collection<T> findAll();
 
-    void delete(T id);
+    void delete(UUID t);
 
-    boolean hasIn(T t);
+    boolean hasIn(UUID t);
 
 
     Optional<T> getById(UUID id);
