@@ -1,19 +1,11 @@
 package com.andersenlab.hotel.usecase;
 
+import com.andersenlab.hotel.model.ClientEntity;
+import com.andersenlab.hotel.model.ClientSort;
+
 import java.util.List;
-import java.util.UUID;
 
 public interface ListClientsUseCase {
 
-    List<ClientView> list(Sort sort);
-
-    enum Sort {
-        ID, NAME, STATUS
-    }
-
-    enum ClientStatus {
-        NEW
-    }
-
-    record ClientView(UUID id, String name, ClientStatus status) {}
+    List<ClientEntity> list(ClientSort sort);
 }

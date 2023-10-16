@@ -1,10 +1,10 @@
 package com.andersenlab.hotel.application.command;
 
 import com.andersenlab.hotel.application.CustomErrorMessage;
+import com.andersenlab.hotel.model.ApartmentSort;
+import com.andersenlab.hotel.model.ClientSort;
 import com.andersenlab.hotel.service.ApartmentService;
 import com.andersenlab.hotel.service.ClientService;
-import com.andersenlab.hotel.usecase.ListApartmentsUseCase;
-import com.andersenlab.hotel.usecase.ListClientsUseCase;
 import org.apache.commons.lang3.EnumUtils;
 
 import java.io.PrintStream;
@@ -22,13 +22,11 @@ public final class GetEntityListCommand implements Command, ArgumentsValidator<S
 
         switch (arguments.get(1)) {
             case APARTMENT -> {
-                ListApartmentsUseCase.Sort sort =
-                        EnumUtils.getEnum(ListApartmentsUseCase.Sort.class, arguments.get(2));
+                ApartmentSort sort =  EnumUtils.getEnum(ApartmentSort.class, arguments.get(2));
                 ApartmentService.getInstance().list(sort).forEach(output::println);
             }
             case CLIENT -> {
-                ListClientsUseCase.Sort sort =
-                        EnumUtils.getEnum(ListClientsUseCase.Sort.class, arguments.get(2));
+                ClientSort sort = EnumUtils.getEnum(ClientSort.class, arguments.get(2));
                 ClientService.getInstance().list(sort).forEach(output::println);
             }
             default -> throw new IllegalArgumentException(CustomErrorMessage.WRONG_ARGUMENTS.getMessage());
