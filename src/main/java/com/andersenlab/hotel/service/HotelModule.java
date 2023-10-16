@@ -18,22 +18,22 @@ public final class HotelModule { //TODO
     private ClientService clientService;
     private ApartmentService apartmentService;
 
-    public HotelModule(ClientStore clientStore, ApartmentStore apartmentStore) {
-        //this.clientService = new ClientService(clientStore);
-        //this.apartmentService = new ApartmentService(apartmentStore);
+    public HotelModule(ClientStore clientStore, ApartmentService apartmentService) {
+        this.clientService = new ClientService();
+        this.apartmentService = new ApartmentService();
     }
 
-    public AddApartmentUseCase addApartmentUseCase() {
-        return apartmentService;
-    }
+//    public AddApartmentUseCase addApartmentUseCase() {
+//        return apartmentService;
+//    }
 
-    public AdjustApartmentPriceUseCase adjustApartmentPriceUseCase() {
-        return apartmentService;
-    }
+//    public AdjustApartmentPriceUseCase adjustApartmentPriceUseCase() {
+//        return apartmentService;
+//    }
 
-    public ListApartmentsUseCase listApartmentsUseCase() {
-        return apartmentService;
-    }
+//    public ListApartmentsUseCase listApartmentsUseCase() {
+//        return apartmentService;
+//    }apartmentService
 
     public CalculateClientStayCurrentPriceUseCase calcClientStayCurrentPrice() {
         return clientService;

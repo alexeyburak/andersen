@@ -1,8 +1,8 @@
 package com.andersenlab.hotel;
 
-import com.andersenlab.hotel.repository.inmemory.InMemoryApartmentStore;
 import com.andersenlab.hotel.repository.inmemory.InMemoryClientStore;
 import com.andersenlab.hotel.application.command.CommandUtils;
+import com.andersenlab.hotel.service.ApartmentService;
 import com.andersenlab.hotel.service.HotelModule;
 
 public class Main {
@@ -19,7 +19,7 @@ public class Main {
     private static HotelModule module() {
         return new HotelModule(
                 new InMemoryClientStore(),
-                new InMemoryApartmentStore()
+                new ApartmentService()
         );
     }
 

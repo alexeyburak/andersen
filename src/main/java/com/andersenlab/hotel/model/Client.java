@@ -1,4 +1,4 @@
-package com.andersenlab.hotel.service;
+package com.andersenlab.hotel.model;
 
 import com.andersenlab.hotel.repository.ClientStore;
 import com.andersenlab.hotel.usecase.ListClientsUseCase;

@@ -1,64 +1,55 @@
 package com.andersenlab.hotel.service;
 
+import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.repository.inmemory.InMemoryApartmentStore;
-import com.andersenlab.hotel.repository.ApartmentStore;
-import com.andersenlab.hotel.usecase.AddApartmentUseCase;
 import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
-import com.andersenlab.hotel.usecase.ListApartmentsUseCase;
-import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-final class ApartmentService
-        implements AddApartmentUseCase,
-        AdjustApartmentPriceUseCase,
-        ListApartmentsUseCase {
+public class ApartmentService implements AdjustApartmentPriceUseCase{
 
-    private static final Logger LOG = LoggerFactory.getLogger(ApartmentService.class);
-    private final ApartmentStore apartmentStore;
+    private InMemoryApartmentStore inMemoryApartmentStore;
+
     private static ApartmentService instance;
 
-    protected ApartmentService() {
-        this.apartmentStore = InMemoryApartmentStore.getInstance();
-    }
-
     public static ApartmentService getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new ApartmentService();
         }
+
         return instance;
     }
 
-    @Override
-    public void add(UUID id, BigDecimal price, BigInteger capacity, boolean availability) {
-        if (apartmentStore.has(id)) {
-            throw new ApartmentWithSameIdExists();
-        }
-        LOG.info("Add new apartment. ID: {}", id);
-        apartmentStore.save(
-                new ApartmentStore.ApartmentEntity(id, price, capacity, availability, ApartmentStore.ApartmentStatus.AVAILABLE)
-        );
+    public void addApartment(Apartment apartment) {
+        inMemoryApartmentStore.save(apartment);
+    }
+    public Collection<Apartment> getAllApartments() {
+        return inMemoryApartmentStore.findAll();
+    }
+
+    public void delete(Apartment apartment) {
+        inMemoryApartmentStore.delete(apartment);
+    }
+
+
+    public boolean hasIn(Apartment apartment) {
+        return inMemoryApartmentStore.hasIn(apartment);
+    }
+
+    public Optional<Apartment> getById(UUID id) {
+     return inMemoryApartmentStore.getById(id);
     }
 
     @Override
     public void adjust(UUID id, BigDecimal newPrice) {
-        ApartmentStore.ApartmentEntity entity = apartmentStore.getById(id);
-
-        LOG.info("Adjust apartment price. ID: {}", id);
+        Optional<Apartment> apartment = inMemoryApartmentStore.getById(id);
+        if (apartment.isPresent()){
+            Apartment updatedApartment = new Apartment
+                    (apartment.get().getId(),newPrice, apartment.get().getCapacity(), apartment.get().isAvailability());
+            inMemoryApartmentStore.save(updatedApartment);
+        }
     }
-
-    @Override
-    public List<ApartmentView> list(Sort sort) {
-        return apartmentStore.findAllSorted(ApartmentStore.Sort.valueOf(sort.toString()))
-                .stream()
-                .map(Apartment::new)
-                .map(Apartment::view)
-                .toList();
-    }
-
 }

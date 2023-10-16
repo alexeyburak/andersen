@@ -11,7 +11,7 @@ public final class InMemoryClientStore implements ClientStore {
     private final Map<UUID, ClientEntity> map;
     private static InMemoryClientStore instance;
 
-    protected InMemoryClientStore(){
+    public InMemoryClientStore(){
         map = new HashMap<>();
     }
 

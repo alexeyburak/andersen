@@ -15,7 +15,7 @@ public interface CrudRepository<T>{
     boolean hasIn(T t);
 
 
-    Optional<T> getById(T t);
+    Optional<T> getById(UUID id);
 
 
 }
