@@ -1,24 +1,37 @@
 package com.andersenlab.hotel.service;
 
 import com.andersenlab.hotel.model.Apartment;
+import com.andersenlab.hotel.model.ApartmentEntity;
+import com.andersenlab.hotel.model.ApartmentSort;
 import com.andersenlab.hotel.repository.inmemory.InMemoryApartmentStore;
 import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
+import com.andersenlab.hotel.usecase.ListApartmentsUseCase;
+import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
 
-public class ApartmentService implements AdjustApartmentPriceUseCase{
+public final class ApartmentService implements AdjustApartmentPriceUseCase, ListApartmentsUseCase {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ApartmentService.class);
+
+    private Function<Apartment, ApartmentEntity> apartmentApartmentEntityFunction = (apartment ->
+            new ApartmentEntity(apartment.getId(), apartment.getPrice(), apartment.getCapacity(),
+                    apartment.isAvailability(), apartment.getStatus()));
 
     private InMemoryApartmentStore inMemoryApartmentStore;
 
     private static ApartmentService instance;
 
     protected ApartmentService() {
-        this.apartmentStore = InMemoryApartmentStore.getInstance();
+        this.inMemoryApartmentStore = InMemoryApartmentStore.getInstance();
     }
 
-    protected ApartmentService(final ApartmentStore apartmentStore) {
-        this.apartmentStore = apartmentStore;
+    protected ApartmentService(final InMemoryApartmentStore apartmentStore) {
+        this.inMemoryApartmentStore = apartmentStore;
     }
 
     public static ApartmentService getInstance() {
@@ -39,18 +52,16 @@ public class ApartmentService implements AdjustApartmentPriceUseCase{
         inMemoryApartmentStore.delete(apartment);
     }
 
-
     public boolean hasIn(UUID apartment) {
         return inMemoryApartmentStore.hasIn(apartment);
     }
 
-    public Optional<Apartment> getById(UUID id) {
-     return inMemoryApartmentStore.getById(id);
+    public Optional<ApartmentEntity> getById(UUID id) {
+        return inMemoryApartmentStore.getById(id).map(apartmentApartmentEntityFunction);
     }
 
     @Override
     public void adjust(UUID id, BigDecimal newPrice) {
-        ApartmentStore.ApartmentEntity entity = apartmentStore.getById(id);
         inMemoryApartmentStore.getById(id).ifPresent(a -> inMemoryApartmentStore.save(
                 new Apartment(a.getId(),newPrice, a.getCapacity(), a.isAvailability())));
 
@@ -58,12 +69,17 @@ public class ApartmentService implements AdjustApartmentPriceUseCase{
     }
 
     @Override
-    public List<ApartmentView> list(Sort sort) {
-        return apartmentStore.findAllSorted(ApartmentStore.Sort.valueOf(sort.toString()))
+    public List<ApartmentEntity> list(ApartmentSort sort) {
+        return inMemoryApartmentStore.findAllSorted(sort)
                 .stream()
-                .map(Apartment::new)
-                .map(Apartment::view)
+                .map(apartmentApartmentEntityFunction)
                 .toList();
     }
 
+    public void save(Apartment apartment) {
+        if(hasIn(apartment.getId())) {
+            throw new ApartmentWithSameIdExists("Apartment with same id already exists");
+        }
+        inMemoryApartmentStore.save(apartment);
+    }
 }

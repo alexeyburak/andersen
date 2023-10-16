@@ -1,9 +1,9 @@
 package com.andersenlab.hotel.repository.inmemory;
 
+import com.andersenlab.hotel.model.ApartmentSort;
 import com.andersenlab.hotel.repository.CrudRepository;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,7 @@ public class InMemoryApartmentStore implements CrudRepository<Apartment> {
 
     protected InMemoryApartmentStore() {
         apartments = new HashMap<>();
-    } //TODO ask about this when code-review
+    }
 
     public static InMemoryApartmentStore getInstance() {
         if(instance == null){
@@ -41,6 +41,12 @@ public class InMemoryApartmentStore implements CrudRepository<Apartment> {
     @Override
     public Collection<Apartment> findAll() {
         return apartments.values().stream().toList();
+    }
+
+    public Collection<Apartment> findAllSorted(ApartmentSort sort) {
+        return apartments.values().stream()
+                .sorted(sort.getComparator())
+                .toList();
     }
 
     @Override

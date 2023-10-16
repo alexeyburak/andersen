@@ -1,7 +1,8 @@
 package com.andersenlab.hotel.service.factory;
 
 import com.andersenlab.hotel.application.CustomErrorMessage;
-import com.andersenlab.hotel.repository.ClientStore;
+import com.andersenlab.hotel.model.Client;
+import com.andersenlab.hotel.model.ClientStatus;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,26 +13,26 @@ public class ClientFactory {
 
     private ClientFactory() {}
 
-    public static ClientStore.ClientEntity createClient(List<String> args) {
+    public static Client createClient(List<String> args) {
         return args.isEmpty() ? createRandomClient() : createClientFromArgs(args);
     }
 
-    public static ClientStore.ClientEntity createRandomClient() {
+    public static Client createRandomClient() {
         UUID id = UUID.randomUUID();
 
-        return new ClientStore.ClientEntity(
+        return new Client(
                 id,
                 "client-" + id.toString().substring(0, 4),
-                ClientStore.ClientStatus.NEW
+                ClientStatus.NEW
         );
     }
 
-    public static ClientStore.ClientEntity createClientFromArgs(List<String> args) {
+    public static Client createClientFromArgs(List<String> args) {
         validateArgs(args);
 
-        return new ClientStore.ClientEntity(
+        return new Client(
                 UUID.fromString(args.get(0)), args.get(1),
-                ClientStore.ClientStatus.NEW
+                ClientStatus.NEW
         );
     }
 

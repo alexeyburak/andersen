@@ -2,7 +2,7 @@ package com.andersenlab.hotel.repository.inmemory;
 
 
 import com.andersenlab.hotel.model.Client;
-import com.andersenlab.hotel.repository.ClientStore;
+import com.andersenlab.hotel.model.ClientSort;
 import com.andersenlab.hotel.repository.CrudRepository;
 
 import java.util.*;
@@ -10,7 +10,6 @@ import java.util.*;
 public final class InMemoryClientStore implements CrudRepository<Client> {
     private final Map<UUID, Client> map;
     private static InMemoryClientStore instance;
-
 
     protected InMemoryClientStore() {
         map = new HashMap<>();
@@ -30,12 +29,11 @@ public final class InMemoryClientStore implements CrudRepository<Client> {
     }
 
 
-    public Collection<Client> findAllSorted(ClientStore.Sort sort) {
+    public Collection<Client> findAllSorted(ClientSort sort) {
         return map.values().stream()
-//                .sorted(sort.getComparator())
+                .sorted(sort.getComparator())
                 .toList();
     }
-//    TODO Enums for comparator
 
     @Override
     public void delete(UUID id) {
@@ -52,11 +50,9 @@ public final class InMemoryClientStore implements CrudRepository<Client> {
         return Optional.ofNullable(map.get(id));
     }
 
-
     @Override
     public Collection<Client> findAll() {
-        return null;
+        return new ArrayList<>(map.values());
     }
-
 }
 
