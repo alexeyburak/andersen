@@ -82,4 +82,8 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase, List
         }
         inMemoryApartmentStore.save(apartment);
     }
+
+    public void update(Apartment apartment) {
+        inMemoryApartmentStore.update(apartment);
+    }
 }

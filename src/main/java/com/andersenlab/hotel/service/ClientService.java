@@ -57,7 +57,13 @@ public final class ClientService
         }
         Optional<Client> clientOpt = clientStore.getById(clientId);
         Optional<ApartmentEntity> apartmentOpt = apartmentService.getById(apartmentId);
-        clientOpt.ifPresent(client -> client.getApartments().add(apartmentOpt.orElseThrow(() -> new IllegalArgumentException("Wrong apartment id"))));
+        if(clientOpt.isPresent() && apartmentOpt.isPresent()) {
+            ApartmentEntity apartment = apartmentOpt.get();
+            apartmentService.update(new Apartment(apartment.id(), apartment.price(), apartment.capacity(),
+                    false, ApartmentStatus.RESERVED));
+            clientOpt.ifPresent(client -> client.getApartments()
+                    .add(apartmentService.getById(apartmentId).get()));
+        }
     }
 
     @Override
@@ -81,6 +87,8 @@ public final class ClientService
         Client client = clientStore.getById(clientId).orElseThrow(() -> new IllegalArgumentException("Wrong client id"));
         ApartmentEntity apartment = apartmentService.getById(apartmentId).orElseThrow(() -> new IllegalArgumentException("Wrong apartmentId"));
         if (client.getApartments().remove(apartment)) {
+            apartmentService.update(new Apartment(apartment.id(), apartment.price(), apartment.capacity(),
+                    true, ApartmentStatus.AVAILABLE));
             System.out.println("Apartment was removed");
         } else {
             System.out.println("Apartment wasn`t removed");

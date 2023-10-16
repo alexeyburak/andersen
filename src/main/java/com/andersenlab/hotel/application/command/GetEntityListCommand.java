@@ -22,11 +22,11 @@ public final class GetEntityListCommand implements Command, ArgumentsValidator<S
 
         switch (arguments.get(1)) {
             case APARTMENT -> {
-                ApartmentSort sort =  EnumUtils.getEnum(ApartmentSort.class, arguments.get(2));
+                ApartmentSort sort =  EnumUtils.getEnum(ApartmentSort.class, arguments.get(2).toUpperCase());
                 ApartmentService.getInstance().list(sort).forEach(output::println);
             }
             case CLIENT -> {
-                ClientSort sort = EnumUtils.getEnum(ClientSort.class, arguments.get(2));
+                ClientSort sort = EnumUtils.getEnum(ClientSort.class, arguments.get(2).toUpperCase());
                 ClientService.getInstance().list(sort).forEach(output::println);
             }
             default -> throw new IllegalArgumentException(CustomErrorMessage.WRONG_ARGUMENTS.getMessage());

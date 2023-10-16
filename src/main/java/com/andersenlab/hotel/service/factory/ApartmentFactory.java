@@ -54,12 +54,12 @@ public class ApartmentFactory {
 
     public static Apartment createRandomApartment() {
         ApartmentStatus[] statuses = ApartmentStatus.values();
-
+        ApartmentStatus status = statuses[rand.nextInt(statuses.length)];
         return new Apartment(
                 UUID.randomUUID(),
                 BigDecimal.valueOf(rand.nextDouble()),
                 BigInteger.valueOf(rand.nextInt(4)),
-                rand.nextBoolean(), statuses[rand.nextInt(statuses.length)]
+                status.equals(ApartmentStatus.AVAILABLE), status
         );
     }
 }

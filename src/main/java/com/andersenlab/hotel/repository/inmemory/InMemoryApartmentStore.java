@@ -42,6 +42,10 @@ public class InMemoryApartmentStore implements CrudRepository<Apartment> {
 
     }
 
+    public void update(Apartment apartment) {
+        apartments.put(apartment.getId(), apartment);
+    }
+
     @Override
     public Collection<Apartment> findAll() {
         return apartments.values().stream().toList();

@@ -38,8 +38,9 @@ public final class CommandUtils {
             String userInput = reader.readLine();
             List<String> args = Arrays.stream(userInput.split(" ")).toList();
             chosenComand = EnumUtils.getEnum(ApplicationCommand.class, args.get(0).toUpperCase());
-
-            execute(chosenComand.getCommand(), printStream, args);
+            if(chosenComand != null) {
+                execute(chosenComand.getCommand(), printStream, args);
+            }
         } while (chosenComand != ApplicationCommand.EXIT);
     }
 
