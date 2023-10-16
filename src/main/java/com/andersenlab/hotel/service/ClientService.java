@@ -1,5 +1,6 @@
 package com.andersenlab.hotel.service;
 
+import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.repository.inmemory.InMemoryClientStore;
 import com.andersenlab.hotel.repository.ClientStore;
 import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
