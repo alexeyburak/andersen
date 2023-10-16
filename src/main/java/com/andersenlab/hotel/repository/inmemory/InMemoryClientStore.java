@@ -1,14 +1,19 @@
 package com.andersenlab.hotel.repository.inmemory;
 
-import com.andersenlab.hotel.repository.ClientStore;
 
+import com.andersenlab.hotel.model.Client;
+import com.andersenlab.hotel.model.ClientSort;
+import com.andersenlab.hotel.repository.CrudRepository;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
-public final class InMemoryClientStore implements ClientStore {
-    private final Map<UUID, ClientEntity> map;
+public final class InMemoryClientStore implements CrudRepository<Client> {
+    private final Map<UUID, Client> map;
     private static InMemoryClientStore instance;
 
     protected InMemoryClientStore() {
@@ -23,12 +28,12 @@ public final class InMemoryClientStore implements ClientStore {
     }
 
     @Override
-    public void save(ClientEntity clientEntity) {
-        map.put(clientEntity.id(), clientEntity);
+    public void save(Client client) {
+        map.put(client.getId(), client);
     }
 
-    @Override
-    public Collection<ClientEntity> findAllSorted(Sort sort) {
+
+    public Collection<Client> findAllSorted(ClientSort sort) {
         return map.values().stream()
                 .sorted(sort.getComparator())
                 .toList();
@@ -40,12 +45,18 @@ public final class InMemoryClientStore implements ClientStore {
     }
 
     @Override
-    public boolean has(UUID id) {
+    public boolean hasIn(UUID id) {
         return map.containsKey(id);
     }
 
     @Override
-    public ClientEntity getById(UUID id) {
-        return map.get(id);
+    public Optional<Client> getById(UUID id) {
+        return Optional.ofNullable(map.get(id));
+    }
+
+    @Override
+    public Collection<Client> findAll() {
+        return new ArrayList<>(map.values());
     }
 }
+

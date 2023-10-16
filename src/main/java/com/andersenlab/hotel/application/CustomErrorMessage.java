@@ -8,7 +8,14 @@ import lombok.Getter;
 public enum CustomErrorMessage {
     APARTMENT_IS_ALREADY_EXISTS("Apartment is already exists"),
     CLIENT_IS_ALREADY_EXISTS("Client is already exists"),
-    WRONG_ARGUMENTS("Wrong arguments");
+    UNKNOWN_ENTITY("Unknown entity"),
+    WRONG_ARGUMENTS("Wrong arguments"),
+    INVALID_ARGUMENTS_QUANTITY("Invalid arguments quantity"),
+    ILLEGAL_PRICE("Illegal price"),
+    ILLEGAL_CAPACITY("Illegal capacity"),
+    ILLEGAL_AVAILABILITY("Illegal availability"),
+    ILLEGAL_STATUS("Illegal status"),
+    ILLEGAL_NUMBER_OF_ARGUMENTS("Illegal number of arguments");
 
-    private String message;
+    private final String message;
 }

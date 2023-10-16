@@ -17,11 +17,6 @@ public final class BusinessExceptionHandlingCommand implements Command {
     }
 
     @Override
-    public void printDescription(PrintStream output) {
-        original.printDescription(output);
-    }
-
-    @Override
     public void execute(PrintStream output, List<String> arguments) {
         try {
             original.execute(output, arguments);

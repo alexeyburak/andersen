@@ -1,20 +1,27 @@
 package com.andersenlab.hotel.repository.inmemory;
 
-import com.andersenlab.hotel.repository.ApartmentStore;
+import com.andersenlab.hotel.model.ApartmentSort;
+import com.andersenlab.hotel.repository.CrudRepository;
+import com.andersenlab.hotel.model.Apartment;
+import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
+public class InMemoryApartmentStore implements CrudRepository<Apartment> {
+    private static final Logger log = LoggerFactory.getLogger(InMemoryApartmentStore.class);
 
-public final class InMemoryApartmentStore implements ApartmentStore {
     private static InMemoryApartmentStore instance;
-    private final Map<UUID, ApartmentEntity> map;
+    private final Map<UUID, Apartment> apartments;
 
     protected InMemoryApartmentStore() {
-        map = new HashMap<>();
-    } //TODO ask about this when code-review
+        apartments = new HashMap<>();
+    }
 
     public static InMemoryApartmentStore getInstance() {
         if (instance == null) {
@@ -23,30 +30,50 @@ public final class InMemoryApartmentStore implements ApartmentStore {
         return instance;
     }
 
+
     @Override
-    public void save(ApartmentEntity apartmentEntity) {
-        map.put(apartmentEntity.id(), apartmentEntity);
+    public void save(Apartment apartment) {
+        if (apartments.containsKey(apartment.getId())){
+            throw new ApartmentWithSameIdExists("Apartment with id " + apartment.getId() + " already exist");
+        }
+        else {
+            apartments.put(apartment.getId(), apartment);
+        }
+
     }
 
     @Override
-    public Collection<ApartmentEntity> findAllSorted(Sort sort) {
-        return map.values().stream()
+    public Collection<Apartment> findAll() {
+        return apartments.values().stream().toList();
+    }
+
+    public Collection<Apartment> findAllSorted(ApartmentSort sort) {
+        return apartments.values().stream()
                 .sorted(sort.getComparator())
                 .toList();
     }
 
     @Override
     public void delete(UUID id) {
-        map.remove(id);
+        if (apartments.containsKey(id)){
+            apartments.remove(id);
+        }
+        else {
+            log.info("Object wasn't removed because of absence in data base");
+        }
     }
 
     @Override
-    public boolean has(UUID id) {
-        return map.containsKey(id);
+    public boolean hasIn(UUID id) {
+        return apartments.containsKey(id);
     }
 
     @Override
-    public ApartmentEntity getById(UUID id) {
-        return map.get(id);
+    public Optional<Apartment> getById(UUID id) {
+        if (!apartments.containsKey(id)) {
+            log.info("No apartment with id {}", id);
+        }
+        return Optional.ofNullable(apartments.get(id));
     }
+
 }
