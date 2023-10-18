@@ -1,19 +1,19 @@
-//package com.andersenlab.hotel.repository.inmemory;
-//
-//import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//
-//import java.math.BigDecimal;
-//import java.math.BigInteger;
-//import java.util.List;
-//import java.util.UUID;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//
-//class InMemoryApartmentStoreTest {
+package com.andersenlab.hotel.repository.inmemory;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class InMemoryApartmentStoreTest {
 //    InMemoryApartmentStore target;
 //    ApartmentStore.ApartmentEntity apartment1;
 //    ApartmentStore.ApartmentEntity apartment2;
@@ -169,4 +169,4 @@
 //    void has_NonExistingEntity_ShouldReturnFalse() {
 //        assertFalse(target.has(apartment1.id()));
 //    }
-//}
+}

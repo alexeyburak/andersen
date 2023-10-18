@@ -1,17 +1,17 @@
-//package com.andersenlab.hotel.repository.inmemory;
-//
-//import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//
-//import java.util.List;
-//import java.util.UUID;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//
-//class InMemoryClientStoreTest {
+package com.andersenlab.hotel.repository.inmemory;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class InMemoryClientStoreTest {
 //    InMemoryClientStore target;
 //    ClientStore.ClientEntity client1;
 //    ClientStore.ClientEntity client2;
@@ -145,4 +145,4 @@
 //    void has_NonExistingEntity_ShouldReturnFalse() {
 //        assertFalse(target.has(client1.id()));
 //    }
-//}
+}
