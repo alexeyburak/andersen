@@ -1,5 +1,6 @@
-package com.andersenlab.hotel.model;
+package com.andersenlab.hotel.repository;
 
+import com.andersenlab.hotel.model.Client;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

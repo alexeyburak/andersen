@@ -55,9 +55,10 @@ public class ApartmentFactory {
     public static Apartment createRandomApartment() {
         ApartmentStatus[] statuses = ApartmentStatus.values();
         ApartmentStatus status = statuses[rand.nextInt(statuses.length)];
+        final double decimalPlace = 10;
         return new Apartment(
                 UUID.randomUUID(),
-                BigDecimal.valueOf(rand.nextDouble()),
+                BigDecimal.valueOf(Math.round(rand.nextFloat() * 100 * decimalPlace)/decimalPlace),
                 BigInteger.valueOf(rand.nextInt(4)),
                 status.equals(ApartmentStatus.AVAILABLE), status
         );

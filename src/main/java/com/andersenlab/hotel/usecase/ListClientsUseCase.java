@@ -1,7 +1,7 @@
 package com.andersenlab.hotel.usecase;
 
 import com.andersenlab.hotel.model.ClientEntity;
-import com.andersenlab.hotel.model.ClientSort;
+import com.andersenlab.hotel.repository.ClientSort;
 
 import java.util.List;
 

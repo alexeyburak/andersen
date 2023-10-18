@@ -1,8 +1,8 @@
 package com.andersenlab.hotel.repository.inmemory;
 
 import com.andersenlab.hotel.model.Client;
-import com.andersenlab.hotel.model.ClientSort;
-import com.andersenlab.hotel.repository.ClientStore;
+import com.andersenlab.hotel.repository.SortableCrudRepository;
+import com.andersenlab.hotel.repository.ClientSort;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public final class InMemoryClientStore implements ClientStore {
+public final class InMemoryClientRepository implements SortableCrudRepository<Client, ClientSort> {
 
     private final Map<UUID, Client> clients = new HashMap<>();
 

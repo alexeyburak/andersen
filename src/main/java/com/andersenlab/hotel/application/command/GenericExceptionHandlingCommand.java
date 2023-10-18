@@ -12,7 +12,12 @@ public final class GenericExceptionHandlingCommand implements Command {
     public GenericExceptionHandlingCommand(Command original) {
         this.original = original;
     }
+    private static final ApplicationCommand applicationCommand = ApplicationCommand.GENERIC_EXCEPTION_HANDLER;
 
+    @Override
+    public ApplicationCommand getApplicationCommand() {
+        return applicationCommand;
+    }
     @Override
     public void execute(PrintStream output, List<String> arguments) {
         try {

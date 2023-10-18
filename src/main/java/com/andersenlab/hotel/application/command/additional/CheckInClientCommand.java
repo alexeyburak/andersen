@@ -1,5 +1,7 @@
-package com.andersenlab.hotel.application.command;
+package com.andersenlab.hotel.application.command.additional;
 
+import com.andersenlab.hotel.application.command.ApplicationCommand;
+import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import lombok.AllArgsConstructor;
 
@@ -13,6 +15,11 @@ public final class CheckInClientCommand implements Command {
     private static final String CHECK_IN_MESSAGE = "Client was checked in";
 
     private final CheckInClientUseCase useCase;
+    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.CHECK_IN;
+    @Override
+    public ApplicationCommand getApplicationCommand() {
+        return APPLICATION_COMMAND;
+    }
 
     @Override
     public void execute(PrintStream output, List<String> arguments) {

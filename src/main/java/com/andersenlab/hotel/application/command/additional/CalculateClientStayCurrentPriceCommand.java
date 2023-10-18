@@ -1,5 +1,7 @@
-package com.andersenlab.hotel.application.command;
+package com.andersenlab.hotel.application.command.additional;
 
+import com.andersenlab.hotel.application.command.ApplicationCommand;
+import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
 import lombok.AllArgsConstructor;
 
@@ -11,6 +13,11 @@ import java.util.UUID;
 public final class CalculateClientStayCurrentPriceCommand implements Command {
 
     private final CalculateClientStayCurrentPriceUseCase useCase;
+    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.CALCULATE_PRICE;
+    @Override
+    public ApplicationCommand getApplicationCommand() {
+        return APPLICATION_COMMAND;
+    }
 
     @Override
     public void execute(PrintStream output, List<String> arguments) {

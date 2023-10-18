@@ -9,10 +9,16 @@ import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
 import java.io.PrintStream;
 import java.util.List;
 
-
 public final class BusinessExceptionHandlingCommand implements Command {
 
     private final Command original;
+
+    private static final ApplicationCommand applicationCommand = ApplicationCommand.BUSINESS_EXCEPTION_HANDLER;
+
+    @Override
+    public ApplicationCommand getApplicationCommand() {
+        return applicationCommand;
+    }
 
     public BusinessExceptionHandlingCommand(Command original) {
         this.original = original;
