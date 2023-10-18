@@ -130,9 +130,9 @@ class InMemoryClientRepositoryTest {
         List<Client> sorted = (List<Client>)
                 target.findAllSorted(ClientSort.STATUS);
 
-        assertThat(ClientStatus.NEW).isEqualTo(sorted.get(0).getStatus());
-        assertThat(ClientStatus.ADVANCED).isEqualTo(sorted.get(1).getStatus());
-        assertThat(ClientStatus.BANNED).isEqualTo(sorted.get(2).getStatus());
+        assertThat(sorted.get(0).getStatus()).isEqualTo(ClientStatus.NEW);
+        assertThat(sorted.get(1).getStatus()).isEqualTo(ClientStatus.ADVANCED);
+        assertThat(sorted.get(2).getStatus()).isEqualTo(ClientStatus.BANNED);
     }
 
     @Test
