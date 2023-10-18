@@ -19,10 +19,11 @@ import java.util.List;
 public final class GetEntityListCommand implements Command, ArgumentsValidator<String> {
 
     private static final int VALID_ARGUMENTS_SIZE = 3;
+    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.GET_ALL;
 
     private final ListClientsUseCase listClientsUseCase;
     private final ListApartmentsUseCase listApartmentsUseCase;
-    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.GET_ALL;
+
     @Override
     public ApplicationCommand getApplicationCommand() {
         return APPLICATION_COMMAND;

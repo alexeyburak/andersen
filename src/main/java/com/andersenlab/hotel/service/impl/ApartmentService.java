@@ -2,8 +2,8 @@ package com.andersenlab.hotel.service.impl;
 
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
-import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.repository.ApartmentSort;
+import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.service.CrudService;
 import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
 import com.andersenlab.hotel.usecase.ListApartmentsUseCase;
@@ -33,7 +33,7 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
 
     @Override
     public void delete(UUID id) {
-        if(!has(id)) {
+        if (!has(id)) {
             throw new ApartmentNotfoundException();
         }
         store.delete(id);
@@ -55,8 +55,8 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
     @Override
     public void adjust(UUID id, BigDecimal newPrice) {
         store.getById(id).ifPresentOrElse(
-                        a -> store.save(new Apartment(a.getId(), newPrice, a.getCapacity(), a.isAvailability())),
-                        ApartmentNotfoundException::new);
+                a -> store.save(new Apartment(a.getId(), newPrice, a.getCapacity(), a.isAvailability())),
+                ApartmentNotfoundException::new);
 
         LOG.info("Adjust apartment price. ID: {}", id);
     }
@@ -71,7 +71,7 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
 
     @Override
     public void save(Apartment apartment) {
-        if(has(apartment.getId())) {
+        if (has(apartment.getId())) {
             throw new ApartmentWithSameIdExists();
         }
         UUID id = apartment.getId();
@@ -86,7 +86,7 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
 
     @Override
     public void update(Apartment apartment) {
-        if(has(apartment.getId())) {
+        if (has(apartment.getId())) {
             throw new ApartmentNotfoundException();
         }
         store.update(apartment);

@@ -19,6 +19,7 @@ public final class CommandStarter {
     private final InputStream inputStream;
     private final PrintStream printStream;
     private final List<Command> commands;
+
     @SneakyThrows
     public void run() {
         final BufferedReader reader = new BufferedReader(
@@ -37,21 +38,22 @@ public final class CommandStarter {
 
     private void printMenu() {
         printStream.println("""
-                    ---------
-                    Welcome! command format [command model additional_args]
-                    example: create apartment
-                    List of available commands below:
-                    """);
+                ---------
+                Welcome! command format [command model additional_args]
+                example: create apartment
+                List of available commands below:
+                """);
         commands.forEach(command -> printStream.printf(
-                        "To action - %s, write - %s%n",
-                        command.getApplicationCommand().getDesc(),
-                        command.getApplicationCommand().toString().toLowerCase()
-                ));
+                "To action - %s, write - %s%n",
+                command.getApplicationCommand().getDesc(),
+                command.getApplicationCommand().toString().toLowerCase()
+        ));
     }
 
     private Optional<Command> getCommand(ApplicationCommand chosenCommand) {
         return commands.stream().filter(command -> command.getApplicationCommand().equals(chosenCommand)).findFirst();
     }
+
     private void execute(Command command, List<String> args) {
         new BusinessExceptionHandlingCommand(
                 new GenericExceptionHandlingCommand(command)

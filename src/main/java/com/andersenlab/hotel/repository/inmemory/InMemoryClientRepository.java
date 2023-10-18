@@ -1,8 +1,8 @@
 package com.andersenlab.hotel.repository.inmemory;
 
 import com.andersenlab.hotel.model.Client;
-import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.repository.ClientSort;
+import com.andersenlab.hotel.repository.SortableCrudRepository;
 
 import java.util.Collection;
 import java.util.HashMap;

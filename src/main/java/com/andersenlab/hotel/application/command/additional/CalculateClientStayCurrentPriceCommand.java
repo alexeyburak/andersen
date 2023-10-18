@@ -12,8 +12,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public final class CalculateClientStayCurrentPriceCommand implements Command {
 
-    private final CalculateClientStayCurrentPriceUseCase useCase;
     private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.CALCULATE_PRICE;
+
+    private final CalculateClientStayCurrentPriceUseCase useCase;
+
     @Override
     public ApplicationCommand getApplicationCommand() {
         return APPLICATION_COMMAND;

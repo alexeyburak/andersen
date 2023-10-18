@@ -10,10 +10,12 @@ public final class ExitApplicationCommand implements Command {
 
     private static final String EXIT_MESSAGE = "Goodbye, have a nice day!";
     private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.EXIT;
+
     @Override
     public ApplicationCommand getApplicationCommand() {
         return APPLICATION_COMMAND;
     }
+
     @Override
     public void execute(PrintStream output, List<String> arguments) {
         output.println(EXIT_MESSAGE);

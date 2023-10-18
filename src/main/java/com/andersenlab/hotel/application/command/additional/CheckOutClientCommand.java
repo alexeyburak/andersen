@@ -13,9 +13,10 @@ import java.util.UUID;
 public final class CheckOutClientCommand implements Command {
 
     private static final String CHECK_OUT_MESSAGE = "Client was checked out";
+    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.CHECK_OUT;
 
     private final CheckOutClientUseCase useCase;
-    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.CHECK_OUT;
+
     @Override
     public ApplicationCommand getApplicationCommand() {
         return APPLICATION_COMMAND;

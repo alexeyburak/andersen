@@ -11,17 +11,17 @@ import java.util.List;
 
 public final class BusinessExceptionHandlingCommand implements Command {
 
+    private static final ApplicationCommand applicationCommand = ApplicationCommand.BUSINESS_EXCEPTION_HANDLER;
+
     private final Command original;
 
-    private static final ApplicationCommand applicationCommand = ApplicationCommand.BUSINESS_EXCEPTION_HANDLER;
+    public BusinessExceptionHandlingCommand(Command original) {
+        this.original = original;
+    }
 
     @Override
     public ApplicationCommand getApplicationCommand() {
         return applicationCommand;
-    }
-
-    public BusinessExceptionHandlingCommand(Command original) {
-        this.original = original;
     }
 
     @Override

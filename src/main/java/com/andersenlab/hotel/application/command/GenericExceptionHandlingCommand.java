@@ -7,17 +7,19 @@ import java.util.List;
 
 public final class GenericExceptionHandlingCommand implements Command {
 
+    private static final ApplicationCommand applicationCommand = ApplicationCommand.GENERIC_EXCEPTION_HANDLER;
+
     private final Command original;
 
     public GenericExceptionHandlingCommand(Command original) {
         this.original = original;
     }
-    private static final ApplicationCommand applicationCommand = ApplicationCommand.GENERIC_EXCEPTION_HANDLER;
 
     @Override
     public ApplicationCommand getApplicationCommand() {
         return applicationCommand;
     }
+
     @Override
     public void execute(PrintStream output, List<String> arguments) {
         try {

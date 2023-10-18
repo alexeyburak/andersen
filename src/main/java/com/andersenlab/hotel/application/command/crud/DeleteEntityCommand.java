@@ -25,6 +25,7 @@ public final class DeleteEntityCommand implements Command, ArgumentsValidator<St
 
     private final CrudService<Client, ClientEntity> clientService;
     private final CrudService<Apartment, ApartmentEntity> apartmentService;
+
     @Override
     public ApplicationCommand getApplicationCommand() {
         return APPLICATION_COMMAND;

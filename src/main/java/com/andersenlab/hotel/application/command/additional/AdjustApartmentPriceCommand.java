@@ -16,8 +16,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public final class AdjustApartmentPriceCommand implements Command, ArgumentsValidator<String> {
 
-    private final AdjustApartmentPriceUseCase useCase;
     private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.ADJUST;
+
+    private final AdjustApartmentPriceUseCase useCase;
+
     @Override
     public ApplicationCommand getApplicationCommand() {
         return APPLICATION_COMMAND;

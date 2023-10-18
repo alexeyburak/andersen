@@ -13,9 +13,10 @@ import java.util.UUID;
 public final class CheckInClientCommand implements Command {
 
     private static final String CHECK_IN_MESSAGE = "Client was checked in";
+    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.CHECK_IN;
 
     private final CheckInClientUseCase useCase;
-    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.CHECK_IN;
+
     @Override
     public ApplicationCommand getApplicationCommand() {
         return APPLICATION_COMMAND;

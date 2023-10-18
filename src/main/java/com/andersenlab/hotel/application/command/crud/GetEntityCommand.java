@@ -21,10 +21,10 @@ import java.util.UUID;
 public final class GetEntityCommand implements Command, ArgumentsValidator<String> {
 
     private static final int VALID_ARGUMENTS_SIZE = 3;
-
+    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.GET;
     private final CrudService<Client, ClientEntity> clientService;
     private final CrudService<Apartment, ApartmentEntity> apartmentService;
-    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.GET;
+
     @Override
     public ApplicationCommand getApplicationCommand() {
         return APPLICATION_COMMAND;
