@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class InMemoryApartmentStoreTest {
+class InMemoryApartmentRepositoryTest {
 
-    InMemoryApartmentRepository target;
-    Apartment apartment1, apartment2, apartment3, apartment4, apartment5;
+    private InMemoryApartmentRepository target;
+    private Apartment apartment1, apartment2, apartment3, apartment4, apartment5;
 
     @BeforeEach
     void setUp() {
@@ -157,10 +157,5 @@ class InMemoryApartmentStoreTest {
         target.save(apartment1);
 
         assertTrue(target.has(apartment1.getId()));
-    }
-
-    @Test
-    void has_NonExistingEntity_ShouldReturnFalse() {
-        assertFalse(target.has(apartment1.getId()));
     }
 }

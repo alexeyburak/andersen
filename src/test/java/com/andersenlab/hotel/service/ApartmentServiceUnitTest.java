@@ -18,18 +18,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class ApartmentServiceUnitTest {
-    ApartmentService target;
-    InMemoryApartmentRepository repo;
+    private ApartmentService target;
+    private InMemoryApartmentRepository repo;
 
-    Apartment apartmentAvailable, apartmentUnavailable;
-    UUID apartmentAvailableId, apartmentUnavailableId;
+    private Apartment apartmentAvailable;
+    private Apartment apartmentUnavailable;
+    private UUID apartmentAvailableId;
+    private UUID apartmentUnavailableId;
 
     @BeforeEach
     void setUp() {
@@ -49,7 +51,9 @@ class ApartmentServiceUnitTest {
         final UUID id = UUID.randomUUID();
         when(repo.has(any(UUID.class))).thenReturn(false);
 
-        assertThrows(ApartmentNotfoundException.class, () -> target.delete(id));
+        assertThatThrownBy(() ->
+                target.delete(id)
+        ).isInstanceOf(ApartmentNotfoundException.class);
     }
 
     @Test
@@ -85,7 +89,9 @@ class ApartmentServiceUnitTest {
         final UUID id = UUID.randomUUID();
         when(repo.getById(any())).thenReturn(Optional.empty());
 
-        assertThrows(ApartmentNotfoundException.class, () -> target.getById(id));
+        assertThatThrownBy(() ->
+                target.getById(id)
+        ).isInstanceOf(ApartmentNotfoundException.class);
         verify(repo).getById(id);
     }
 
@@ -112,7 +118,9 @@ class ApartmentServiceUnitTest {
 
         when(repo.getById(apartmentUnavailableId)).thenReturn(Optional.of(apartmentUnavailable));
 
-        assertThrows(ApartmentNotfoundException.class, () -> target.adjust(apartmentUnavailableId, newPrice));
+        assertThatThrownBy(() ->
+                target.adjust(apartmentUnavailableId, newPrice)
+        ).isInstanceOf(ApartmentNotfoundException.class);
         verify(repo).getById(apartmentUnavailable.getId());
     }
 
@@ -122,12 +130,14 @@ class ApartmentServiceUnitTest {
 
         when(repo.getById(any())).thenReturn(Optional.empty());
 
-        assertThrows(ApartmentNotfoundException.class, () -> target.adjust(apartmentUnavailableId, newPrice));
+        assertThatThrownBy(() ->
+                target.adjust(apartmentUnavailableId, newPrice)
+        ).isInstanceOf(ApartmentNotfoundException.class);
         verify(repo).getById(apartmentUnavailable.getId());
     }
 
     @Test
-    void list_ShouldCallRepositoryMethod() {
+    void list_WithValidSortParam_ShouldCallRepositoryMethod() {
         ArgumentCaptor<ApartmentSort> captor = ArgumentCaptor.forClass(ApartmentSort.class);
         ApartmentSort sort = ApartmentSort.ID;
 
@@ -153,7 +163,9 @@ class ApartmentServiceUnitTest {
     void save_WithExistingId_ShouldThrowApartmentWithSameIdExists() {
         when(repo.has(any())).thenReturn(true);
 
-        assertThrows(ApartmentWithSameIdExists.class, () -> target.save(apartmentAvailable));
+        assertThatThrownBy(() ->
+                target.save(apartmentAvailable)
+        ).isInstanceOf(ApartmentWithSameIdExists.class);
         verify(repo).has(apartmentAvailable.getId());
     }
 
@@ -173,7 +185,9 @@ class ApartmentServiceUnitTest {
     void save_WithNonExistingId_ShouldThrowApartmentNotfoundException() {
         when(repo.has(any())).thenReturn(false);
 
-        assertThrows(ApartmentNotfoundException.class, () -> target.update(apartmentAvailable));
+        assertThatThrownBy(() ->
+                target.update(apartmentAvailable)
+        ).isInstanceOf(ApartmentNotfoundException.class);
         verify(repo).has(apartmentAvailable.getId());
     }
 }
