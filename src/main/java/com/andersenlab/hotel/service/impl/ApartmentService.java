@@ -54,10 +54,11 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
 
     @Override
     public void adjust(UUID id, BigDecimal newPrice) {
-        store.getById(id).ifPresentOrElse(
-                a -> store.save(new Apartment(a.getId(), newPrice, a.getCapacity(), a.isAvailability())),
-                ApartmentNotfoundException::new);
-
+        store.getById(id).filter(Apartment::isAvailability).ifPresentOrElse(
+                a -> store.update(new Apartment(a.getId(), newPrice, a.getCapacity(), a.isAvailability(), a.getStatus())),
+                () -> {
+                    throw new ApartmentNotfoundException();
+                });
         LOG.info("Adjust apartment price. ID: {}", id);
     }
 
@@ -76,17 +77,13 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
         }
         UUID id = apartment.getId();
 
-        if (has(id)) {
-            throw new ApartmentWithSameIdExists();
-        }
-
         store.save(apartment);
         LOG.info("Save apartment. ID: {}", id);
     }
 
     @Override
     public void update(Apartment apartment) {
-        if (has(apartment.getId())) {
+        if (!has(apartment.getId())) {
             throw new ApartmentNotfoundException();
         }
         store.update(apartment);
