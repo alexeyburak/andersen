@@ -3,7 +3,6 @@ package com.andersenlab.hotel.repository.inmemory;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.repository.ApartmentSort;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +13,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InMemoryApartmentRepositoryTest {
 
@@ -49,7 +46,7 @@ class InMemoryApartmentRepositoryTest {
         int actualSize = target.findAllSorted(ApartmentSort.ID).size();
 
         assertThat(actualSize).isEqualTo(1);
-        assertTrue(target.has(apartment1.getId()));
+        assertThat(target.has(apartment1.getId())).isTrue();
     }
 
     @Test
@@ -60,8 +57,8 @@ class InMemoryApartmentRepositoryTest {
         int actualSize = target.findAllSorted(ApartmentSort.ID).size();
 
         assertThat(actualSize).isEqualTo(2);
-        assertTrue(target.has(apartment3.getId()));
-        assertTrue(target.has(apartment2.getId()));
+        assertThat(target.has(apartment3.getId())).isTrue();
+        assertThat(target.has(apartment2.getId())).isTrue();
     }
 
     @Test
@@ -70,14 +67,14 @@ class InMemoryApartmentRepositoryTest {
 
         target.delete(apartment1.getId());
 
-        assertFalse(target.has(apartment1.getId()));
+        assertThat(target.has(apartment1.getId())).isFalse();
     }
 
     @Test
     void delete_NonExistingEntity_ShouldDeleteEntityFromStore() {
         target.delete(apartment1.getId());
 
-        assertFalse(target.has(apartment1.getId()));
+        assertThat(target.has(apartment1.getId())).isFalse();
     }
 
     @Test
@@ -85,15 +82,14 @@ class InMemoryApartmentRepositoryTest {
         target.save(apartment1);
         Optional<Apartment> actual = target.getById(apartment1.getId());
 
-        assertTrue(actual.isPresent());
-        assertThat(actual).contains(apartment1);
+        assertThat(actual).isPresent().contains(apartment1);
     }
 
     @Test
     void getById_ExistingEntity_ShouldReturnEmptyOptional() {
         Optional<Apartment> actual = target.getById(apartment1.getId());
 
-        Assertions.assertTrue(actual.isEmpty());
+        assertThat(actual).isEmpty();
     }
 
     @Test
@@ -147,15 +143,15 @@ class InMemoryApartmentRepositoryTest {
         List<Apartment> sorted = (List<Apartment>)
                 target.findAllSorted(ApartmentSort.AVAILABILITY);
 
-        assertFalse(sorted.get(0).isAvailability());
-        assertTrue(sorted.get(1).isAvailability());
-        assertTrue(sorted.get(2).isAvailability());
+        assertThat(sorted.get(0).isAvailability()).isFalse();
+        assertThat(sorted.get(1).isAvailability()).isTrue();
+        assertThat(sorted.get(2).isAvailability()).isTrue();
     }
 
     @Test
     void has_ExistingEntity_ShouldReturnTrue() {
         target.save(apartment1);
 
-        assertTrue(target.has(apartment1.getId()));
+        assertThat(target.has(apartment1.getId())).isTrue();
     }
 }

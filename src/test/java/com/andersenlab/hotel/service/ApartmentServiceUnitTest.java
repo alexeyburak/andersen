@@ -1,6 +1,5 @@
 package com.andersenlab.hotel.service;
 
-
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.repository.ApartmentSort;
