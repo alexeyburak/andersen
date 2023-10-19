@@ -1,0 +1,10 @@
+junitjupiter:
+  execution:
+    parallel:
+      enabled: true
+      mode:
+        default: concurrent
+        classes:
+          default: concurrent
+      config:
+        strategy: dynamic
