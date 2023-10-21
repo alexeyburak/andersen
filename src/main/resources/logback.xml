@@ -38,11 +38,11 @@
         <appender-ref ref="STDOUT" />
     </root>
 
-    <logger name="repository-logger" level="INFO" additivity="true">
+    <logger name="com.andersenlab.hotel.repository" level="INFO" additivity="true">
         <appender-ref ref="repository"/>
     </logger>
 
-    <logger name="service-logger" level="INFO" additivity="true">
+    <logger name="com.andersenlab.hotel.service" level="INFO" additivity="true">
         <appender-ref ref="service"/>
     </logger>
 </configuration>

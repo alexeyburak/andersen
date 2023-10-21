@@ -11,6 +11,7 @@ import com.andersenlab.hotel.repository.inmemory.InMemoryClientRepository;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
 import com.andersenlab.hotel.usecase.exception.ApartmentNotfoundException;
+import com.andersenlab.hotel.usecase.exception.ClientBannedException;
 import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
 import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -95,6 +96,21 @@ class ClientServiceUnitTest {
         assertThatThrownBy(() ->
                 target.checkIn(clientId, apartmentId)
         ).isInstanceOf(ClientNotfoundException.class);
+    }
+
+    @Test
+    void checkIn_BannedClient_ShouldThrowClientBannedException() {
+        final UUID clientId = UUID.randomUUID();
+        final UUID apartmentId = UUID.randomUUID();
+        client.setStatus(ClientStatus.BANNED);
+        when(repository.getById(any(UUID.class)))
+                .thenReturn(Optional.of(client));
+        when(apartmentService.getById(any(UUID.class)))
+                .thenReturn(apartmentEntity);
+
+        assertThatThrownBy(() ->
+                target.checkIn(clientId, apartmentId)
+        ).isInstanceOf(ClientBannedException.class);
     }
 
     @Test

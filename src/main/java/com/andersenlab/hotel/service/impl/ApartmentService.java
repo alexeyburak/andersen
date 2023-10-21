@@ -15,17 +15,12 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Function;
 
 public final class ApartmentService implements AdjustApartmentPriceUseCase,
         ListApartmentsUseCase, CrudService<Apartment, ApartmentEntity> {
-    private static final Logger LOG = LoggerFactory.getLogger("service-logger");
+    private static final Logger LOG = LoggerFactory.getLogger(ApartmentService.class);
 
     private final SortableCrudRepository<Apartment, ApartmentSort> store;
-    private final Function<Apartment, ApartmentEntity> toEntityMapper = (apartment ->
-            new ApartmentEntity(apartment.getId(), apartment.getPrice(), apartment.getCapacity(),
-                    apartment.isAvailability(), apartment.getStatus())
-    );
 
     public ApartmentService(final SortableCrudRepository<Apartment, ApartmentSort> store) {
         this.store = store;
@@ -48,7 +43,7 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
     @Override
     public ApartmentEntity getById(UUID id) throws ApartmentNotfoundException {
         return store.getById(id)
-                .map(toEntityMapper)
+                .map(this::toEntityMapper)
                 .orElseThrow(ApartmentNotfoundException::new);
     }
 
@@ -66,7 +61,7 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
     public List<ApartmentEntity> list(ApartmentSort sort) {
         return store.findAllSorted(sort)
                 .stream()
-                .map(toEntityMapper)
+                .map(this::toEntityMapper)
                 .toList();
     }
 
@@ -87,5 +82,10 @@ public final class ApartmentService implements AdjustApartmentPriceUseCase,
             throw new ApartmentNotfoundException();
         }
         store.update(apartment);
+    }
+
+    private ApartmentEntity toEntityMapper(Apartment apartment) {
+        return new ApartmentEntity(apartment.getId(), apartment.getPrice(), apartment.getCapacity(),
+                apartment.isAvailability(), apartment.getStatus());
     }
 }
