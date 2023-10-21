@@ -2,7 +2,7 @@ package com.andersenlab.hotel.application.command.crud;
 
 import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.application.command.ApplicationCommand;
-import com.andersenlab.hotel.application.command.ArgumentsValidator;
+import com.andersenlab.hotel.application.command.ValidatingArgumentsCommand;
 import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
-public final class GetEntityCommand implements Command, ArgumentsValidator<String> {
+public final class GetEntityCommand extends ValidatingArgumentsCommand implements Command {
 
     private static final int VALID_ARGUMENTS_SIZE = 3;
     private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.GET;
@@ -31,8 +31,7 @@ public final class GetEntityCommand implements Command, ArgumentsValidator<Strin
     }
 
     @Override
-    public void execute(PrintStream output, List<String> arguments) {
-        validateArguments(arguments);
+    public void process(PrintStream output, List<String> arguments) {
         Entity chosenEntity = EnumUtils.getEnum(Entity.class, arguments.get(1).toUpperCase());
         switch (chosenEntity) {
             case APARTMENT -> output.println(apartmentService.getById(UUID.fromString(arguments.get(2))));
@@ -42,7 +41,7 @@ public final class GetEntityCommand implements Command, ArgumentsValidator<Strin
     }
 
     @Override
-    public void validateArguments(List<String> arguments) throws IllegalArgumentException {
+    public void validate(List<String> arguments) throws IllegalArgumentException {
         if (arguments.size() != VALID_ARGUMENTS_SIZE) {
             throw new IllegalArgumentException(CustomErrorMessage.INVALID_ARGUMENTS_QUANTITY.getMessage());
         }
