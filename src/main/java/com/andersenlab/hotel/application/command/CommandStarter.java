@@ -25,29 +25,19 @@ public final class CommandStarter {
         final BufferedReader reader = new BufferedReader(
                 new InputStreamReader(inputStream, StandardCharsets.UTF_8)
         );
-
-        ApplicationCommand chosenCommand;
-        do {
-            printMenu();
-            String userInput = reader.readLine();
-            List<String> args = Arrays.stream(userInput.split(" ")).toList();
-            chosenCommand = EnumUtils.getEnum(ApplicationCommand.class, args.get(0).toUpperCase());
-            getCommand(chosenCommand).ifPresent(command -> execute(command, args));
-        } while (chosenCommand != ApplicationCommand.EXIT);
-    }
-
-    private void printMenu() {
         printStream.println("""
                 ---------
                 Welcome! command format [command model additional_args]
                 example: create apartment
                 List of available commands below:
                 """);
-        commands.forEach(command -> printStream.printf(
-                "To action - %s, write - %s%n",
-                command.getApplicationCommand().getDesc(),
-                command.getApplicationCommand().toString().toLowerCase()
-        ));
+        ApplicationCommand chosenCommand;
+        do {
+            String userInput = reader.readLine();
+            List<String> args = Arrays.stream(userInput.split(" ")).toList();
+            chosenCommand = EnumUtils.getEnum(ApplicationCommand.class, args.get(0).toUpperCase());
+            getCommand(chosenCommand).ifPresent(command -> execute(command, args));
+        } while (chosenCommand != ApplicationCommand.EXIT);
     }
 
     private Optional<Command> getCommand(ApplicationCommand chosenCommand) {

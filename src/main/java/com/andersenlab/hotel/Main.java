@@ -8,6 +8,7 @@ import com.andersenlab.hotel.application.command.additional.CalculateClientStayC
 import com.andersenlab.hotel.application.command.additional.CheckInClientCommand;
 import com.andersenlab.hotel.application.command.additional.CheckOutClientCommand;
 import com.andersenlab.hotel.application.command.additional.ExitApplicationCommand;
+import com.andersenlab.hotel.application.command.additional.HelpCommand;
 import com.andersenlab.hotel.application.command.crud.CreateEntityCommand;
 import com.andersenlab.hotel.application.command.crud.DeleteEntityCommand;
 import com.andersenlab.hotel.application.command.crud.GetEntityCommand;
@@ -53,6 +54,7 @@ public class Main {
                 new CalculateClientStayCurrentPriceCommand(module.calculateClientStayCurrentPriceUseCase()),
                 new CheckInClientCommand(module.checkInClientUseCase()),
                 new CheckOutClientCommand(module.checkOutClientUseCase()),
+                new HelpCommand(),
                 new ExitApplicationCommand()
         );
     }
