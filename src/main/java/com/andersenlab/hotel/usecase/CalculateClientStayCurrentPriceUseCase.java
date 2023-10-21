@@ -1,8 +1,9 @@
 package com.andersenlab.hotel.usecase;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public interface CalculateClientStayCurrentPriceUseCase {
 
-    double calculatePrice(UUID id);
+    BigDecimal calculatePrice(UUID id);
 }
