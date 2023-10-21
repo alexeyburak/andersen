@@ -104,9 +104,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         }
         UUID id = client.getId();
 
-        store.save(
-                new Client(id, client.getName(), ClientStatus.NEW)
-        );
+        store.save(client);
         LOG.info("Register new client. ID: {}", id);
     }
 
