@@ -66,6 +66,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
                         false, ApartmentStatus.RESERVED)
         );
         client.apartments().add(apartmentService.getById(apartmentId));
+        update(toClientMapper(client));
         LOG.info("Check in client. Client ID: {}, Apartment ID: {}", clientId, apartmentId);
     }
 
@@ -89,6 +90,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
                             true, ApartmentStatus.AVAILABLE)
             );
         }
+        update(toClientMapper(client));
         LOG.info("Check out client. Client ID: {}, Apartment ID: {}", clientId, apartmentId);
     }
 
@@ -135,5 +137,9 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
     private ClientEntity toEntityMapper(Client client) {
         return new ClientEntity(client.getId(), client.getName(), client.getStatus(), client.getApartments());
+    }
+
+    private Client toClientMapper(ClientEntity client){
+        return new Client(client.id(), client.name(), client.status(), client.apartments());
     }
 }
