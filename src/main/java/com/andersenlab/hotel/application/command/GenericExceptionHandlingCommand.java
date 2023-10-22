@@ -1,13 +1,9 @@
 package com.andersenlab.hotel.application.command;
 
-import com.andersenlab.hotel.application.CustomErrorMessage;
-
 import java.io.PrintStream;
 import java.util.List;
 
 public final class GenericExceptionHandlingCommand implements Command {
-
-    private static final ApplicationCommand applicationCommand = ApplicationCommand.GENERIC_EXCEPTION_HANDLER;
 
     private final Command original;
 
@@ -17,15 +13,15 @@ public final class GenericExceptionHandlingCommand implements Command {
 
     @Override
     public ApplicationCommand getApplicationCommand() {
-        return applicationCommand;
+        return original.getApplicationCommand();
     }
 
     @Override
     public void execute(PrintStream output, List<String> arguments) {
         try {
             original.execute(output, arguments);
-        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
-            output.println(CustomErrorMessage.WRONG_ARGUMENTS.getMessage());
+        } catch (IllegalArgumentException e) {
+            output.println(e.getMessage());
         }
     }
 }

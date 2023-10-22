@@ -31,13 +31,15 @@ class ApartmentServiceUnitTest {
     private Apartment apartmentUnavailable;
     private UUID apartmentAvailableId;
     private UUID apartmentUnavailableId;
+    private UUID id;
 
     @BeforeEach
     void setUp() {
         repo = mock(InMemoryApartmentRepository.class);
         target = new ApartmentService(repo);
-        apartmentUnavailableId = UUID.randomUUID();
-        apartmentAvailableId = UUID.randomUUID();
+        apartmentUnavailableId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+        apartmentAvailableId = UUID.fromString("00000000-0000-0000-0000-000000000002");
+        id = UUID.fromString("00000000-0000-0000-0000-abc000000005");
         apartmentAvailable = new Apartment(apartmentAvailableId, BigDecimal.ONE, BigInteger.ONE,
                 true, ApartmentStatus.AVAILABLE);
 
@@ -47,7 +49,6 @@ class ApartmentServiceUnitTest {
 
     @Test
     void delete_NotExistingId_ShouldThrowsApartmentNotFoundException() {
-        final UUID id = UUID.randomUUID();
         when(repo.has(any(UUID.class))).thenReturn(false);
 
         assertThatThrownBy(() ->
@@ -57,7 +58,6 @@ class ApartmentServiceUnitTest {
 
     @Test
     void delete_ExistingId_ShouldCallRepositoryMethod() {
-        final UUID id = UUID.randomUUID();
         when(repo.has(any(UUID.class))).thenReturn(true);
 
         target.delete(id);
@@ -67,8 +67,6 @@ class ApartmentServiceUnitTest {
 
     @Test
     void has_AnyUuid_ShouldCallRepositoryMethod() {
-        final UUID id = UUID.randomUUID();
-
         target.has(id);
 
         verify(repo).has(any());
@@ -85,7 +83,6 @@ class ApartmentServiceUnitTest {
 
     @Test
     void getById_NotExistingId_ShouldThrowsApartmentNotfoundException() {
-        final UUID id = UUID.randomUUID();
         when(repo.getById(any())).thenReturn(Optional.empty());
 
         assertThatThrownBy(() ->

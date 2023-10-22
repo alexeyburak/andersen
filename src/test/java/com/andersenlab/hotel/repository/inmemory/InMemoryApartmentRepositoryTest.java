@@ -17,25 +17,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 class InMemoryApartmentRepositoryTest {
 
     private InMemoryApartmentRepository target;
-    private Apartment apartment1, apartment2, apartment3, apartment4, apartment5;
+    private Apartment apartment1;
+    private Apartment apartment2;
+    private Apartment apartment3;
+    private Apartment apartment4;
+    private Apartment apartment5;
 
     @BeforeEach
     void setUp() {
         target = new InMemoryApartmentRepository();
 
-        apartment1 = new Apartment(UUID.randomUUID(), BigDecimal.ONE, BigInteger.ONE,
-                true, ApartmentStatus.AVAILABLE);
+        apartment1 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                BigDecimal.ONE, BigInteger.ONE,true, ApartmentStatus.AVAILABLE);
 
-        apartment2 = new Apartment(UUID.randomUUID(), BigDecimal.TWO, BigInteger.TWO,
-                true, ApartmentStatus.RESERVED);
+        apartment2 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                BigDecimal.TWO, BigInteger.TWO,true, ApartmentStatus.RESERVED);
 
-        apartment3 = new Apartment(UUID.fromString("9d76f43e-4ce2-40ba-90e1-37a6bc425ee1"),
+        apartment3 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000003"),
                 BigDecimal.TEN, BigInteger.TEN, true, ApartmentStatus.AVAILABLE);
 
-        apartment4 = new Apartment(UUID.fromString("9d76f43e-4ce2-40ba-90e1-37a6bc425ee2"),
+        apartment4 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000004"),
                 BigDecimal.ONE, BigInteger.TWO, true, ApartmentStatus.AVAILABLE);
 
-        apartment5 = new Apartment(UUID.fromString("9d76f43e-4ce2-40ba-90e1-37a6bc425ee3"),
+        apartment5 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000005"),
                 BigDecimal.TWO, BigInteger.ONE, false, ApartmentStatus.AVAILABLE);
     }
 
@@ -82,7 +86,7 @@ class InMemoryApartmentRepositoryTest {
         target.save(apartment1);
         Optional<Apartment> actual = target.getById(apartment1.getId());
 
-        assertThat(actual).isPresent().contains(apartment1);
+        assertThat(actual).contains(apartment1);
     }
 
     @Test

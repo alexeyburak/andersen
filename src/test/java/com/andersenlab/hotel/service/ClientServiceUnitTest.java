@@ -64,11 +64,11 @@ class ClientServiceUnitTest {
     @Test
     void calculatePrice_ExistingEntity_ShouldReturnDoubleValueOfSumPrice() {
         final UUID id = UUID.randomUUID();
-        final double expectedPrice = 4;
+        final BigDecimal expectedPrice = BigDecimal.valueOf(4);
         when(repository.getById(any(UUID.class)))
                 .thenReturn(Optional.of(client));
 
-        double actual = target.calculatePrice(id);
+        BigDecimal actual = target.calculatePrice(id);
 
         assertThat(actual).isEqualTo(expectedPrice);
     }

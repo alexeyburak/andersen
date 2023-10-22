@@ -6,6 +6,7 @@ import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
 import lombok.AllArgsConstructor;
 
 import java.io.PrintStream;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public final class CalculateClientStayCurrentPriceCommand implements Command {
 
     @Override
     public void execute(PrintStream output, List<String> arguments) {
-        double price = useCase.calculatePrice(UUID.fromString(arguments.get(1)));
+        BigDecimal price = useCase.calculatePrice(UUID.fromString(arguments.get(1)));
 
         output.println("Price for all apartments: " + price);
     }

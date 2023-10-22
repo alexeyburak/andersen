@@ -3,15 +3,7 @@ package com.andersenlab.hotel;
 import com.andersenlab.hotel.application.HotelModule;
 import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.application.command.CommandStarter;
-import com.andersenlab.hotel.application.command.additional.AdjustApartmentPriceCommand;
-import com.andersenlab.hotel.application.command.additional.CalculateClientStayCurrentPriceCommand;
-import com.andersenlab.hotel.application.command.additional.CheckInClientCommand;
-import com.andersenlab.hotel.application.command.additional.CheckOutClientCommand;
-import com.andersenlab.hotel.application.command.additional.ExitApplicationCommand;
-import com.andersenlab.hotel.application.command.crud.CreateEntityCommand;
-import com.andersenlab.hotel.application.command.crud.DeleteEntityCommand;
-import com.andersenlab.hotel.application.command.crud.GetEntityCommand;
-import com.andersenlab.hotel.application.command.crud.GetEntityListCommand;
+import com.andersenlab.hotel.application.command.CommandsCreator;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.repository.ApartmentSort;
@@ -27,7 +19,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         final HotelModule context = initContext();
-        final CommandStarter starter = new CommandStarter(System.in, System.out, getCommands(context));
+
+        List<? extends Command> listCommands = CommandsCreator.decorateCommands(CommandsCreator.getCommands(context));
+        final CommandStarter starter = new CommandStarter(System.in, System.out, listCommands);
 
         starter.run();
     }
@@ -43,17 +37,4 @@ public class Main {
                 clientService);
     }
 
-    public static List<Command> getCommands(HotelModule module) {
-        return List.of(
-                new CreateEntityCommand(module.clientService(), module.apartmentService()),
-                new DeleteEntityCommand(module.clientService(), module.apartmentService()),
-                new GetEntityCommand(module.clientService(), module.apartmentService()),
-                new GetEntityListCommand(module.listClientsUseCase(), module.listApartmentsUseCase()),
-                new AdjustApartmentPriceCommand(module.adjustApartmentPriceUseCase()),
-                new CalculateClientStayCurrentPriceCommand(module.calculateClientStayCurrentPriceUseCase()),
-                new CheckInClientCommand(module.checkInClientUseCase()),
-                new CheckOutClientCommand(module.checkOutClientUseCase()),
-                new ExitApplicationCommand()
-        );
-    }
 }

@@ -19,6 +19,7 @@ import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,13 +37,14 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
     }
 
     @Override
-    public double calculatePrice(UUID id) {
+    public BigDecimal calculatePrice(UUID id) {
         LOG.info("Calculate client price. ID: {}", id);
         return getById(id)
                 .apartments()
                 .stream()
-                .mapToDouble(apartment -> apartment.price().doubleValue())
-                .sum();
+                .map(ApartmentEntity::price)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
     }
 
     @Override

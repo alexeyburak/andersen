@@ -11,9 +11,6 @@ import java.io.PrintStream;
 import java.util.List;
 
 public final class BusinessExceptionHandlingCommand implements Command {
-
-    private static final ApplicationCommand applicationCommand = ApplicationCommand.BUSINESS_EXCEPTION_HANDLER;
-
     private final Command original;
 
     public BusinessExceptionHandlingCommand(Command original) {
@@ -22,7 +19,7 @@ public final class BusinessExceptionHandlingCommand implements Command {
 
     @Override
     public ApplicationCommand getApplicationCommand() {
-        return applicationCommand;
+        return original.getApplicationCommand();
     }
 
     @Override
