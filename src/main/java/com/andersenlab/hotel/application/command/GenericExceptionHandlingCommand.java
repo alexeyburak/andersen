@@ -22,7 +22,7 @@ public final class GenericExceptionHandlingCommand implements Command {
     public void execute(PrintStream output, List<String> arguments) {
         try {
             original.execute(output, arguments);
-        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+        } catch (IllegalArgumentException e) {
             output.println(CustomErrorMessage.WRONG_ARGUMENTS.getMessage());
         }
     }
