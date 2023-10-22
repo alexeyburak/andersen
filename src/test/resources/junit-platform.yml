@@ -1,0 +1,6 @@
+junitjupiter:
+  execution:
+    parallel:
+      enabled: false
+      config:
+        strategy: dynamic
