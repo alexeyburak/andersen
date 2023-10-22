@@ -18,7 +18,8 @@ public final class CommandStarter {
 
     private final InputStream inputStream;
     private final PrintStream printStream;
-    private final List<Command> commands;
+
+    private final List<? extends Command> commands;//instead of List<Command>
 
     @SneakyThrows
     public void run() {
@@ -32,8 +33,13 @@ public final class CommandStarter {
             String userInput = reader.readLine();
             List<String> args = Arrays.stream(userInput.split(" ")).toList();
             chosenCommand = EnumUtils.getEnum(ApplicationCommand.class, args.get(0).toUpperCase());
-            getCommand(chosenCommand).ifPresent(command -> execute(command, args));
+            getCommand(chosenCommand).ifPresent(command -> command.execute(printStream, args) );
         } while (chosenCommand != ApplicationCommand.EXIT);
+    }
+
+    //returns Optional<? extends Command> instead of Optional<Command>
+    private Optional<? extends Command> getCommand(ApplicationCommand chosenCommand) {
+        return commands.stream().filter(command -> command.getApplicationCommand().equals(chosenCommand)).findFirst();
     }
 
     private void printMenu() {
@@ -50,13 +56,5 @@ public final class CommandStarter {
         ));
     }
 
-    private Optional<Command> getCommand(ApplicationCommand chosenCommand) {
-        return commands.stream().filter(command -> command.getApplicationCommand().equals(chosenCommand)).findFirst();
-    }
 
-    private void execute(Command command, List<String> args) {
-        new BusinessExceptionHandlingCommand(
-                new GenericExceptionHandlingCommand(command)
-        ).execute(printStream, args);
-    }
 }
