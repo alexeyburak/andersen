@@ -44,8 +44,10 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         LOG.info("Calculate client price. ID: {}", id);
         return getById(id)
                 .apartments()
-                .stream().map(ApartmentEntity::price)
-                .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+                .stream()
+                .map(ApartmentEntity::price)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
     }
 
     @Override

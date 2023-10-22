@@ -16,7 +16,9 @@ import com.andersenlab.hotel.application.command.crud.GetEntityListCommand;
 import java.util.List;
 
 public class CommandsCreator {
+
     private CommandsCreator() {}
+
     public static List<Command> getCommands(HotelModule module) {
         return List.of(
                 new CreateEntityCommand(module.clientService(), module.apartmentService()),
