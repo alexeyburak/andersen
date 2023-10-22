@@ -1,6 +1,5 @@
 package com.andersenlab.hotel.application.command;
 
-import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.usecase.exception.ApartmentNotfoundException;
 import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
 import com.andersenlab.hotel.usecase.exception.ClientBannedException;
@@ -27,15 +26,15 @@ public final class BusinessExceptionHandlingCommand implements Command {
         try {
             original.execute(output, arguments);
         } catch (ApartmentWithSameIdExists e) {
-            output.println(CustomErrorMessage.APARTMENT_IS_ALREADY_EXISTS.getMessage());
+            output.println("Apartment is already exists");
         } catch (ClientIsAlreadyExistsException e) {
-            output.println(CustomErrorMessage.CLIENT_IS_ALREADY_EXISTS.getMessage());
+            output.println("Client is already exists");
         } catch (ClientNotfoundException e) {
-            output.println(CustomErrorMessage.CLIENT_NOT_FOUND.getMessage());
+            output.println("Client was not found");
         } catch (ApartmentNotfoundException e) {
-            output.println(CustomErrorMessage.APARTMENT_NOT_FOUND.getMessage());
+            output.println("Apartment was not found");
         } catch (ClientBannedException e) {
-            output.println(CustomErrorMessage.CLIENT_BANNED.getMessage());
+            output.println("Client banned");
         }
     }
 

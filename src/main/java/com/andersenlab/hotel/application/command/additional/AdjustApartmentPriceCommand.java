@@ -1,6 +1,5 @@
 package com.andersenlab.hotel.application.command.additional;
 
-import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.application.command.ApplicationCommand;
 import com.andersenlab.hotel.application.command.ValidatingArgumentsCommand;
 import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
@@ -36,7 +35,7 @@ public final class AdjustApartmentPriceCommand extends ValidatingArgumentsComman
     @Override
     public void validate(List<String> arguments) throws IllegalArgumentException {
         if (!NumberUtils.isParsable(arguments.get(2))) {
-            throw new IllegalArgumentException(CustomErrorMessage.ILLEGAL_PRICE.getMessage());
+            throw new IllegalArgumentException("Illegal price");
         }
     }
 }

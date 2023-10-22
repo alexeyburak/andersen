@@ -1,6 +1,5 @@
 package com.andersenlab.hotel.service.factory;
 
-import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientStatus;
 
@@ -23,7 +22,7 @@ public class ClientFactory {
 
     private static void validateArgs(List<String> args) {
         if (args.size() != VALID_ARGUMENTS_SIZE) {
-            throw new IllegalArgumentException(CustomErrorMessage.ILLEGAL_NUMBER_OF_ARGUMENTS.getMessage());
+            throw new IllegalArgumentException("Illegal number of arguments");
         }
     }
 }

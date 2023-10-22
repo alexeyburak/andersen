@@ -1,6 +1,5 @@
 package com.andersenlab.hotel.application.command.crud;
 
-import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.application.command.ApplicationCommand;
 import com.andersenlab.hotel.application.command.ValidatingArgumentsCommand;
 import com.andersenlab.hotel.model.Entity;
@@ -40,14 +39,14 @@ public final class GetEntityListCommand extends ValidatingArgumentsCommand {
                 ClientSort sort = EnumUtils.getEnum(ClientSort.class, arguments.get(2).toUpperCase());
                 listClientsUseCase.list(sort).forEach(output::println);
             }
-            default -> throw new IllegalArgumentException(CustomErrorMessage.WRONG_ARGUMENTS.getMessage());
+            default -> throw new IllegalArgumentException("Unknown entity");
         }
     }
 
     @Override
     public void validate(List<String> arguments) throws IllegalArgumentException {
         if (arguments.size() != VALID_ARGUMENTS_SIZE) {
-            throw new IllegalArgumentException(CustomErrorMessage.INVALID_ARGUMENTS_QUANTITY.getMessage());
+            throw new IllegalArgumentException("Invalid arguments quantity");
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.andersenlab.hotel.application.command.crud;
 
-import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.application.command.ApplicationCommand;
 import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.model.Apartment;
@@ -36,7 +35,7 @@ public final class CreateEntityCommand implements Command {
         switch (chosenEntity) {
             case APARTMENT -> apartmentService.save(ApartmentFactory.createApartment(trimmed));
             case CLIENT -> clientService.save(ClientFactory.createClient(trimmed));
-            default -> throw new IllegalArgumentException(CustomErrorMessage.UNKNOWN_ENTITY.getMessage());
+            default -> throw new IllegalArgumentException("Unknown entity");
         }
         output.printf("%s was created", chosenEntity.name());
     }

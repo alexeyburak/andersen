@@ -1,6 +1,5 @@
 package com.andersenlab.hotel.service.factory;
 
-import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import org.apache.commons.lang3.BooleanUtils;
@@ -30,19 +29,19 @@ public class ApartmentFactory {
 
     private static void validateArgs(List<String> args) {
         if (args.size() != VALID_ARGUMENTS_SIZE) {
-            throw new IllegalArgumentException(CustomErrorMessage.ILLEGAL_NUMBER_OF_ARGUMENTS.getMessage());
+            throw new IllegalArgumentException("Illegal number of arguments");
         }
         if (!NumberUtils.isParsable(args.get(1))) {
-            throw new IllegalArgumentException(CustomErrorMessage.ILLEGAL_PRICE.getMessage());
+            throw new IllegalArgumentException("Illegal price");
         }
         if (!NumberUtils.isParsable(args.get(2))) {
-            throw new IllegalArgumentException(CustomErrorMessage.ILLEGAL_CAPACITY.getMessage());
+            throw new IllegalArgumentException("Illegal capacity");
         }
         if ((!args.get(3).equals("true")) && (!args.get(3).equals("false"))) {
-            throw new IllegalArgumentException(CustomErrorMessage.ILLEGAL_AVAILABILITY.getMessage());
+            throw new IllegalArgumentException("Illegal availability");
         }
         if (!EnumUtils.isValidEnum(ApartmentStatus.class, args.get(4).toUpperCase())) {
-            throw new IllegalArgumentException(CustomErrorMessage.ILLEGAL_STATUS.getMessage());
+            throw new IllegalArgumentException("Illegal status");
         }
     }
 }
