@@ -1,13 +1,15 @@
 package service;
 
-import com.andersenlab.hotel.model.*;
+import com.andersenlab.hotel.model.Apartment;
+import com.andersenlab.hotel.model.Client;
+import com.andersenlab.hotel.model.ApartmentStatus;
+import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.repository.ApartmentSort;
 import com.andersenlab.hotel.repository.ClientSort;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.repository.inmemory.InMemoryApartmentRepository;
 import com.andersenlab.hotel.repository.inmemory.InMemoryClientRepository;
 import com.andersenlab.hotel.service.impl.ApartmentService;
-import com.andersenlab.hotel.service.impl.ClientService;
 import com.andersenlab.hotel.usecase.exception.ApartmentNotfoundException;
 import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
 import org.junit.jupiter.api.Assertions;
@@ -25,9 +27,6 @@ public class ApartmentServiceIntegrationTest {
 
     private ApartmentService target;
     private SortableCrudRepository<Apartment, ApartmentSort> repo;
-    private SortableCrudRepository<Client, ClientSort> clientRepo;
-    private ClientService clientTarget;
-    private Client client;
     private Apartment apartmentAvailable;
     private Apartment apartmentUnAvailable;
 
@@ -35,10 +34,7 @@ public class ApartmentServiceIntegrationTest {
     @BeforeEach
     void setUp() {
         repo = new InMemoryApartmentRepository();
-        clientRepo = new InMemoryClientRepository();
         target = new ApartmentService(repo);
-        clientTarget = new ClientService(clientRepo, target);
-        client = new Client(UUID.randomUUID(), "Aibar", ClientStatus.NEW);
         apartmentAvailable = new Apartment(UUID.randomUUID(), BigDecimal.ONE, BigInteger.ONE, true, ApartmentStatus.AVAILABLE);
         apartmentUnAvailable = new Apartment(UUID.randomUUID(), BigDecimal.TWO, BigInteger.TWO, false, ApartmentStatus.RESERVED);
 
@@ -152,11 +148,9 @@ public class ApartmentServiceIntegrationTest {
     @Test
     void notAdjustApartmentPrice_ifApartmentNotAvailable() {
         BigDecimal newPrice = new BigDecimal(44);
-        clientTarget.save(client);
-        target.save(apartmentAvailable);
-        clientTarget.checkIn(client.getId(), apartmentAvailable.getId());
-        target.adjust(apartmentAvailable.getId(), newPrice);
-        ApartmentEntity apartment = target.getById(apartmentAvailable.getId());
+        target.save(apartmentUnAvailable);
+        target.adjust(apartmentUnAvailable.getId(), newPrice);
+        ApartmentEntity apartment = target.getById(apartmentUnAvailable.getId());
         assertThat(apartment.price()).isNotEqualByComparingTo(newPrice);
     }
 }
