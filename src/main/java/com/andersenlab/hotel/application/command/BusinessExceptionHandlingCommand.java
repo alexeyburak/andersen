@@ -10,7 +10,6 @@ import java.io.PrintStream;
 import java.util.List;
 
 public final class BusinessExceptionHandlingCommand implements Command {
-
     private final Command original;
 
     public BusinessExceptionHandlingCommand(Command original) {
