@@ -1,7 +1,5 @@
 package com.andersenlab.hotel.application.command;
 
-import com.andersenlab.hotel.application.CustomErrorMessage;
-
 import java.io.PrintStream;
 import java.util.List;
 
@@ -23,7 +21,7 @@ public final class GenericExceptionHandlingCommand implements Command {
         try {
             original.execute(output, arguments);
         } catch (IllegalArgumentException e) {
-            output.println(CustomErrorMessage.WRONG_ARGUMENTS.getMessage());
+            output.println(e.getMessage());
         }
     }
 }

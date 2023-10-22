@@ -7,6 +7,7 @@ import com.andersenlab.hotel.application.command.additional.CalculateClientStayC
 import com.andersenlab.hotel.application.command.additional.CheckInClientCommand;
 import com.andersenlab.hotel.application.command.additional.CheckOutClientCommand;
 import com.andersenlab.hotel.application.command.additional.ExitApplicationCommand;
+import com.andersenlab.hotel.application.command.additional.HelpCommand;
 import com.andersenlab.hotel.application.command.crud.CreateEntityCommand;
 import com.andersenlab.hotel.application.command.crud.DeleteEntityCommand;
 import com.andersenlab.hotel.application.command.crud.GetEntityCommand;
@@ -15,6 +16,7 @@ import com.andersenlab.hotel.application.command.crud.GetEntityListCommand;
 import java.util.List;
 
 public class CommandsCreator {
+    private CommandsCreator() {}
     public static List<Command> getCommands(HotelModule module) {
         return List.of(
                 new CreateEntityCommand(module.clientService(), module.apartmentService()),
@@ -25,6 +27,7 @@ public class CommandsCreator {
                 new CalculateClientStayCurrentPriceCommand(module.calculateClientStayCurrentPriceUseCase()),
                 new CheckInClientCommand(module.checkInClientUseCase()),
                 new CheckOutClientCommand(module.checkOutClientUseCase()),
+                new HelpCommand(),
                 new ExitApplicationCommand()
         );
     }

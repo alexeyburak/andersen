@@ -29,8 +29,7 @@ public final class CommandStarter {
                 ---------
                 Welcome! command format [command model additional_args]
                 example: create apartment
-                List of available commands below:
-                """);
+                type "help" to get list of available commands""");
         ApplicationCommand chosenCommand;
         do {
             String userInput = reader.readLine();
