@@ -12,6 +12,7 @@ public enum CustomErrorMessage {
     CLIENT_NOT_FOUND("Client was not found"),
     CLIENT_BANNED("Client banned"),
     APARTMENT_NOT_FOUND("Apartment was not found"),
+    APARTMENT_RESERVED("Apartment is already reserved"),
     UNKNOWN_ENTITY("Unknown entity"),
     WRONG_ARGUMENTS("Wrong arguments"),
     INVALID_ARGUMENTS_QUANTITY("Invalid arguments quantity"),

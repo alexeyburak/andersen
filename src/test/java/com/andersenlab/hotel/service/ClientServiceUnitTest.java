@@ -11,6 +11,7 @@ import com.andersenlab.hotel.repository.inmemory.InMemoryClientRepository;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
 import com.andersenlab.hotel.usecase.exception.ApartmentNotfoundException;
+import com.andersenlab.hotel.usecase.exception.ApartmentReservedException;
 import com.andersenlab.hotel.usecase.exception.ClientBannedException;
 import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
 import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
@@ -111,6 +112,22 @@ class ClientServiceUnitTest {
         assertThatThrownBy(() ->
                 target.checkIn(clientId, apartmentId)
         ).isInstanceOf(ClientBannedException.class);
+    }
+
+    @Test
+    void checkIn_ReservedApartment_ShouldThrowApartmentReservedException() {
+        final UUID clientId = UUID.randomUUID();
+        final UUID apartmentId = UUID.randomUUID();
+        apartmentEntity = new ApartmentEntity(UUID.randomUUID(), BigDecimal.ONE, BigInteger.ONE,
+                true, ApartmentStatus.RESERVED);
+        when(repository.getById(any(UUID.class)))
+                .thenReturn(Optional.of(client));
+        when(apartmentService.getById(any(UUID.class)))
+                .thenReturn(apartmentEntity);
+
+        assertThatThrownBy(() ->
+                target.checkIn(clientId, apartmentId)
+        ).isInstanceOf(ApartmentReservedException.class);
     }
 
     @Test
