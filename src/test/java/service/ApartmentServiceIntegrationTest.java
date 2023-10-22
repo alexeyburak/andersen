@@ -1,14 +1,11 @@
 package service;
 
 import com.andersenlab.hotel.model.Apartment;
-import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.repository.ApartmentSort;
-import com.andersenlab.hotel.repository.ClientSort;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.repository.inmemory.InMemoryApartmentRepository;
-import com.andersenlab.hotel.repository.inmemory.InMemoryClientRepository;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.usecase.exception.ApartmentNotfoundException;
 import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
