@@ -13,6 +13,7 @@ import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
 import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.usecase.ListClientsUseCase;
+import com.andersenlab.hotel.usecase.exception.ApartmentReservedException;
 import com.andersenlab.hotel.usecase.exception.ClientBannedException;
 import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
 import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
@@ -55,6 +56,9 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
         }
         ApartmentEntity apartment = apartmentService.getById(apartmentId);
+        if (apartment.status().equals(ApartmentStatus.RESERVED)) {
+            throw new ApartmentReservedException();
+        }
 
         apartmentService.update(
                 new Apartment(apartment.id(), apartment.price(), apartment.capacity(),

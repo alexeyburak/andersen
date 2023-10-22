@@ -2,6 +2,7 @@ package com.andersenlab.hotel.application.command;
 
 import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.usecase.exception.ApartmentNotfoundException;
+import com.andersenlab.hotel.usecase.exception.ApartmentReservedException;
 import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
 import com.andersenlab.hotel.usecase.exception.ClientBannedException;
 import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
@@ -36,6 +37,8 @@ public final class BusinessExceptionHandlingCommand implements Command {
             output.println(CustomErrorMessage.APARTMENT_NOT_FOUND.getMessage());
         } catch (ClientBannedException e) {
             output.println(CustomErrorMessage.CLIENT_BANNED.getMessage());
+        } catch (ApartmentReservedException e) {
+            output.println(CustomErrorMessage.APARTMENT_RESERVED.getMessage());
         }
     }
 
