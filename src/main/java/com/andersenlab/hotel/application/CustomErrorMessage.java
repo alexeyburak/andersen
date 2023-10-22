@@ -10,6 +10,7 @@ public enum CustomErrorMessage {
     APARTMENT_IS_ALREADY_EXISTS("Apartment is already exists"),
     CLIENT_IS_ALREADY_EXISTS("Client is already exists"),
     CLIENT_NOT_FOUND("Client was not found"),
+    CLIENT_BANNED("Client banned"),
     APARTMENT_NOT_FOUND("Apartment was not found"),
     UNKNOWN_ENTITY("Unknown entity"),
     WRONG_ARGUMENTS("Wrong arguments"),
