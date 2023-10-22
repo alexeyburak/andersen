@@ -1,7 +1,9 @@
 package com.andersenlab.hotel;
 
 import com.andersenlab.hotel.application.HotelModule;
-import com.andersenlab.hotel.application.command.*;
+import com.andersenlab.hotel.application.command.Command;
+import com.andersenlab.hotel.application.command.CommandStarter;
+import com.andersenlab.hotel.application.command.CommandsCreator;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.repository.ApartmentSort;

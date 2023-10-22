@@ -14,7 +14,7 @@ public final class GenericExceptionHandlingCommand implements Command {
 
     @Override
     public ApplicationCommand getApplicationCommand() {
-        return original.getApplicationCommand(); //instead of return applicationCommand;
+        return original.getApplicationCommand();
     }
 
     @Override

@@ -19,7 +19,7 @@ public final class CommandStarter {
     private final InputStream inputStream;
     private final PrintStream printStream;
 
-    private final List<? extends Command> commands;//instead of List<Command>
+    private final List<? extends Command> commands;
 
     @SneakyThrows
     public void run() {
@@ -37,7 +37,6 @@ public final class CommandStarter {
         } while (chosenCommand != ApplicationCommand.EXIT);
     }
 
-    //returns Optional<? extends Command> instead of Optional<Command>
     private Optional<? extends Command> getCommand(ApplicationCommand chosenCommand) {
         return commands.stream().filter(command -> command.getApplicationCommand().equals(chosenCommand)).findFirst();
     }

@@ -1,7 +1,12 @@
 package com.andersenlab.hotel.application.command;
 
 import com.andersenlab.hotel.application.HotelModule;
-import com.andersenlab.hotel.application.command.additional.*;
+
+import com.andersenlab.hotel.application.command.additional.AdjustApartmentPriceCommand;
+import com.andersenlab.hotel.application.command.additional.CalculateClientStayCurrentPriceCommand;
+import com.andersenlab.hotel.application.command.additional.CheckInClientCommand;
+import com.andersenlab.hotel.application.command.additional.CheckOutClientCommand;
+import com.andersenlab.hotel.application.command.additional.ExitApplicationCommand;
 import com.andersenlab.hotel.application.command.crud.CreateEntityCommand;
 import com.andersenlab.hotel.application.command.crud.DeleteEntityCommand;
 import com.andersenlab.hotel.application.command.crud.GetEntityCommand;
@@ -23,7 +28,6 @@ public class CommandsCreator {
                 new ExitApplicationCommand()
         );
     }
-    //returns List<BusinessExceptionHandlingCommand>, not the List<Command>
     public static List<? extends Command> decorateCommands(List<Command> commandList){
         return commandList.stream().map(command ->
                 new BusinessExceptionHandlingCommand(new GenericExceptionHandlingCommand(command))).toList();
