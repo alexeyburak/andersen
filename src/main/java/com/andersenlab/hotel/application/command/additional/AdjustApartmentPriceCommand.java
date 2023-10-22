@@ -3,7 +3,6 @@ package com.andersenlab.hotel.application.command.additional;
 import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.application.command.ApplicationCommand;
 import com.andersenlab.hotel.application.command.ValidatingArgumentsCommand;
-import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
-public final class AdjustApartmentPriceCommand extends ValidatingArgumentsCommand implements Command  {
+public final class AdjustApartmentPriceCommand extends ValidatingArgumentsCommand {
 
     private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.ADJUST;
 

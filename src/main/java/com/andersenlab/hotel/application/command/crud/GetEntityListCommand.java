@@ -3,7 +3,6 @@ package com.andersenlab.hotel.application.command.crud;
 import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.application.command.ApplicationCommand;
 import com.andersenlab.hotel.application.command.ValidatingArgumentsCommand;
-import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.model.Entity;
 import com.andersenlab.hotel.repository.ApartmentSort;
 import com.andersenlab.hotel.repository.ClientSort;
@@ -16,7 +15,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 @AllArgsConstructor
-public final class GetEntityListCommand extends ValidatingArgumentsCommand implements Command  {
+public final class GetEntityListCommand extends ValidatingArgumentsCommand {
 
     private static final int VALID_ARGUMENTS_SIZE = 3;
     private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.GET_ALL;

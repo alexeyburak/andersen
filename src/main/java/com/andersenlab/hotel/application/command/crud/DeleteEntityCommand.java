@@ -3,7 +3,6 @@ package com.andersenlab.hotel.application.command.crud;
 import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.application.command.ApplicationCommand;
 import com.andersenlab.hotel.application.command.ValidatingArgumentsCommand;
-import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.Client;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
-public final class DeleteEntityCommand extends ValidatingArgumentsCommand implements Command {
+public final class DeleteEntityCommand extends ValidatingArgumentsCommand {
 
     private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.DELETE;
     private static final int VALID_ARGUMENTS_SIZE = 3;

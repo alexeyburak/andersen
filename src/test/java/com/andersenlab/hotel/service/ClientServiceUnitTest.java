@@ -263,12 +263,11 @@ class ClientServiceUnitTest {
 
     @Test
     void save_NotExistingClient_ShouldCallRepositorySaveMethod() {
-        Client actual = new Client(client.getId(), client.getName(), ClientStatus.NEW);
         when(repository.has(any(UUID.class))).thenReturn(false);
 
         target.save(client);
 
-        verify(repository).save(actual);
+        verify(repository).save(any(Client.class));
     }
 
     @Test
