@@ -4,19 +4,19 @@ import com.andersenlab.hotel.application.command.ApplicationCommand;
 import com.andersenlab.hotel.application.command.Command;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.List;
 
-public final class ExitApplicationCommand implements Command {
-
-    private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.EXIT;
-
+public class HelpCommand implements Command {
     @Override
     public ApplicationCommand getApplicationCommand() {
-        return APPLICATION_COMMAND;
+        return ApplicationCommand.HELP;
     }
 
     @Override
     public void execute(PrintStream output, List<String> arguments) {
-        output.println("Goodbye, have a nice day!");
+        Arrays.stream(ApplicationCommand.values()).forEach(command -> output.printf(
+                "To action - %s, write - %s%n", command.getDesc(), command.toString().toLowerCase()
+        ));
     }
 }

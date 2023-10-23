@@ -2,7 +2,9 @@ package com.andersenlab.hotel.application.command;
 
 import com.andersenlab.hotel.application.CustomErrorMessage;
 import com.andersenlab.hotel.usecase.exception.ApartmentNotfoundException;
+import com.andersenlab.hotel.usecase.exception.ApartmentReservedException;
 import com.andersenlab.hotel.usecase.exception.ApartmentWithSameIdExists;
+import com.andersenlab.hotel.usecase.exception.ClientBannedException;
 import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
 import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
 
@@ -10,8 +12,6 @@ import java.io.PrintStream;
 import java.util.List;
 
 public final class BusinessExceptionHandlingCommand implements Command {
-
-    private static final ApplicationCommand applicationCommand = ApplicationCommand.BUSINESS_EXCEPTION_HANDLER;
 
     private final Command original;
 
@@ -21,7 +21,7 @@ public final class BusinessExceptionHandlingCommand implements Command {
 
     @Override
     public ApplicationCommand getApplicationCommand() {
-        return applicationCommand;
+        return original.getApplicationCommand();
     }
 
     @Override
@@ -36,6 +36,10 @@ public final class BusinessExceptionHandlingCommand implements Command {
             output.println(CustomErrorMessage.CLIENT_NOT_FOUND.getMessage());
         } catch (ApartmentNotfoundException e) {
             output.println(CustomErrorMessage.APARTMENT_NOT_FOUND.getMessage());
+        } catch (ClientBannedException e) {
+            output.println(CustomErrorMessage.CLIENT_BANNED.getMessage());
+        } catch (ApartmentReservedException e) {
+            output.println(CustomErrorMessage.APARTMENT_RESERVED.getMessage());
         }
     }
 

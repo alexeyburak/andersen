@@ -15,8 +15,7 @@ public enum ApplicationCommand {
     CHECK_OUT("Check out client"),
     ADJUST("Adjust apartment price"),
     CALCULATE_PRICE("Calculate client stay price"),
-    BUSINESS_EXCEPTION_HANDLER("Business exception handler"),
-    GENERIC_EXCEPTION_HANDLER("Generic exception handler"),
+    HELP("Help"),
     EXIT("Exit");
 
     private final String desc;

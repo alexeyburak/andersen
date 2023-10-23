@@ -10,21 +10,15 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 public class ApartmentFactory {
 
     private static final int VALID_ARGUMENTS_SIZE = 5;
-    private static final Random rand = new Random();
 
     private ApartmentFactory() {}
 
     public static Apartment createApartment(List<String> args) {
-        return args.isEmpty() ? createRandomApartment() : createApartmentFromArgs(args);
-    }
-
-    public static Apartment createApartmentFromArgs(List<String> args) {
         validateArgs(args);
 
         return new Apartment(
@@ -50,17 +44,5 @@ public class ApartmentFactory {
         if (!EnumUtils.isValidEnum(ApartmentStatus.class, args.get(4).toUpperCase())) {
             throw new IllegalArgumentException(CustomErrorMessage.ILLEGAL_STATUS.getMessage());
         }
-    }
-
-    public static Apartment createRandomApartment() {
-        ApartmentStatus[] statuses = ApartmentStatus.values();
-        ApartmentStatus status = statuses[rand.nextInt(statuses.length)];
-        final double decimalPlace = 10;
-        return new Apartment(
-                UUID.randomUUID(),
-                BigDecimal.valueOf(Math.round(rand.nextFloat() * 100 * decimalPlace)/decimalPlace),
-                BigInteger.valueOf(rand.nextInt(4)),
-                status.equals(ApartmentStatus.AVAILABLE), status
-        );
     }
 }

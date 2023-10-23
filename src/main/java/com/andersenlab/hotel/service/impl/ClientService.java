@@ -13,23 +13,23 @@ import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
 import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.usecase.ListClientsUseCase;
+import com.andersenlab.hotel.usecase.exception.ApartmentReservedException;
+import com.andersenlab.hotel.usecase.exception.ClientBannedException;
 import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
 import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Function;
 
 public final class ClientService implements CalculateClientStayCurrentPriceUseCase,
         CheckInClientUseCase, CheckOutClientUseCase, ListClientsUseCase,
         CrudService<Client, ClientEntity> {
-    private static final Logger LOG = LoggerFactory.getLogger("service-logger");
 
-    private final Function<Client, ClientEntity> toEntityMapper = (client ->
-            new ClientEntity(client.getId(), client.getName(), client.getStatus(), client.getApartments())
-    );
+    private static final Logger LOG = LoggerFactory.getLogger(ClientService.class);
+
     private final SortableCrudRepository<Client, ClientSort> store;
     private final ApartmentService apartmentService;
 
@@ -39,19 +39,27 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
     }
 
     @Override
-    public double calculatePrice(UUID id) {
+    public BigDecimal calculatePrice(UUID id) {
         LOG.info("Calculate client price. ID: {}", id);
         return getById(id)
                 .apartments()
                 .stream()
-                .mapToDouble(apartment -> apartment.price().doubleValue())
-                .sum();
+                .map(ApartmentEntity::price)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
     }
 
     @Override
     public void checkIn(UUID clientId, UUID apartmentId) {
         ClientEntity client = getById(clientId);
+        if (client.status().equals(ClientStatus.BANNED)) {
+            throw new ClientBannedException();
+
+        }
         ApartmentEntity apartment = apartmentService.getById(apartmentId);
+        if (apartment.status().equals(ApartmentStatus.RESERVED)) {
+            throw new ApartmentReservedException();
+        }
 
         apartmentService.update(
                 new Apartment(apartment.id(), apartment.price(), apartment.capacity(),
@@ -65,7 +73,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
     public List<ClientEntity> list(ClientSort sort) {
         return store.findAllSorted(ClientSort.valueOf(sort.toString()))
                 .stream()
-                .map(toEntityMapper)
+                .map(this::toEntityMapper)
                 .toList();
     }
 
@@ -87,7 +95,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
     @Override
     public ClientEntity getById(UUID id) throws ClientNotfoundException {
         return store.getById(id)
-                .map(toEntityMapper)
+                .map(this::toEntityMapper)
                 .orElseThrow(ClientNotfoundException::new);
     }
 
@@ -103,9 +111,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         }
         UUID id = client.getId();
 
-        store.save(
-                new Client(id, client.getName(), ClientStatus.NEW)
-        );
+        store.save(client);
         LOG.info("Register new client. ID: {}", id);
     }
 
@@ -125,5 +131,9 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         }
         store.update(client);
         LOG.info("Update client. ID: {}", client.getId());
+    }
+
+    private ClientEntity toEntityMapper(Client client) {
+        return new ClientEntity(client.getId(), client.getName(), client.getStatus(), client.getApartments());
     }
 }

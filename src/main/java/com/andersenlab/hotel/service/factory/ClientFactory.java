@@ -14,25 +14,10 @@ public class ClientFactory {
     private ClientFactory() {}
 
     public static Client createClient(List<String> args) {
-        return args.isEmpty() ? createRandomClient() : createClientFromArgs(args);
-    }
-
-    public static Client createRandomClient() {
-        UUID id = UUID.randomUUID();
-
-        return new Client(
-                id,
-                "client-" + id.toString().substring(0, 4),
-                ClientStatus.NEW
-        );
-    }
-
-    public static Client createClientFromArgs(List<String> args) {
         validateArgs(args);
 
         return new Client(
-                UUID.fromString(args.get(0)), args.get(1),
-                ClientStatus.NEW
+                UUID.fromString(args.get(0)), args.get(1), ClientStatus.NEW
         );
     }
 
