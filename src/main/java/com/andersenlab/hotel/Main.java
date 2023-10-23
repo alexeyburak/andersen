@@ -34,7 +34,7 @@ public class Main {
 
         PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");
         String location = propertyReaderFromFile.readProperty("location");
-        String abilityApartmentotoChange = propertyReaderFromFile.readProperty("ability-apartmento-change");
+        String abilityApartmentotoChange = propertyReaderFromFile.readProperty("ability-apartment-to-change");
 
         final File file = fileLoader(location);
         final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);
