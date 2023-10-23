@@ -152,6 +152,8 @@ class ClientServiceUnitTest {
                 .thenReturn(Optional.of(client));
         when(apartmentService.getById(any(UUID.class)))
                 .thenReturn(apartmentEntity);
+        when(repository.has(clientId))
+                .thenReturn(true);
 
         target.checkIn(clientId, apartmentId);
 
@@ -208,6 +210,8 @@ class ClientServiceUnitTest {
                 .thenReturn(apartmentEntity);
         Apartment expected = new Apartment(apartmentEntity.id(), apartmentEntity.price(), apartmentEntity.capacity(),
                 true, ApartmentStatus.AVAILABLE);
+        when(repository.has(clientId))
+                .thenReturn(true);
 
         target.checkOut(clientId, apartmentId);
 
@@ -223,6 +227,8 @@ class ClientServiceUnitTest {
                 .thenReturn(Optional.of(client));
         when(apartmentService.getById(any(UUID.class)))
                 .thenReturn(apartmentEntity);
+        when(repository.has(clientId))
+                .thenReturn(true);
 
         target.checkOut(clientId, apartmentId);
 
