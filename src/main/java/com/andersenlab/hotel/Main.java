@@ -9,6 +9,7 @@ import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.repository.ApartmentSort;
 import com.andersenlab.hotel.repository.ClientSort;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
+import com.andersenlab.hotel.application.propertyReaders.PropertyReaderFromFile;
 import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
 import com.andersenlab.hotel.repository.infile.InFileClientRepository;
 import com.andersenlab.hotel.service.impl.ApartmentService;
@@ -17,6 +18,7 @@ import lombok.SneakyThrows;
 
 import java.io.File;
 import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -29,11 +31,18 @@ public class Main {
     }
 
     public static HotelModule initContext() {
-        final File file = fileLoader("D://database.json");
+
+        PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");
+        String location = propertyReaderFromFile.readProperty("location");
+        String abilityApartmentotoChange = propertyReaderFromFile.readProperty("ability-apartmento-change");
+
+        final File file = fileLoader(location);
         final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);
         final SortableCrudRepository<Client, ClientSort> clientRepository = new InFileClientRepository(file);
+
         final ApartmentService apartmentService = new ApartmentService(apartmentRepository);
-        final ClientService clientService = new ClientService(clientRepository, apartmentService);
+        final ClientService clientService = new ClientService(clientRepository, apartmentService,
+                Boolean.parseBoolean(abilityApartmentotoChange));
 
         return new HotelModule(clientService, apartmentService, apartmentService,
                 clientService, clientService, clientService, apartmentService,
