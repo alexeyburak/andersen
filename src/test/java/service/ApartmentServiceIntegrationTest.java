@@ -146,8 +146,9 @@ public class ApartmentServiceIntegrationTest {
     void notAdjustApartmentPrice_ifApartmentNotAvailable() {
         BigDecimal newPrice = new BigDecimal(44);
         target.save(apartmentUnAvailable);
-        target.adjust(apartmentUnAvailable.getId(), newPrice);
+        assertThatThrownBy(() -> target.adjust(apartmentUnAvailable.getId(), newPrice)).isInstanceOf(ApartmentNotfoundException.class);
         ApartmentEntity apartment = target.getById(apartmentUnAvailable.getId());
         assertThat(apartment.price()).isNotEqualByComparingTo(newPrice);
+
     }
 }
