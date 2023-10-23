@@ -11,7 +11,7 @@ import com.andersenlab.hotel.repository.ClientSort;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.repository.inmemory.InMemoryApartmentRepository;
 import com.andersenlab.hotel.repository.inmemory.InMemoryClientRepository;
-import com.andersenlab.hotel.resourcesManagement.propertyReaders.PropertyReaderFromFile;
+import com.andersenlab.hotel.application.propertyReaders.PropertyReaderFromFile;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
 
@@ -20,8 +20,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
-
         final HotelModule context = initContext();
 
         List<? extends Command> listCommands = CommandsCreator.decorateCommands(CommandsCreator.getCommands(context));
@@ -33,13 +31,13 @@ public class Main {
     public static HotelModule initContext() {
         PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");
         String location = propertyReaderFromFile.readProperty("location");
-        String abilityApartmentotoChange = propertyReaderFromFile.readProperty("ability-apartmentoto-change");
-
+        String abilityApartmentotoChange = propertyReaderFromFile.readProperty("ability-apartmento-change");
 
         final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InMemoryApartmentRepository();
         final SortableCrudRepository<Client, ClientSort> clientRepository = new InMemoryClientRepository();
         final ApartmentService apartmentService = new ApartmentService(apartmentRepository);
-        final ClientService clientService = new ClientService(clientRepository, apartmentService, Boolean.parseBoolean(abilityApartmentotoChange));
+        final ClientService clientService = new ClientService(clientRepository, apartmentService,
+                Boolean.parseBoolean(abilityApartmentotoChange));
 
         return new HotelModule(clientService, apartmentService, apartmentService,
                 clientService, clientService, clientService, apartmentService,

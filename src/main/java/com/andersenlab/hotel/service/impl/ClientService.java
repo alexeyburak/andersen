@@ -13,10 +13,7 @@ import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
 import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.usecase.ListClientsUseCase;
-import com.andersenlab.hotel.usecase.exception.ApartmentReservedException;
-import com.andersenlab.hotel.usecase.exception.ClientBannedException;
-import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
-import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
+import com.andersenlab.hotel.usecase.exception.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +25,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         CheckInClientUseCase, CheckOutClientUseCase, ListClientsUseCase,
         CrudService<Client, ClientEntity> {
     private static final Logger LOG = LoggerFactory.getLogger(ClientService.class);
-
     private final boolean statusChangeAvailable;
-
     private final SortableCrudRepository<Client, ClientSort> store;
     private final ApartmentService apartmentService;
 
@@ -40,7 +35,10 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         this.statusChangeAvailable = true;
     }
 
-    public ClientService(final SortableCrudRepository<Client, ClientSort> store, final ApartmentService apartmentService, final boolean statusChangeAvailable) {
+    public ClientService(final SortableCrudRepository<Client,
+            ClientSort> store,
+            final ApartmentService apartmentService,
+            final boolean statusChangeAvailable) {
         this.store = store;
         this.apartmentService = apartmentService;
         this.statusChangeAvailable = statusChangeAvailable;
@@ -59,8 +57,8 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
     @Override
     public void checkIn(UUID clientId, UUID apartmentId) {
-        if(!statusChangeAvailable){
-            throw new RuntimeException("Status change is not avaliable");
+        if (!statusChangeAvailable){
+            throw new ApartmentChangeStatusException();
         }
         ClientEntity client = getById(clientId);
         if (client.status().equals(ClientStatus.BANNED)) {
@@ -91,8 +89,8 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
     @Override
     public void checkOut(UUID clientId, UUID apartmentId) {
-        if(!statusChangeAvailable){
-            throw new RuntimeException("Status change is not avaliable");
+        if (!statusChangeAvailable){
+            throw new ApartmentChangeStatusException();
         }
         ClientEntity client = getById(clientId);
         ApartmentEntity apartment = apartmentService.getById(apartmentId);
