@@ -29,12 +29,21 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         CrudService<Client, ClientEntity> {
     private static final Logger LOG = LoggerFactory.getLogger(ClientService.class);
 
+    private final boolean statusChangeAvailable;
+
     private final SortableCrudRepository<Client, ClientSort> store;
     private final ApartmentService apartmentService;
 
     public ClientService(final SortableCrudRepository<Client, ClientSort> store, final ApartmentService apartmentService) {
         this.store = store;
         this.apartmentService = apartmentService;
+        this.statusChangeAvailable = true;
+    }
+
+    public ClientService(final SortableCrudRepository<Client, ClientSort> store, final ApartmentService apartmentService, final boolean statusChangeAvailable) {
+        this.store = store;
+        this.apartmentService = apartmentService;
+        this.statusChangeAvailable = statusChangeAvailable;
     }
 
     @Override
@@ -50,6 +59,9 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
     @Override
     public void checkIn(UUID clientId, UUID apartmentId) {
+        if(!statusChangeAvailable){
+            throw new RuntimeException("Status change is not avaliable");
+        }
         ClientEntity client = getById(clientId);
         if (client.status().equals(ClientStatus.BANNED)) {
             throw new ClientBannedException();
@@ -62,7 +74,8 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
         apartmentService.update(
                 new Apartment(apartment.id(), apartment.price(), apartment.capacity(),
-                        false, ApartmentStatus.RESERVED)
+                        false,
+                        ApartmentStatus.RESERVED)
         );
         client.apartments().add(apartmentService.getById(apartmentId));
         LOG.info("Check in client. Client ID: {}, Apartment ID: {}", clientId, apartmentId);
@@ -78,14 +91,17 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
     @Override
     public void checkOut(UUID clientId, UUID apartmentId) {
+        if(!statusChangeAvailable){
+            throw new RuntimeException("Status change is not avaliable");
+        }
         ClientEntity client = getById(clientId);
         ApartmentEntity apartment = apartmentService.getById(apartmentId);
 
         boolean ifClientHasApartment = client.apartments().remove(apartment);
         if (ifClientHasApartment) {
             apartmentService.update(
-                    new Apartment(apartment.id(), apartment.price(), apartment.capacity(),
-                            true, ApartmentStatus.AVAILABLE)
+                    new Apartment(apartment.id(), apartment.price(), apartment.capacity(), true,
+                            ApartmentStatus.AVAILABLE)
             );
         }
         LOG.info("Check out client. Client ID: {}, Apartment ID: {}", clientId, apartmentId);
