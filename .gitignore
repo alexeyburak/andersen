@@ -6,6 +6,7 @@ build/
 /target
 /logs
 dependency-reduced-pom.xml
+db.json
 
 ### IntelliJ IDEA ###
 .idea
