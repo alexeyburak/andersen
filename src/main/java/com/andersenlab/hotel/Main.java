@@ -14,6 +14,10 @@ import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
 import com.andersenlab.hotel.repository.infile.InFileClientRepository;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
+import com.andersenlab.hotel.usecase.CheckInClientUseCase;
+import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
+import com.andersenlab.hotel.usecase.impl.BlockedCheckIn;
+import com.andersenlab.hotel.usecase.impl.BlockedCheckOut;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -31,21 +35,30 @@ public class Main {
     }
 
     public static HotelModule initContext() {
-
         PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");
         String location = propertyReaderFromFile.readProperty("location");
-        String abilityApartmentotoChange = propertyReaderFromFile.readProperty("ability-apartment-to-change");
+        String abilityApartmentToChange = propertyReaderFromFile.readProperty("ability-apartment-to-change");
 
         final File file = fileLoader(location);
         final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);
         final SortableCrudRepository<Client, ClientSort> clientRepository = new InFileClientRepository(file);
 
         final ApartmentService apartmentService = new ApartmentService(apartmentRepository);
-        final ClientService clientService = new ClientService(clientRepository, apartmentService,
-                Boolean.parseBoolean(abilityApartmentotoChange));
+        final ClientService clientService = new ClientService(clientRepository, apartmentService);
+
+        CheckInClientUseCase checkInClientUseCase;
+        CheckOutClientUseCase checkOutClientUseCase;
+
+        if(Boolean.parseBoolean(abilityApartmentToChange)) {
+            checkInClientUseCase = clientService;
+            checkOutClientUseCase = clientService;
+        } else {
+            checkInClientUseCase = new BlockedCheckIn();
+            checkOutClientUseCase = new BlockedCheckOut();
+        }
 
         return new HotelModule(clientService, apartmentService, apartmentService,
-                clientService, clientService, clientService, apartmentService,
+                clientService, checkOutClientUseCase, checkInClientUseCase, apartmentService,
                 clientService);
     }
 

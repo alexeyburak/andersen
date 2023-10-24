@@ -1,27 +1,19 @@
 package com.andersenlab.hotel.repository.infile;
 
 import com.andersenlab.hotel.model.Apartment;
-import com.andersenlab.hotel.model.ApartmentStatus;
-import com.andersenlab.hotel.model.Entity;
+import com.andersenlab.hotel.model.Database;
 import com.andersenlab.hotel.repository.ApartmentSort;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import org.apache.commons.lang3.EnumUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class InFileApartmentRepository implements SortableCrudRepository<Apartment, ApartmentSort> {
     private static final Logger LOG = LoggerFactory.getLogger(InFileApartmentRepository.class);
@@ -72,41 +64,17 @@ public class InFileApartmentRepository implements SortableCrudRepository<Apartme
         save(entity);
     }
 
+    @SneakyThrows
     private Map<UUID, Apartment> getAll() {
-        final Map<String, LinkedHashMap<String, Object>> map =
-                (Map<String, LinkedHashMap<String, Object>>) getFullMap().get(Entity.APARTMENT.toString());
-
-        return map.values()
-                .stream()
-                .collect(Collectors.toMap(
-                        fieldMap -> UUID.fromString(fieldMap.get("id").toString()),
-                        fieldMap -> new Apartment(
-                                UUID.fromString(String.valueOf(fieldMap.get("id"))),
-                                new BigDecimal(String.valueOf(fieldMap.get("price"))),
-                                new BigInteger(String.valueOf(fieldMap.get("capacity"))),
-                                Boolean.parseBoolean(String.valueOf(fieldMap.get("availability"))),
-                                EnumUtils.getEnum(ApartmentStatus.class, String.valueOf(fieldMap.get("status")))
-                        )));
-
-    }
-
-    private Map<String, Object> getFullMap() {
-        Map<String, Object> fullMap = new HashMap<>();
-        try {
-            fullMap = jsonMapper.readValue(database, HashMap.class);
-        } catch (IOException e) {
-            LOG.warn("Failed to load resources");
-        }
-        if(!fullMap.containsKey(Entity.APARTMENT.toString())) {
-            fullMap.put(Entity.APARTMENT.toString(), new LinkedHashMap<String, Object>());
-        }
-        return fullMap;
+        return jsonMapper.readValue(database, Database.class).apartments();
     }
 
     @SneakyThrows
     private void saveAll(Map<UUID, Apartment> apartmentMap) {
-        Map<String, Object> fullMap = getFullMap();
-        fullMap.put(Entity.APARTMENT.toString(), apartmentMap);
-        jsonMapper.writeValue(database, fullMap);
+        Database db = jsonMapper.readValue(database, Database.class);
+        db.apartments().clear();
+        db.apartments().putAll(apartmentMap);
+        jsonMapper.writeValue(database, db);
+        LOG.debug("File was successfully saved");
     }
 }

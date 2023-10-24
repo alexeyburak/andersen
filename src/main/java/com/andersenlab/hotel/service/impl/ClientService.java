@@ -25,23 +25,12 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         CheckInClientUseCase, CheckOutClientUseCase, ListClientsUseCase,
         CrudService<Client, ClientEntity> {
     private static final Logger LOG = LoggerFactory.getLogger(ClientService.class);
-    private final boolean statusChangeAvailable;
     private final SortableCrudRepository<Client, ClientSort> store;
     private final ApartmentService apartmentService;
 
     public ClientService(final SortableCrudRepository<Client, ClientSort> store, final ApartmentService apartmentService) {
         this.store = store;
         this.apartmentService = apartmentService;
-        this.statusChangeAvailable = true;
-    }
-
-    public ClientService(final SortableCrudRepository<Client,
-            ClientSort> store,
-            final ApartmentService apartmentService,
-            final boolean statusChangeAvailable) {
-        this.store = store;
-        this.apartmentService = apartmentService;
-        this.statusChangeAvailable = statusChangeAvailable;
     }
 
     @Override
@@ -57,9 +46,6 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
     @Override
     public void checkIn(UUID clientId, UUID apartmentId) {
-        if (!statusChangeAvailable){
-            throw new ApartmentChangeStatusException();
-        }
         ClientEntity client = getById(clientId);
         if (client.status().equals(ClientStatus.BANNED)) {
             throw new ClientBannedException();
@@ -90,9 +76,6 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
     @Override
     public void checkOut(UUID clientId, UUID apartmentId) {
-        if (!statusChangeAvailable){
-            throw new ApartmentChangeStatusException();
-        }
         ClientEntity client = getById(clientId);
         ApartmentEntity apartment = apartmentService.getById(apartmentId);
 

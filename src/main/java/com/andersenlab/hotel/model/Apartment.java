@@ -25,5 +25,8 @@ public final class Apartment {
         this.availability = availability;
         this.status = status;
     }
+
+    public Apartment() {
+    }
 }
 
