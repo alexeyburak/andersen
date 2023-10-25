@@ -4,6 +4,7 @@ import com.andersenlab.hotel.application.HotelModule;
 import com.andersenlab.hotel.application.command.Command;
 import com.andersenlab.hotel.application.command.CommandStarter;
 import com.andersenlab.hotel.application.command.CommandsCreator;
+import com.andersenlab.hotel.application.servlet.ServletStarter;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.repository.ApartmentSort;
@@ -21,18 +22,27 @@ import com.andersenlab.hotel.usecase.impl.BlockedCheckOut;
 import lombok.SneakyThrows;
 
 import java.io.File;
-import java.util.List;
+import java.net.URISyntaxException;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException {
         final HotelModule context = initContext();
-
-        List<? extends Command> listCommands = CommandsCreator.decorateCommands(CommandsCreator.getCommands(context));
-        final CommandStarter starter = new CommandStarter(System.in, System.out, listCommands);
-
-        starter.run();
+        getStarter(context).run();
     }
+
+    public static ServletStarter getStarter(HotelModule context){
+        return ServletStarter.forModule(context);
+    }
+
+//    public static void main(String[] args) {
+//        final HotelModule context = initContext();
+//
+//        List<? extends Command> listCommands = CommandsCreator.decorateCommands(CommandsCreator.getCommands(context));
+//        final CommandStarter starter = new CommandStarter(System.in, System.out, listCommands);
+//
+//        starter.run();
+//    }
 
     public static HotelModule initContext() {
         PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");
