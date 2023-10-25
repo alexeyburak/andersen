@@ -39,7 +39,7 @@ public class Main {
         String location = propertyReaderFromFile.readProperty("location");
         String abilityApartmentToChange = propertyReaderFromFile.readProperty("ability-apartment-to-change");
 
-        final File file = fileLoader(location);
+        final File file = getFile(location);
         final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);
         final SortableCrudRepository<Client, ClientSort> clientRepository = new InFileClientRepository(file);
 
@@ -63,7 +63,7 @@ public class Main {
     }
 
     @SneakyThrows
-    public static File fileLoader(String path) {
+    public static File getFile(String path) {
         final File file = new File(path);
         if (!file.exists()) {
             file.createNewFile();
