@@ -54,6 +54,13 @@ public class ServletStarter {
                 ),
                 "/"
         );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ApartmentsServlet(module.apartmentService(),
+                                module.listApartmentsUseCase())
+                ),
+                "/apartments"
+        );
     }
 
     @SneakyThrows
