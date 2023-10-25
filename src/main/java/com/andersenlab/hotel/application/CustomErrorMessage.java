@@ -20,7 +20,8 @@ public enum CustomErrorMessage {
     ILLEGAL_CAPACITY("Illegal capacity"),
     ILLEGAL_AVAILABILITY("Illegal availability"),
     ILLEGAL_STATUS("Illegal status"),
-    ILLEGAL_NUMBER_OF_ARGUMENTS("Illegal number of arguments");
+    ILLEGAL_NUMBER_OF_ARGUMENTS("Illegal number of arguments"),
+    APARTMENT_STATUS_CHANGED("Apartment status can not be changed");
 
     private final String message;
 }
