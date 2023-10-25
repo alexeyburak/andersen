@@ -18,11 +18,10 @@ import com.andersenlab.hotel.usecase.impl.BlockedCheckOut;
 import lombok.SneakyThrows;
 
 import java.io.File;
-import java.net.URISyntaxException;
 
 
 public class Main {
-    public static void main(String[] args) throws URISyntaxException {
+    public static void main(String[] args) {
         final HotelModule context = initContext();
         getStarter(context).run();
     }
@@ -30,15 +29,6 @@ public class Main {
     public static ServletStarter getStarter(HotelModule context){
         return ServletStarter.forModule(context);
     }
-
-//    public static void main(String[] args) {
-//        final HotelModule context = initContext();
-//
-//        List<? extends Command> listCommands = CommandsCreator.decorateCommands(CommandsCreator.getCommands(context));
-//        final CommandStarter starter = new CommandStarter(System.in, System.out, listCommands);
-//
-//        starter.run();
-//    }
 
     public static HotelModule initContext() {
         PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");

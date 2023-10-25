@@ -2,6 +2,7 @@ package com.andersenlab.hotel.servlethotel;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,14 @@ public abstract class JsonServlet extends HttpServlet {
     }
 
     Response post(String uri, Map<String, String> body) {
+        return new Response(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+    }
+
+    Response put(String uri, Map<String, String> body) {
+        return new Response(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+    }
+
+    Response delete(String uri, Map<String, String> body) {
         return new Response(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 
@@ -41,6 +50,28 @@ public abstract class JsonServlet extends HttpServlet {
         respond(
                 resp,
                 post(
+                        req.getRequestURI(),
+                        objectMapper.readValue(req.getReader(), new TypeReference<>() {})
+                )
+        );
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        respond(
+                resp,
+                put(
+                        req.getRequestURI(),
+                        objectMapper.readValue(req.getReader(), new TypeReference<>() {})
+                )
+        );
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        respond(
+                resp,
+                delete(
                         req.getRequestURI(),
                         objectMapper.readValue(req.getReader(), new TypeReference<>() {})
                 )
