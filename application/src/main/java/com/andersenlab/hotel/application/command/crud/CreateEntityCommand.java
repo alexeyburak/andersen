@@ -8,7 +8,7 @@ import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientEntity;
 import com.andersenlab.hotel.model.Entity;
-import com.andersenlab.hotel.CrudService;
+import com.andersenlab.hotel.service.CrudService;
 import com.andersenlab.hotel.service.factory.ApartmentFactory;
 import com.andersenlab.hotel.service.factory.ClientFactory;
 import lombok.AllArgsConstructor;

@@ -8,7 +8,7 @@ import com.andersenlab.hotel.model.ClientEntity;
 import com.andersenlab.hotel.model.ClientStatus;
 import com.andersenlab.hotel.model.ClientSort;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
-import com.andersenlab.hotel.CrudService;
+import com.andersenlab.hotel.service.CrudService;
 import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
 import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.usecase.CheckOutClientUseCase;

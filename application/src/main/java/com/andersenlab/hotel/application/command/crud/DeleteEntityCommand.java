@@ -8,7 +8,7 @@ import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientEntity;
 import com.andersenlab.hotel.model.Entity;
-import com.andersenlab.hotel.CrudService;
+import com.andersenlab.hotel.service.CrudService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.EnumUtils;
 

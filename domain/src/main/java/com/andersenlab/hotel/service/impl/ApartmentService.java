@@ -4,7 +4,7 @@ import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.ApartmentSort;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
-import com.andersenlab.hotel.CrudService;
+import com.andersenlab.hotel.service.CrudService;
 import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
 import com.andersenlab.hotel.usecase.ListApartmentsUseCase;
 import com.andersenlab.hotel.usecase.exception.ApartmentNotfoundException;
