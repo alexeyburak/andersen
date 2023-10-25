@@ -6,6 +6,7 @@ import com.andersenlab.hotel.model.ApartmentSort;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.service.CrudService;
 import com.andersenlab.hotel.usecase.ListApartmentsUseCase;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.EnumUtils;
 
 import java.math.BigDecimal;
@@ -32,6 +33,12 @@ public class ApartmentsServlet extends JsonServlet {
         );
         apartmentService.save(apartment);
         return new Response(apartment);
+    }
+
+    @Override
+    Response delete(String uri, Map<String, String> body) {
+        apartmentService.delete(UUID.fromString(body.get("id")));
+        return new Response(HttpServletResponse.SC_OK);
     }
 
     @Override
