@@ -4,6 +4,7 @@ import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientEntity;
+import com.andersenlab.hotel.service.CrudService;
 import com.andersenlab.hotel.usecase.AdjustApartmentPriceUseCase;
 import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
 import com.andersenlab.hotel.usecase.CheckInClientUseCase;

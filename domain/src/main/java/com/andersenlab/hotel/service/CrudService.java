@@ -1,4 +1,4 @@
-package com.andersenlab.hotel;
+package com.andersenlab.hotel.service;
 
 import java.util.UUID;
 
