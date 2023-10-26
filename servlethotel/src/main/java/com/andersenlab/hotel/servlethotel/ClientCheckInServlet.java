@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.UUID;
 
-public class ClientCheckInServlet extends JsonServlet{
+public class ClientCheckInServlet extends JsonServlet {
     private final CheckInClientUseCase checkInClientUseCase;
 
     ClientCheckInServlet(CheckInClientUseCase checkInClientUseCase) {
@@ -14,10 +14,10 @@ public class ClientCheckInServlet extends JsonServlet{
 
     @Override
     Response put(String uri, Map<String, String> body) {
-        UUID clientID = UUID.fromString(body.get("clientID"));
-        UUID apartmentID = UUID.fromString(body.get("apartmentID"));
+        UUID clientId = UUID.fromString(body.get("clientID"));
+        UUID apartmentId = UUID.fromString(body.get("apartmentID"));
 
-        checkInClientUseCase.checkIn(clientID,apartmentID);
+        checkInClientUseCase.checkIn(clientId,apartmentId);
         return new Response(HttpServletResponse.SC_OK);
     }
 }
