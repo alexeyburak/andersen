@@ -28,7 +28,7 @@ public class ApartmentsServlet extends JsonServlet {
     Response post(String uri, Map<String, String> body) {
         Apartment apartment = new Apartment(
                 UUID.fromString(body.get("id")), new BigDecimal(body.get("price")),
-                new BigInteger(body.get("capacity")),Boolean.parseBoolean(body.get("availability")),
+                new BigInteger(body.get("capacity")), Boolean.parseBoolean(body.get("availability")),
                 EnumUtils.getEnum(ApartmentStatus.class, body.get("status"))
         );
         apartmentService.save(apartment);
