@@ -60,6 +60,12 @@ public class ServletStarter {
                 ),
                 "/apartments/adjust"
         );
+      servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ClientServlet(module.clientService())
+                ),
+                "/clients/*"
+        );
     }
 
     @SneakyThrows
