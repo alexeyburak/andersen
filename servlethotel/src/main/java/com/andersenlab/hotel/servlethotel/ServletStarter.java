@@ -83,6 +83,12 @@ public class ServletStarter {
         );
         servletHandler.addServletWithMapping(
                 new ServletHolder(
+                        new ClientCheckInServlet(module.checkInClientUseCase())
+                ),
+                "/clients/check-in"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
                         new CheckOutClientServlet(
                                 module.checkOutClientUseCase())
                 ),
@@ -93,6 +99,7 @@ public class ServletStarter {
                         new ClientsServlet(module.clientService(), module.listClientsUseCase())
                 ),
                 "/clients"
+        servlet-dev
         );
     }
 
