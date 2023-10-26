@@ -3,13 +3,18 @@ package com.andersenlab.hotel.servlethotel;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.service.CrudService;
+
 import java.util.Map;
 import java.util.UUID;
+
 public class ApartmentServlet extends JsonServlet {
+
     private CrudService<Apartment, ApartmentEntity> apartmentService;
+
     public ApartmentServlet(CrudService<Apartment, ApartmentEntity> apartmentService) {
         this.apartmentService = apartmentService;
     }
+
     @Override
     Response get(String uri, Map<String, String[]> parameters) {
         int lastSlash = uri.lastIndexOf("/");

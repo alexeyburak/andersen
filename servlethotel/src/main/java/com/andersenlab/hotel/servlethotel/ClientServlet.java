@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ClientServlet extends JsonServlet {
+
     private final CrudService<Client, ClientEntity> crudService;
 
     public ClientServlet(CrudService<Client, ClientEntity> crudService) {

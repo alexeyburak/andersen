@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ClientsServlet extends JsonServlet {
+
     private final CrudService<Client, ClientEntity> clientService;
     private final ListClientsUseCase useCase;
 
@@ -23,7 +24,7 @@ public class ClientsServlet extends JsonServlet {
 
     @Override
     Response get(String uri, Map<String, String[]> parameters) {
-        ClientSort sort = EnumUtils.getEnum(ClientSort.class ,parameters.get("sort")[0]);
+        ClientSort sort = EnumUtils.getEnum(ClientSort.class, parameters.get("sort")[0]);
         return new Response(useCase.list(sort));
     }
 

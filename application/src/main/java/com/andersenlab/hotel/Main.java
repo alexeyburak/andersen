@@ -2,8 +2,8 @@ package com.andersenlab.hotel;
 
 import com.andersenlab.hotel.application.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.model.Apartment;
-import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ApartmentSort;
+import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientSort;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
@@ -26,7 +26,7 @@ public class Main {
         getStarter(context).run();
     }
 
-    public static ServletStarter getStarter(HotelModule context){
+    public static ServletStarter getStarter(HotelModule context) {
         return ServletStarter.forModule(context);
     }
 
@@ -45,7 +45,7 @@ public class Main {
         CheckInClientUseCase checkInClientUseCase;
         CheckOutClientUseCase checkOutClientUseCase;
 
-        if(Boolean.parseBoolean(abilityApartmentToChange)) {
+        if (Boolean.parseBoolean(abilityApartmentToChange)) {
             checkInClientUseCase = clientService;
             checkOutClientUseCase = clientService;
         } else {
