@@ -73,7 +73,14 @@ public class ServletStarter {
                 ),
                 "/apartments"
         );
-         servletHandler.addServletWithMapping(
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new CheckOutClientServlet(
+                                module.checkOutClientUseCase())
+                ),
+                "/clients/check-out"
+        );
+        servletHandler.addServletWithMapping(
                 new ServletHolder(
                         new ClientsServlet(module.clientService(), module.listClientsUseCase())
                 ),
