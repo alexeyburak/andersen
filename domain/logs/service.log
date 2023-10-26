@@ -1,0 +1,370 @@
+19:48:04.021 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 4735f2ba-09bd-4bc0-930f-88f5649c879b
+19:48:04.022 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 0514e97f-4715-485e-b235-dd583b3250f7, Apartment ID: de2630e6-6928-4bb7-96d0-0f53685ce59c
+19:48:04.039 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 0fad737e-eee1-431b-bd4c-684720d2e5a4
+19:48:04.039 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 73f51f40-832e-49e8-9bd5-78630f7d874c, Apartment ID: f32388f4-61a0-4115-9b13-70841e1a3cfe
+19:48:04.040 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 72d920e0-4154-4e19-b56d-ae1acccb0ca7
+19:48:04.043 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 109c7236-2e85-44d0-a63a-7ec47f6a5472
+19:48:04.048 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 4ebd4a0b-fd9e-4ab6-bc87-c9a751e33dd0
+19:48:04.051 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 3c6fac99-eca7-4c3b-a6e8-a5e0504babc5
+19:48:04.052 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: d3f5d81c-6b00-4ace-b4c7-1aed0effb20b
+19:48:04.058 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: aa313e86-98fd-4f6c-a15b-81b794328240
+19:48:04.058 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 92f7d43e-7609-4439-8145-a22e00aa9c46, Apartment ID: a6b737b9-2d5e-486b-b1e6-77e54dd443c6
+19:48:04.061 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 95de441f-b0e9-42a8-9fad-76c2e742ed0a
+19:48:04.061 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 95de441f-b0e9-42a8-9fad-76c2e742ed0a, Apartment ID: 00000000-0000-0000-0000-000000000001
+19:48:04.063 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: d89cf0d1-a78c-4c1b-88ee-4f65b9256c46
+19:48:04.064 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: d89cf0d1-a78c-4c1b-88ee-4f65b9256c46, Apartment ID: 00000000-0000-0000-0000-000000000001
+19:48:04.064 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: a00a72ba-4e95-4f1c-a258-3a01cb868584
+19:48:04.065 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 54d76af4-5ed4-4ed3-836f-535c358ede87
+19:48:04.066 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+19:48:04.067 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: cc770b87-07c7-4249-a903-7e02ecd94cc6
+19:48:04.067 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 05e48846-ddea-4228-a6d1-18574041f0f2
+19:48:04.071 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 56de0817-2100-421e-bffc-b80cfbc637fb
+19:48:04.071 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 56de0817-2100-421e-bffc-b80cfbc637fb, Apartment ID: 00000000-0000-0000-0000-000000000001
+19:48:04.076 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.076 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.077 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.077 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.077 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.077 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.078 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.078 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.078 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.079 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+19:48:04.080 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.081 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:48:04.097 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+19:48:04.098 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+19:48:04.099 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+19:50:33.204 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: fe56dce0-88f7-4891-9548-58b57aa21db3
+19:50:33.205 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: eb5d4be4-9bab-4a8e-ad23-f97e8b3779b1, Apartment ID: 6c35cb8d-db32-4c2e-ae43-8e4c683e5cb6
+19:50:33.223 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: c420b28a-de9f-4b24-8832-71e8b1d4b749
+19:50:33.224 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 4887f49a-399a-48cf-8110-391e05940025, Apartment ID: c49f733d-2a92-4b8c-8aa6-4b830ec730db
+19:50:33.225 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: fa05fa99-f8d1-49a0-b117-43771a7945e2
+19:50:33.228 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: f004d939-f293-400f-b661-773c8c95b589
+19:50:33.232 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 5684298c-7d06-4d48-a7b1-5e7332a50a18
+19:50:33.236 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 27865c42-5111-40c3-8ffb-6482a2cc1a63
+19:50:33.237 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 1a4ca051-bf2f-473c-874c-01f245e80b33
+19:50:33.243 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 61f930f0-e93f-492b-a682-08b3711b612f
+19:50:33.243 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 11d75c9c-0610-4a6d-92b3-fc1b7444230e, Apartment ID: 3c0729a8-591f-47d0-827c-4745be206ba1
+19:50:33.246 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: ae77cce2-08ed-433d-9a81-7ee48cabca81
+19:50:33.247 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: ae77cce2-08ed-433d-9a81-7ee48cabca81, Apartment ID: 00000000-0000-0000-0000-000000000001
+19:50:33.250 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 71868be2-0340-4b55-9be8-45faba9935fb
+19:50:33.250 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 71868be2-0340-4b55-9be8-45faba9935fb, Apartment ID: 00000000-0000-0000-0000-000000000001
+19:50:33.251 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 1cf649e4-5693-481e-9f5a-8626ea60245f
+19:50:33.251 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 33bdc817-24e2-4eac-a958-c3ac52750de9
+19:50:33.253 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+19:50:33.254 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: e5479260-8b35-45e0-b5e5-f03e955bbbe8
+19:50:33.254 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 95814deb-c627-4081-b64d-2e4a61ec0c91
+19:50:33.257 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: e9d5e35a-598d-4123-b7d8-c29ea85994f8
+19:50:33.257 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: e9d5e35a-598d-4123-b7d8-c29ea85994f8, Apartment ID: 00000000-0000-0000-0000-000000000001
+19:50:33.260 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.261 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.261 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.262 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.262 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.262 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.262 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.263 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.263 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.264 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+19:50:33.264 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.266 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+19:50:33.283 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+19:50:33.285 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+19:50:33.287 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:31:53.189 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 6eaac369-b66b-4927-91dd-c55e1d6d6ac6
+20:31:53.192 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 6779de3a-c540-493d-a0af-306c4de0741f, Apartment ID: c9a497a2-0ae8-4b79-9767-fa43073368fa
+20:31:53.250 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: ed033c77-37dd-4cc4-8b1e-d66d94b9acd0
+20:31:53.250 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 60d9641d-e651-47ef-900b-c02428a7d6fd, Apartment ID: 18603a63-a422-4a90-98bb-cb938ef52922
+20:31:53.256 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: d0c73654-7324-4ae5-a1e5-54446dbf64c2
+20:31:53.267 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: abf6f6aa-e8cc-45f4-ba14-e61553852425
+20:31:53.283 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 4b6b4c6f-1972-4395-b059-a66462b77432
+20:31:53.296 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 038988ff-9ab5-4810-879c-a6a851faadf8
+20:31:53.300 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: addf5187-d67f-41c6-a2b9-639ac2731f07
+20:31:53.327 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: aa6d21b6-a3a7-4eb7-ae37-1b17803c0caf
+20:31:53.328 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 276761e6-3692-43c9-afe4-af55bf999617, Apartment ID: 8e57ae4f-a227-4c42-9767-a5f43cef2666
+20:31:53.345 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 90487043-88f9-4601-8736-50fde6a1aad7
+20:31:53.345 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 90487043-88f9-4601-8736-50fde6a1aad7, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:31:53.355 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 6230cc96-3aca-4047-9f63-6844792dcc85
+20:31:53.356 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 6230cc96-3aca-4047-9f63-6844792dcc85, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:31:53.358 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 6c609659-eacf-496e-ac9e-6cde0926470f
+20:31:53.360 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: fa9cec28-a8a0-443e-8182-3f285ebdb0fc
+20:31:53.365 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+20:31:53.373 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: cebfbf60-3bd9-4a04-978c-d6b03ba808bd
+20:31:53.375 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: a15377b6-dd81-4a69-886d-f46835bfdf97
+20:31:53.385 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 63e8f21d-52ee-40f3-83c9-f485cd531ba7
+20:31:53.386 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 63e8f21d-52ee-40f3-83c9-f485cd531ba7, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:31:53.402 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.404 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.404 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.406 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.407 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.409 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.414 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.415 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.416 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.421 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:31:53.423 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.429 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:31:53.492 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+20:31:53.497 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+20:31:53.500 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:45:48.008 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 231e8c72-b21e-4e45-a8af-e7e769c2b376
+20:45:48.010 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: e957d128-45d8-453d-8f61-50fc0d06c2af, Apartment ID: ba190661-8711-4224-82ab-c4f8d34dd70a
+20:45:48.045 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: cfa6a339-4bb9-4bf6-84f0-80f1aafe6dc8
+20:45:48.045 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 83625792-fd1c-4c18-a03c-517dff859608, Apartment ID: 5ea93b76-2c43-422d-8eef-a66aaf116dee
+20:45:48.048 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 07383e0d-e09e-4c3d-a9ec-ed1ce603c7ce
+20:45:48.053 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 773614cf-44f4-424f-9c1a-7ceed36dae5d
+20:45:48.064 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 5e5896c6-622a-41d7-91ad-9c126e368751
+20:45:48.070 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 8fcd930e-a1af-4290-91e2-374510592642
+20:45:48.072 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 5afef84a-7023-4bc9-8a94-18ef7262979f
+20:45:48.084 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 8897fa3f-a125-4e9a-8b30-3eb346d3b1b1
+20:45:48.085 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 8050881a-8c6d-411a-93b2-c59ff4074c76, Apartment ID: 09b059ef-5120-4c3e-a18d-23883b085575
+20:45:48.092 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: a21f767d-7919-4888-bdc0-666f37a9712f
+20:45:48.092 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: a21f767d-7919-4888-bdc0-666f37a9712f, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:45:48.097 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: e2d01d95-cd37-4011-9c6e-3b906d71258f
+20:45:48.097 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: e2d01d95-cd37-4011-9c6e-3b906d71258f, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:45:48.099 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: d51e1bd8-f4dd-401b-8f23-a17b8c017114
+20:45:48.100 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 7206ba4f-5a66-4c29-a63a-ce4ab7b4b707
+20:45:48.102 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+20:45:48.105 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: ce43ac13-20f7-4ff7-a05a-0ec031e18f79
+20:45:48.106 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 4b7fe8c7-f38b-40bb-aa45-ca7a5cc4bcd5
+20:45:48.111 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 869710dd-61b0-416d-b785-39599073663e
+20:45:48.111 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 869710dd-61b0-416d-b785-39599073663e, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:45:48.120 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.122 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.122 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.123 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.123 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.124 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.125 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.126 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.127 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.128 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:45:48.129 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.133 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:45:48.163 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+20:45:48.166 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+20:45:48.167 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:46:40.693 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: e1de96ed-b173-403e-9c89-b57ae250dd8e
+20:46:40.695 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 25a7fb66-ec7f-4aee-8e54-6f4b21631b44, Apartment ID: cb0cf2be-3845-4088-a3e9-b4a13e14b7f0
+20:46:40.741 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 38a7a7d9-db19-49be-8e25-8c0c026c57e1
+20:46:40.742 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: af01d1bb-4643-4ed1-b387-a23c5413626b, Apartment ID: 8175b11c-c66b-4ee0-84b3-d258d71dd985
+20:46:40.746 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 2ecb0da4-9305-4ec9-b397-59e53200a79a
+20:46:40.752 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 11254d01-862d-497b-bc1c-29ad0fe84cfb
+20:46:40.761 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 06eabe3d-ec08-444a-ab7d-b17a01403121
+20:46:40.769 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 3ab7034a-95c7-435e-a553-02e500738820
+20:46:40.771 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 8256ce16-2d38-41f6-83a1-16384d9e6d8a
+20:46:40.786 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 54640855-4520-45bf-b309-460264c7670a
+20:46:40.787 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: fbe29f3c-832f-4571-baae-96b117d00f3b, Apartment ID: 02c3508a-52b5-4f84-90b3-dbbde5cd9ef6
+20:46:40.796 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: de12ed53-21f8-4daf-88b4-f9b21a48d4e1
+20:46:40.796 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: de12ed53-21f8-4daf-88b4-f9b21a48d4e1, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:46:40.802 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 0fc81f40-c37c-469e-a364-98bb6eca870d
+20:46:40.802 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 0fc81f40-c37c-469e-a364-98bb6eca870d, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:46:40.803 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: a12e6354-0307-4b2c-bbe0-6a2b906535b9
+20:46:40.804 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: e07fdce8-3ba8-4365-8f6e-17c6ec144263
+20:46:40.807 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+20:46:40.812 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 6730aa1d-f827-468b-82c7-d657b843ccb9
+20:46:40.813 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: b138807c-0cc3-46c7-887c-9a945aaeedad
+20:46:40.820 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 7c8b20be-5d9c-4c62-ba2a-ebcc07d624f5
+20:46:40.821 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 7c8b20be-5d9c-4c62-ba2a-ebcc07d624f5, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:46:40.837 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.839 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.840 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.841 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.842 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.844 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.846 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.847 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.847 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.850 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:46:40.854 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.858 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:46:40.892 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+20:46:40.896 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+20:46:40.898 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:47:52.878 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 1838fae6-cb92-42f8-a546-26b3d05cbe44
+20:47:52.880 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 88e0df48-e413-4998-83f1-537a9383a57a, Apartment ID: d321bb0d-cc46-488d-ad1e-d6cfa2ffd803
+20:47:52.923 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: cca3796e-a9b1-48c0-ae32-0ee13d7bfb06
+20:47:52.923 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 17386d9a-1e1c-4fdc-9fd7-8179a44be897, Apartment ID: 31d9f0a0-ad05-4a32-8127-e4a5072e7a4c
+20:47:52.927 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 5190cfa9-025a-48e6-b2fe-d936102f279b
+20:47:52.938 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 0ba8f283-60c4-4b26-8202-4d362f1b8362
+20:47:52.954 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 37085882-d64a-43d8-a12f-5ca09a81be02
+20:47:52.976 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 9e7624bc-f542-4e38-967a-f13ce745e604
+20:47:52.985 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: f4fd1f58-ca3f-4828-9793-245224594fdc
+20:47:53.017 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 51e584f5-ba6c-4413-b022-e2495a630393
+20:47:53.017 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: b32c90fc-c898-467c-abe3-4e301576be4e, Apartment ID: 22de12d2-f18e-44be-873e-67c0871e9a07
+20:47:53.043 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: ad15d61e-c176-4a5c-a9f6-b4faaffbb6fb
+20:47:53.043 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: ad15d61e-c176-4a5c-a9f6-b4faaffbb6fb, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:47:53.053 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 9edb6088-0aa5-4512-874e-99370f86397a
+20:47:53.053 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 9edb6088-0aa5-4512-874e-99370f86397a, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:47:53.055 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: ca97f37c-765f-4946-9490-abe23e12a247
+20:47:53.057 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 31a9062b-f964-40f8-b675-b7548052de90
+20:47:53.062 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+20:47:53.066 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 5a13629c-b780-41cc-a416-1c52b8d6838f
+20:47:53.068 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: b5182eda-2484-4382-9d63-3d40ee0d0b26
+20:47:53.082 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 5bdace6d-b4c3-4dcb-8864-90f5a9ad6485
+20:47:53.083 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 5bdace6d-b4c3-4dcb-8864-90f5a9ad6485, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:47:53.099 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.101 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.102 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.103 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.104 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.105 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.109 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.111 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.112 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.115 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:47:53.117 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.126 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:47:53.194 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+20:47:53.199 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+20:47:53.209 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:48:18.381 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 2d0a8af2-8607-4c00-80cd-60be0ac3e5a6
+20:48:18.383 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: a100ae35-7bb7-43cf-9a3b-5dbd04a47b27, Apartment ID: 2805077e-269c-4204-a821-2984868ea4e7
+20:48:18.421 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: af78af4c-b21e-41a5-9ec4-868a7792cc22
+20:48:18.422 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: d5bad6a1-e77f-4e47-b72f-136e865cb529, Apartment ID: f027617a-e233-4fa2-98c4-7d8f2c0cc0db
+20:48:18.425 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 550ba73a-3133-4daa-8462-afbe7c05229b
+20:48:18.430 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 2cf551bf-bf73-454f-9b22-4ff3ca333764
+20:48:18.438 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 4ab0547c-163f-4464-af04-5456a5bb2446
+20:48:18.445 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 7fe3ce80-08ba-4ecc-bee6-cd25be04eb77
+20:48:18.448 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 9bb845ed-cec6-45dc-b8cc-921251a6bb35
+20:48:18.461 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 4522838d-27e9-4469-8143-60e821561f00
+20:48:18.461 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: ac76cac3-5397-46f5-a75f-44fe08601bd8, Apartment ID: ace4d021-e987-4a3e-b289-fd72f4ff342e
+20:48:18.472 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 622bbfe4-e7e7-49ed-ae57-13f6887eca51
+20:48:18.472 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 622bbfe4-e7e7-49ed-ae57-13f6887eca51, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:48:18.477 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 22ebbfb2-1488-4166-b000-aa91d27dc04f
+20:48:18.478 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 22ebbfb2-1488-4166-b000-aa91d27dc04f, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:48:18.479 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 2b96ed36-c254-451d-a4a2-ab9301010099
+20:48:18.480 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 39602c8c-1499-40da-8f3f-1dc63398ec17
+20:48:18.484 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+20:48:18.487 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: de30da07-adfd-4d17-b3db-07ad9dca4789
+20:48:18.488 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: b8f0a1c3-5adf-4360-b8db-697bea0adfdb
+20:48:18.493 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 04a1b6ca-5061-4149-b2fd-5ed41c7cccd6
+20:48:18.493 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 04a1b6ca-5061-4149-b2fd-5ed41c7cccd6, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:48:18.500 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.501 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.501 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.502 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.502 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.503 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.504 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.505 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.505 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.507 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:48:18.508 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.510 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:48:18.537 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+20:48:18.540 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+20:48:18.542 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:50:28.235 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 0e21093c-e64c-4787-bdc3-c0965f155941
+20:50:28.236 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: b49b9dd7-886e-4e7f-b3e0-daf32dbca5cb, Apartment ID: c674f11b-8442-465c-9fb8-14d9b8486111
+20:50:28.267 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 30685106-31f0-4abb-8786-bcf71f5619bc
+20:50:28.267 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: cae3aee6-842e-40fd-80e9-338427870d53, Apartment ID: 7feb8d5a-12f5-481f-b289-03bb0be062ed
+20:50:28.270 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 5c2aa6fe-f9a4-40f7-881d-72d56017ea73
+20:50:28.275 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: feb3f66a-b24f-48fa-bb92-e56756ee11d5
+20:50:28.281 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 8a1aafa8-6112-4aae-94fc-f018023a04ea
+20:50:28.287 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 551625ac-362a-45f4-a85d-3497d4ce173c
+20:50:28.289 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 695534ac-bf72-47b0-8f11-0d141515098f
+20:50:28.302 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 143310f6-2afa-4a6b-b0a3-8b39d0feb050
+20:50:28.302 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: c75d12d4-1f00-4b31-8d11-b502eca06e4d, Apartment ID: df9f603f-79b6-4e41-82f1-181aff7c936b
+20:50:28.311 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: bc7cf200-bcb8-4bbc-8724-8e604b490e65
+20:50:28.311 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: bc7cf200-bcb8-4bbc-8724-8e604b490e65, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:50:28.316 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 6284be45-9cb1-49a9-8c21-3e1102121580
+20:50:28.316 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 6284be45-9cb1-49a9-8c21-3e1102121580, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:50:28.317 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: d322667f-e22f-4ec8-9e04-9a11b4b6f0e3
+20:50:28.318 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 9bf33829-c6a0-4d9a-8253-f5769df09674
+20:50:28.321 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+20:50:28.324 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 9b373d74-8b8a-4a12-bcf6-0610113480ca
+20:50:28.325 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: aec9844b-0e2e-4aa5-9af3-3f62768fb31e
+20:50:28.332 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 986583e0-dcce-4594-8c6a-199f9eb3d851
+20:50:28.332 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 986583e0-dcce-4594-8c6a-199f9eb3d851, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:50:28.341 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.342 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.343 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.343 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.343 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.344 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.345 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.346 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.346 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.348 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:50:28.350 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.353 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:50:28.384 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+20:50:28.388 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+20:50:28.391 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:51:09.081 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 1fe1b9fe-005a-4ba3-a7ff-ad46f83371c4
+20:51:09.084 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 51f65d4d-b9b5-4097-919a-33eb4f6e8ca8, Apartment ID: 81a32108-d443-4e6b-b794-75d47383c274
+20:51:09.131 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: ef047e4c-d40a-4124-9b83-fca74b9b57ee
+20:51:09.131 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: f4b00835-6da7-4de2-a85b-27a66aead905, Apartment ID: 1f6e556e-1abc-4111-b0f2-55143e27da53
+20:51:09.134 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: e5106da7-2c07-474e-b657-e00850add18d
+20:51:09.141 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 67596d94-4e17-4995-bce6-cbaefa6f8798
+20:51:09.148 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 82b54788-8c53-4006-9ad6-826086fc708f
+20:51:09.155 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 29584132-b155-47fa-9fb3-5a3288af8526
+20:51:09.157 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: a5ced551-1138-43f6-a8f1-0b19f2f096cb
+20:51:09.172 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: e2a471a8-98c8-49f6-9dd0-b2fdcecd78a8
+20:51:09.172 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: c1c594b7-b034-40c5-b2ac-9fccd7bacf66, Apartment ID: a6ee87ea-26af-4665-8409-4c68ab85c108
+20:51:09.182 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 1381fff3-ecb4-4438-ba6e-6554fdc02d08
+20:51:09.182 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 1381fff3-ecb4-4438-ba6e-6554fdc02d08, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:51:09.187 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: aec82048-819b-4880-8f0e-29459406f973
+20:51:09.187 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: aec82048-819b-4880-8f0e-29459406f973, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:51:09.188 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 5249b7c1-eb19-468f-ab0e-dc7276e7349b
+20:51:09.189 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 2d533378-fbd5-41e3-b51e-de50536e1afb
+20:51:09.192 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+20:51:09.194 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: a8b0ae4d-091f-48f2-9a40-08727d6fa06c
+20:51:09.195 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 37274057-d707-4d3f-90a8-8f137ebab485
+20:51:09.201 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 35850b13-2c7b-498e-9f97-4b4203dcaa00
+20:51:09.202 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 35850b13-2c7b-498e-9f97-4b4203dcaa00, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:51:09.210 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.211 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.212 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.212 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.213 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.213 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.215 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.216 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.216 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.217 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:51:09.218 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.222 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:51:09.255 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+20:51:09.258 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+20:51:09.261 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:59:35.841 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: c343bef7-3e81-47e6-80ac-13224d3fae6f
+20:59:35.842 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 1a18848e-8f64-4cfd-88d8-5d532fc8ba5c, Apartment ID: ef36520e-0703-426a-a2be-d4fd96e80313
+20:59:35.878 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 78c7524d-6e88-4f4b-8af4-8da066055ddc
+20:59:35.879 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 3a2236fe-8b0b-4956-9786-2a456f65323f, Apartment ID: ff0250a5-5ab8-4628-9e24-ae3756481b64
+20:59:35.881 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: e262398e-ba58-4f1c-b9e0-55ba429123af
+20:59:35.887 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 48e0e4d7-3bc8-4aec-9deb-3aa4389079da
+20:59:35.894 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: db49662d-bfa4-4c9d-af06-d04a212a51bb
+20:59:35.899 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 3941c038-5599-4080-ad23-e0056d459016
+20:59:35.901 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: a0cac380-82da-4803-84f1-3b0edf5e3024
+20:59:35.914 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: a9339b4d-6c67-41ed-8b55-b351ab2d5f13
+20:59:35.914 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: b5534c02-91ea-4015-a7a1-2359ced37011, Apartment ID: 9ab59d8b-9c4e-4498-a365-35e9d2e266d5
+20:59:35.923 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 3798f9eb-adb4-49de-82e1-8bb10a06c5c4
+20:59:35.923 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check in client. Client ID: 3798f9eb-adb4-49de-82e1-8bb10a06c5c4, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:59:35.929 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 06b97d16-96ac-489a-b04c-6c7e788295bd
+20:59:35.929 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 06b97d16-96ac-489a-b04c-6c7e788295bd, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:59:35.931 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 6e5cbb02-f078-463d-926e-c8f38dcf028f
+20:59:35.932 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: b604a65a-c485-4b05-b323-894e72b1dd91
+20:59:35.935 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Calculate client price. ID: 00000000-0000-0000-0000-000000000010
+20:59:35.938 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Delete client. ID: 9df7a6ce-702d-4925-922b-73f2a9f0bc7d
+20:59:35.939 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Register new client. ID: 843c4d9f-cbb0-4f00-83b9-253759c885e4
+20:59:35.944 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Update client. ID: 767bf871-c0d2-459e-aabf-d557da3792c0
+20:59:35.944 [main] INFO  com.andersenlab.hotel.service.impl.ClientService - Check out client. Client ID: 767bf871-c0d2-459e-aabf-d557da3792c0, Apartment ID: 00000000-0000-0000-0000-000000000001
+20:59:35.954 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.955 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.956 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.957 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.957 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.958 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.959 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.960 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.960 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.961 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
+20:59:35.962 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.965 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000001
+20:59:35.995 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Adjust apartment price. ID: 00000000-0000-0000-0000-000000000002
+20:59:35.997 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Delete apartment. ID: 00000000-0000-0000-0000-abc000000005
+20:59:35.999 [main] INFO  com.andersenlab.hotel.service.impl.ApartmentService - Save apartment. ID: 00000000-0000-0000-0000-000000000002
