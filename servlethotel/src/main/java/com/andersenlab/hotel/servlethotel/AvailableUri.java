@@ -9,7 +9,7 @@ public enum AvailableUri {
     GET_ALL("/entities?sort={sort}", "GET"),
     CREATE("/entities", "POST"),
     GET("/entities/{id}", "GET"),
-    DELETE("/entities/{id}", "DELETE"),
+    DELETE("/entities", "DELETE"),
     ADJUST_APARTMENT_PRICE("/apartments/adjust", "PUT"),
     CHECK_IN("/clients/check-in", "PUT"),
     CHECK_OUT("/clients/check-out", "PUT"),

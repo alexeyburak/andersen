@@ -99,7 +99,6 @@ public class ServletStarter {
                         new ClientsServlet(module.clientService(), module.listClientsUseCase())
                 ),
                 "/clients"
-        servlet-dev
         );
     }
 
