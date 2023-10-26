@@ -13,6 +13,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import java.util.EnumSet;
 
 public class ServletStarter {
+
     private final Server server;
 
     public ServletStarter(Server server) {
@@ -50,12 +51,62 @@ public class ServletStarter {
     private static void addServlets(HotelModule module, ServletHandler servletHandler) {
         servletHandler.addServletWithMapping(
                 new ServletHolder(
-                        new HelperServlet()),
-                "/");
+                        new HelperServlet()
+                ),
+                "/"
+        );
         servletHandler.addServletWithMapping(
                 new ServletHolder(
-                        new ApartmentServlet(module.apartmentService())),
-                "/apartments/*");
+                        new AdjustServlet(module.adjustApartmentPriceUseCase())
+                ),
+                "/apartments/adjust"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ClientServlet(module.clientService())
+                ),
+                "/clients/*"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ApartmentsServlet(module.apartmentService(),
+                                module.listApartmentsUseCase())
+                ),
+                "/apartments"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ClientStayPriceServlet(
+                                module.calculateClientStayCurrentPriceUseCase())
+                ),
+                "/clients/stay"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ClientCheckInServlet(module.checkInClientUseCase())
+                ),
+                "/clients/check-in"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new CheckOutClientServlet(
+                                module.checkOutClientUseCase())
+                ),
+                "/clients/check-out"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ClientsServlet(module.clientService(), module.listClientsUseCase())
+                ),
+                "/clients"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ApartmentServlet(module.apartmentService())
+                ),
+                "/apartments/*"
+        );
+      
     }
 
     @SneakyThrows
