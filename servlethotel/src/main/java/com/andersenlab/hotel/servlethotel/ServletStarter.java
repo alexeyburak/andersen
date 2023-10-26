@@ -56,6 +56,7 @@ public class ServletStarter {
         );
         servletHandler.addServletWithMapping(
                 new ServletHolder(
+
                         new AdjustServlet(module.adjustApartmentPriceUseCase())
                 ),
                 "/apartments/adjust"
@@ -65,6 +66,13 @@ public class ServletStarter {
                         new ClientServlet(module.clientService())
                 ),
                 "/clients/*"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ApartmentsServlet(module.apartmentService(),
+                                module.listApartmentsUseCase())
+                ),
+                "/apartments"
         );
     }
 
