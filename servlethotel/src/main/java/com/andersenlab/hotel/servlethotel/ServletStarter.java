@@ -100,6 +100,13 @@ public class ServletStarter {
                 ),
                 "/clients"
         );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ApartmentServlet(module.apartmentService())
+                ),
+                "/apartments/*"
+        );
+      
     }
 
     @SneakyThrows
