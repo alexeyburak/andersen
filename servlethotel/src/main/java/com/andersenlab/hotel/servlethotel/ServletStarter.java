@@ -54,6 +54,12 @@ public class ServletStarter {
                 ),
                 "/"
         );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new AdjustServlet(module.adjustApartmentPriceUseCase())
+                ),
+                "/apartments/adjust"
+        );
     }
 
     @SneakyThrows
