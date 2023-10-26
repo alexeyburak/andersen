@@ -17,7 +17,7 @@ public class ClientCheckInServlet extends JsonServlet {
         UUID clientId = UUID.fromString(body.get(""));
         UUID apartmentId = UUID.fromString(body.get("apartmentId"));
 
-        checkInClientUseCase.checkIn(clientId,apartmentId);
+        checkInClientUseCase.checkIn(clientID,apartmentID);
         return new Response(HttpServletResponse.SC_OK);
     }
 }
