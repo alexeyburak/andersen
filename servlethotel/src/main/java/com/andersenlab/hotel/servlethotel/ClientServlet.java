@@ -7,10 +7,10 @@ import com.andersenlab.hotel.service.CrudService;
 import java.util.Map;
 import java.util.UUID;
 
-public class ClientsByIdServlet extends JsonServlet {
+public class ClientServlet extends JsonServlet {
     private final CrudService<Client, ClientEntity> crudService;
 
-    public ClientsByIdServlet(CrudService<Client, ClientEntity> crudService) {
+    public ClientServlet(CrudService<Client, ClientEntity> crudService) {
         this.crudService = crudService;
     }
 

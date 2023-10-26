@@ -56,7 +56,7 @@ public class ServletStarter {
         );
         servletHandler.addServletWithMapping(
                 new ServletHolder(
-                        new ClientsByIdServlet(module.clientService())
+                        new ClientServlet(module.clientService())
                 ),
                 "/clients/*"
         );
