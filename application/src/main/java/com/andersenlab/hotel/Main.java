@@ -1,16 +1,16 @@
 package com.andersenlab.hotel;
 
-import com.andersenlab.hotel.application.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentSort;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientSort;
+import com.andersenlab.hotel.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
 import com.andersenlab.hotel.repository.infile.InFileClientRepository;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
-import com.andersenlab.hotel.servlethotel.ServletStarter;
+import com.andersenlab.hotel.http.ServletStarter;
 import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.usecase.impl.BlockedCheckIn;
@@ -19,8 +19,8 @@ import lombok.SneakyThrows;
 
 import java.io.File;
 
-
 public class Main {
+
     public static void main(String[] args) {
         final HotelModule context = initContext();
         getStarter(context).run();
@@ -33,7 +33,7 @@ public class Main {
     public static HotelModule initContext() {
         PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");
         String location = propertyReaderFromFile.readProperty("location");
-        String abilityApartmentToChange = propertyReaderFromFile.readProperty("ability-apartment-to-change");
+        String abilityApartmentToChange = propertyReaderFromFile.readProperty("apartment.change.enabled");
 
         final File file = getFile(location);
         final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);

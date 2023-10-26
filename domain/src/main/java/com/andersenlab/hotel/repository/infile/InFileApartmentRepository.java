@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class InFileApartmentRepository implements SortableCrudRepository<Apartment, ApartmentSort> {
+
     private static final Logger LOG = LoggerFactory.getLogger(InFileApartmentRepository.class);
     private final File database;
     private final ObjectMapper jsonMapper;
