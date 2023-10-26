@@ -9,6 +9,7 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+
 import java.util.EnumSet;
 
 public class ServletStarter {
@@ -47,14 +48,8 @@ public class ServletStarter {
     }
 
     private static void addServlets(HotelModule module, ServletHandler servletHandler) {
-        servletHandler.addServletWithMapping(
-                new ServletHolder(
-                        new HelperServlet()
-                ),
-                "/"
-        );
-        servletHandler.addServletWithMapping(
-                new ServletHolder(new ApartmentsServlet(module.apartmentService())),"/apartments/*");
+        servletHandler.addServletWithMapping(new ServletHolder(new HelperServlet()), "/");
+        servletHandler.addServletWithMapping(new ServletHolder(new ApartmentServlet(module.apartmentService())), "/apartments/*");
     }
 
     @SneakyThrows
