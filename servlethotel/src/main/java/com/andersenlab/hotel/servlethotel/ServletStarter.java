@@ -13,6 +13,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import java.util.EnumSet;
 
 public class ServletStarter {
+
     private final Server server;
 
     public ServletStarter(Server server) {
@@ -56,12 +57,11 @@ public class ServletStarter {
         );
         servletHandler.addServletWithMapping(
                 new ServletHolder(
-
                         new AdjustServlet(module.adjustApartmentPriceUseCase())
                 ),
                 "/apartments/adjust"
         );
-      servletHandler.addServletWithMapping(
+        servletHandler.addServletWithMapping(
                 new ServletHolder(
                         new ClientServlet(module.clientService())
                 ),
@@ -76,9 +76,30 @@ public class ServletStarter {
         );
         servletHandler.addServletWithMapping(
                 new ServletHolder(
+                        new ClientStayPriceServlet(
+                                module.calculateClientStayCurrentPriceUseCase())
+                ),
+                "/clients/stay"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
                         new ClientCheckInServlet(module.checkInClientUseCase())
                 ),
                 "/clients/check-in"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new CheckOutClientServlet(
+                                module.checkOutClientUseCase())
+                ),
+                "/clients/check-out"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ClientsServlet(module.clientService(), module.listClientsUseCase())
+                ),
+                "/clients"
+        servlet-dev
         );
     }
 
