@@ -48,8 +48,14 @@ public class ServletStarter {
     }
 
     private static void addServlets(HotelModule module, ServletHandler servletHandler) {
-        servletHandler.addServletWithMapping(new ServletHolder(new HelperServlet()), "/");
-        servletHandler.addServletWithMapping(new ServletHolder(new ApartmentServlet(module.apartmentService())), "/apartments/*");
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new HelperServlet()),
+                "/");
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ApartmentServlet(module.apartmentService())),
+                "/apartments/*");
     }
 
     @SneakyThrows
