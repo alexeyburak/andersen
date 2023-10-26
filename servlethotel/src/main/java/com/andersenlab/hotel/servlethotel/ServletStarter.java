@@ -74,6 +74,13 @@ public class ServletStarter {
                 ),
                 "/apartments"
         );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new CheckOutClientServlet(
+                                module.checkOutClientUseCase())
+                ),
+                "/clients/check-out"
+        );
     }
 
     @SneakyThrows
