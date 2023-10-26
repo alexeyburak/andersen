@@ -19,6 +19,6 @@ public class CheckOutClientServlet extends JsonServlet {
         UUID clientId = UUID.fromString(body.get("clientId"));
         UUID apartmentId = UUID.fromString(body.get("apartmentId"));
         useCase.checkOut(clientId, apartmentId);
-        return new Response(HttpServletResponse.SC_NO_CONTENT);
+        return new Response(HttpServletResponse.SC_OK);
     }
 }
