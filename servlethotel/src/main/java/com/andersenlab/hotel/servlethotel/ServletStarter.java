@@ -54,6 +54,12 @@ public class ServletStarter {
                 ),
                 "/"
         );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                    new ClientsServlet(module.clientService(), module.listClientsUseCase())
+                ),
+                "/clients"
+        );
     }
 
     @SneakyThrows
