@@ -14,10 +14,10 @@ public class ClientCheckInServlet extends JsonServlet {
 
     @Override
     Response put(String uri, Map<String, String> body) {
-        UUID clientId = UUID.fromString(body.get(""));
+        UUID clientId = UUID.fromString(body.get("clientId"));
         UUID apartmentId = UUID.fromString(body.get("apartmentId"));
 
-        checkInClientUseCase.checkIn(clientID,apartmentID);
+        checkInClientUseCase.checkIn(clientId,apartmentId);
         return new Response(HttpServletResponse.SC_OK);
     }
 }
