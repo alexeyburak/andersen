@@ -57,7 +57,6 @@ public class ServletStarter {
         );
         servletHandler.addServletWithMapping(
                 new ServletHolder(
-
                         new AdjustServlet(module.adjustApartmentPriceUseCase())
                 ),
                 "/apartments/adjust"
@@ -81,6 +80,19 @@ public class ServletStarter {
                                 module.calculateClientStayCurrentPriceUseCase())
                 ),
                 "/clients/stay"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new CheckOutClientServlet(
+                                module.checkOutClientUseCase())
+                ),
+                "/clients/check-out"
+        );
+        servletHandler.addServletWithMapping(
+                new ServletHolder(
+                        new ClientsServlet(module.clientService(), module.listClientsUseCase())
+                ),
+                "/clients"
         );
     }
 

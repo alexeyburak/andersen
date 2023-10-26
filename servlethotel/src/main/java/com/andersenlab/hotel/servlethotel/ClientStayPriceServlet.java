@@ -15,7 +15,7 @@ public class ClientStayPriceServlet extends JsonServlet {
 
     @Override
     Response get(String uri, Map<String, String[]> parameters) {
-        String id = uri.substring(uri.lastIndexOf("?clientId=") + 1);
+        String id = parameters.get("clientId")[0];
         return new Response(useCase.calculatePrice(UUID.fromString(id)));
     }
 
