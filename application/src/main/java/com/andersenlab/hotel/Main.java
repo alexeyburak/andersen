@@ -8,6 +8,7 @@ import com.andersenlab.hotel.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
 import com.andersenlab.hotel.repository.infile.InFileClientRepository;
+import com.andersenlab.hotel.repository.jdbc.JdbcConnector;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
 import com.andersenlab.hotel.http.ServletStarter;
@@ -31,6 +32,8 @@ public class Main {
     }
 
     public static HotelModule initContext() {
+        JdbcConnector jdbc = new JdbcConnector("jdbc:h2:tcp://localhost/~/hotel", "sa")
+                .migrate();
         PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");
         String location = propertyReaderFromFile.readProperty("location");
         String abilityApartmentToChange = propertyReaderFromFile.readProperty("apartment.change.enabled");
