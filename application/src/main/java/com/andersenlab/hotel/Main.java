@@ -32,11 +32,13 @@ public class Main {
     }
 
     public static HotelModule initContext() {
-        JdbcConnector jdbc = new JdbcConnector("jdbc:h2:tcp://localhost/~/hotel", "sa")
-                .migrate();
         PropertyReaderFromFile propertyReaderFromFile = new PropertyReaderFromFile("application.properties");
         String location = propertyReaderFromFile.readProperty("location");
         String abilityApartmentToChange = propertyReaderFromFile.readProperty("apartment.change.enabled");
+        String jdbcUrl = propertyReaderFromFile.readProperty("jdbc.url");
+        String jdbcUser = propertyReaderFromFile.readProperty("jdbc.user");
+        JdbcConnector jdbc = new JdbcConnector(jdbcUrl, jdbcUser)
+                .migrate();
 
         final File file = getFile(location);
         final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);
