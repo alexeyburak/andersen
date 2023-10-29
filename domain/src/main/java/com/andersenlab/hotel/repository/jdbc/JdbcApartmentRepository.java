@@ -23,8 +23,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class JdbcApartmentRepository implements SortableCrudRepository<Apartment, ApartmentSort> {
-    private final JdbcConnector config;
+
     private static final Logger LOG = LoggerFactory.getLogger(JdbcApartmentRepository.class);
+    private final JdbcConnector config;
+
     public JdbcApartmentRepository(JdbcConnector config) {
         this.config = config;
     }
@@ -36,12 +38,13 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 price, capacity, availability, status, id)
                 VALUES (?, ?, ?, ?, ?);
                 """;
+
         try (Connection connection = config.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)){
+             PreparedStatement statement = connection.prepareStatement(query)) {
             put(statement, entity);
             statement.execute();
         } catch (SQLException e) {
-            LOG.warn("Save statement was not executed {}", e.getMessage());
+            throw new RuntimeException("Save statement was not executed" + e.getMessage());
         }
     }
 
@@ -61,7 +64,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 apartments.add(get(set));
             }
         } catch (SQLException e) {
-            LOG.warn("Find all statement was not executed {}", e.getMessage());
+            throw new RuntimeException("Find all statement was not executed " + e.getMessage());
         }
         return apartments;
     }
@@ -72,13 +75,14 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 DELETE FROM apartment
                 WHERE id = ?
                 """;
+
         try (Connection connection = config.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)){
+             PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setObject(1, id, H2Type.UUID);
             int deleted = statement.executeUpdate();
             LOG.info("Query executed. Apartments deleted: {}", deleted);
         } catch (SQLException e) {
-            LOG.warn("Delete statement was not executed {}", e.getMessage());
+            throw new RuntimeException("Delete statement was not executed " + e.getMessage());
         }
     }
 
@@ -94,6 +98,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 FROM apartment
                 WHERE id = ?
                 """;
+
         try (Connection connection = config.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setObject(1, id, H2Type.UUID);
@@ -102,7 +107,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 return Optional.of(get(set));
             }
         } catch (SQLException e) {
-            LOG.warn("Find all statement was not executed {}", e.getMessage());
+            throw new RuntimeException("Find all statement was not executed " + e.getMessage());
         }
         return Optional.empty();
     }
@@ -114,12 +119,13 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 SET price=?, capacity=?, availability=?, status=?
                 WHERE id=?;
                 """;
+        
         try (Connection connection = config.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)){
+             PreparedStatement statement = connection.prepareStatement(query)) {
             put(statement, entity);
             statement.execute();
         } catch (SQLException e) {
-            LOG.warn("Update statement was not executed {}", e.getMessage());
+            throw new RuntimeException("Update statement was not executed {}" + e.getMessage());
         }
     }
 
@@ -133,13 +139,13 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
     }
 
     @SneakyThrows
-    private Apartment get(ResultSet resultSet){
+    private Apartment get(ResultSet resultSet) {
         return new Apartment(
-            UUID.fromString(resultSet.getString("id")),
-            resultSet.getBigDecimal("price"),
-            BigInteger.valueOf(resultSet.getInt("capacity")),
-            resultSet.getBoolean("availability"),
-            EnumUtils.getEnum(ApartmentStatus.class, resultSet.getString("status"))
+                UUID.fromString(resultSet.getString("id")),
+                resultSet.getBigDecimal("price"),
+                BigInteger.valueOf(resultSet.getInt("capacity")),
+                resultSet.getBoolean("availability"),
+                EnumUtils.getEnum(ApartmentStatus.class, resultSet.getString("status"))
         );
     }
 }
