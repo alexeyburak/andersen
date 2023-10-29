@@ -6,8 +6,8 @@ import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientSort;
 import com.andersenlab.hotel.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
-import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
 import com.andersenlab.hotel.repository.infile.InFileClientRepository;
+import com.andersenlab.hotel.repository.jdbc.JdbcApartmentRepository;
 import com.andersenlab.hotel.repository.jdbc.JdbcConnector;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
@@ -41,7 +41,7 @@ public class Main {
                 .migrate();
 
         final File file = getFile(location);
-        final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);
+        final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new JdbcApartmentRepository(jdbc);
         final SortableCrudRepository<Client, ClientSort> clientRepository = new InFileClientRepository(file);
 
         final ApartmentService apartmentService = new ApartmentService(apartmentRepository);
