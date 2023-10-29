@@ -88,7 +88,23 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
 
     @Override
     public boolean has(UUID id) {
-        return getById(id).isPresent();
+        final String query = """
+                SELECT COUNT(*) as quantity
+                FROM APARTMENT
+                WHERE id = ?
+                """;
+
+        try (Connection connection = config.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setObject(1, id, H2Type.UUID);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("quantity") > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to check client existence: " + e.getMessage());
+        }
+        return false;
     }
 
     @Override
