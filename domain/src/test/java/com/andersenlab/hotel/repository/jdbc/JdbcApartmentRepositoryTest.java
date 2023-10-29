@@ -74,6 +74,7 @@ class JdbcApartmentRepositoryTest {
         target.save(apartment2);
 
         List<Apartment> actual = (List<Apartment>)target.findAllSorted(sort);
+
         List<Apartment> expected = Stream.of(apartment1, apartment2, apartment3)
                 .sorted(sort.getComparator()).toList();
 
@@ -88,6 +89,7 @@ class JdbcApartmentRepositoryTest {
         target.save(apartment2);
 
         List<Apartment> actual = (List<Apartment>)target.findAllSorted(sort);
+
         List<Apartment> expected = Stream.of(apartment1, apartment2, apartment3)
                 .sorted(sort.getComparator()).toList();
 
@@ -102,6 +104,7 @@ class JdbcApartmentRepositoryTest {
         target.save(apartment2);
 
         List<Apartment> actual = (List<Apartment>)target.findAllSorted(sort);
+
         List<Apartment> expected = Stream.of(apartment1, apartment2, apartment3)
                 .sorted(sort.getComparator()).toList();
 
@@ -116,6 +119,7 @@ class JdbcApartmentRepositoryTest {
         target.save(apartment2);
 
         List<Apartment> actual = (List<Apartment>)target.findAllSorted(sort);
+
         List<Apartment> expected = Stream.of(apartment1, apartment2, apartment3)
                 .sorted(sort.getComparator()).toList();
 
@@ -125,6 +129,7 @@ class JdbcApartmentRepositoryTest {
     @Test
     void delete_ExistingEntity_ShouldDeleteEntityFromStore() {
         target.save(apartment1);
+
         target.delete(apartment1.getId());
 
         assertThat(target.has(apartment1.getId())).isFalse();
@@ -160,6 +165,7 @@ class JdbcApartmentRepositoryTest {
     void update_ExistingEntity_ShouldUpdateEntityInStore() {
         target.save(apartment1);
         apartment2.setId(apartment1.getId());
+
         target.update(apartment2);
 
         assertThat(target.getById(apartment1.getId())).contains(apartment2);
