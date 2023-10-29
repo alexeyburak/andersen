@@ -79,8 +79,8 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
         try (Connection connection = config.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setObject(1, id, H2Type.UUID);
-            int deleted = statement.executeUpdate();
-            LOG.info("Query executed. Apartments deleted: {}", deleted);
+            statement.executeUpdate();
+            LOG.info("Query executed. Apartment deleted: {}", id);
         } catch (SQLException e) {
             throw new RuntimeException("Delete statement was not executed " + e.getMessage());
         }
@@ -119,7 +119,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 SET price=?, capacity=?, availability=?, status=?
                 WHERE id=?;
                 """;
-        
+
         try (Connection connection = config.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             put(statement, entity);
