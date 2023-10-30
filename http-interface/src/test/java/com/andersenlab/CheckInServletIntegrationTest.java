@@ -1,14 +1,12 @@
 package com.andersenlab;
 
+import com.andersenlab.hotel.HotelModule;
 import com.andersenlab.hotel.http.ServletStarter;
-
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientStatus;
-import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
-import com.andersenlab.hotel.repository.infile.InFileClientRepository;
 import com.andersenlab.hotel.service.ContextBuilder;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
@@ -19,7 +17,6 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -31,10 +28,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CheckInServletIntegrationTest {
+class CheckInServletIntegrationTest {
     private ClientService clientService;
     private ApartmentService apartmentService;
 
@@ -46,20 +42,23 @@ public class CheckInServletIntegrationTest {
     private ObjectMapper objectMapper;
 
     ServletStarter starter;
-    File databaseFile;
-
     AtomicInteger integer = new AtomicInteger(0);
-
     String path;
-
 
     @BeforeEach
     @SneakyThrows
     void setUp() {
-        databaseFile = new File("C:\\Users\\User1\\Desktop\\db.json");
+        path = String.format("test-cio%d.json", integer.incrementAndGet());
 
-        apartmentService = new ApartmentService(new InFileApartmentRepository(databaseFile));
-        clientService = new ClientService(new InFileClientRepository(databaseFile), apartmentService);
+        HotelModule context = new ContextBuilder().initFile(path)
+                .initServices()
+                .initCheckInCheckOut(true)
+                .build();
+        starter = ServletStarter.forModule(context);
+        starter.run();
+
+        apartmentService = (ApartmentService) context.apartmentService();
+        clientService = (ClientService) context.clientService();
 
         apartmentEntity = new ApartmentEntity(UUID.fromString("00000000-0000-0000-0000-000000000001"),
                 new BigDecimal(1), BigInteger.ONE, true, ApartmentStatus.AVAILABLE);
@@ -67,21 +66,18 @@ public class CheckInServletIntegrationTest {
                 new BigDecimal(1), BigInteger.ONE, true, ApartmentStatus.AVAILABLE);
         client = new Client(UUID.fromString("00000000-0000-0000-0000-000000000001"), "John", ClientStatus.NEW, new HashSet<>(Set.of(apartmentEntity)));
 
+        apartmentService.save(apartment);
+        clientService.save(client);
+
         uri = new URI("http://localhost:8080/clients/check-in");
         objectMapper = new ObjectMapper();
-
-        var context = new ContextBuilder().initFile(databaseFile.getPath())
-                .initServices()
-                .initCheckInCheckOut(true)
-                .build();
-        starter = ServletStarter.forModule(context);
-        starter.run();
-
-        path = String.format("test-cio%d.json", integer.incrementAndGet());
     }
 
     @AfterEach
     void tearDown() {
+        apartmentService.delete(apartment.getId());
+        clientService.delete(client.getId());
+
         new File(path).delete();
         starter.stop();
     }
@@ -89,25 +85,17 @@ public class CheckInServletIntegrationTest {
     @SneakyThrows
     @Test
     void checkIn_NotExistingClient_ShouldReturnSC_BAD_REQUEST() {
-        final UUID newClientId = new Client(UUID.randomUUID(), "John", ClientStatus.NEW, new HashSet<>(Set.of(apartmentEntity))).getId();
+        final UUID newClientId = new Client(UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                "John", ClientStatus.NEW, new HashSet<>(Set.of(apartmentEntity))).getId();
         final UUID apartmentId = apartment.getId();
-
-        apartmentService.save(apartment);
-        clientService.save(client);
-
         String jsonBody = objectMapper.writeValueAsString(new ClientAppartmentIds(newClientId, apartmentId));
 
         HttpClient httpClient = HttpClient.newHttpClient();
-
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
-
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-        apartmentService.delete(apartment.getId());
-        clientService.delete(client.getId());
 
         assertThat(response.statusCode()).isEqualTo(HttpServletResponse.SC_BAD_REQUEST);
     }
@@ -115,24 +103,16 @@ public class CheckInServletIntegrationTest {
     @Test
     void checkIn_NotExistingApartments_ShouldReturnSC_BAD_REQUEST() {
         final UUID clientId = client.getId();
-        final UUID newApartmentId = new Apartment(UUID.randomUUID(), new BigDecimal(1), BigInteger.ONE, true, ApartmentStatus.AVAILABLE).getId();
-
-        apartmentService.save(apartment);
-        clientService.save(client);
-
+        final UUID newApartmentId = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000002"),
+                new BigDecimal(1), BigInteger.ONE, true, ApartmentStatus.AVAILABLE).getId();
         String jsonBody = objectMapper.writeValueAsString(new ClientAppartmentIds(clientId, newApartmentId));
 
         HttpClient httpClient = HttpClient.newHttpClient();
-
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
-
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-        apartmentService.delete(apartment.getId());
-        clientService.delete(client.getId());
 
         assertThat(response.statusCode()).isEqualTo(HttpServletResponse.SC_BAD_REQUEST);
     }
@@ -142,23 +122,14 @@ public class CheckInServletIntegrationTest {
     void checkIn_ValidClient_ShouldReturnStatusOK() {
         final UUID clientId = client.getId();
         final UUID apartmentId = apartment.getId();
-
-        apartmentService.save(apartment);
-        clientService.save(client);
-
         String jsonBody = objectMapper.writeValueAsString(new ClientAppartmentIds(clientId, apartmentId));
 
         HttpClient httpClient = HttpClient.newHttpClient();
-
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
-
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-        apartmentService.delete(apartment.getId());
-        clientService.delete(client.getId());
 
         assertThat(response.statusCode()).isEqualTo(HttpServletResponse.SC_OK);
     }
@@ -168,23 +139,14 @@ public class CheckInServletIntegrationTest {
     void checkIn_ValidApartments_ShouldReturnStatusOK() {
         final UUID clientId = client.getId();
         final UUID apartmentId = apartment.getId();
-
-        apartmentService.save(apartment);
-        clientService.save(client);
-
         String jsonBody = objectMapper.writeValueAsString(new ClientAppartmentIds(clientId, apartmentId));
 
         HttpClient httpClient = HttpClient.newHttpClient();
-
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
-
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-        apartmentService.delete(apartment.getId());
-        clientService.delete(client.getId());
 
         assertThat(response.statusCode()).isEqualTo(HttpServletResponse.SC_OK);
     }
