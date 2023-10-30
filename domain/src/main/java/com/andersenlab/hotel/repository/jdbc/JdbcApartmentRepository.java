@@ -44,7 +44,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
             put(statement, entity);
             statement.execute();
         } catch (SQLException e) {
-            throw new RuntimeException("Save statement was not executed" + e.getMessage());
+            throw new CouldNotExecuteSql("Save statement was not executed" + e.getMessage());
         }
     }
 
@@ -64,7 +64,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 apartments.add(get(set));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Find all statement was not executed " + e.getMessage());
+            throw new CouldNotExecuteSql("Find all statement was not executed " + e.getMessage());
         }
         return apartments;
     }
@@ -82,7 +82,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
             statement.executeUpdate();
             LOG.info("Query executed. Apartment deleted: {}", id);
         } catch (SQLException e) {
-            throw new RuntimeException("Delete statement was not executed " + e.getMessage());
+            throw new CouldNotExecuteSql("Delete statement was not executed " + e.getMessage());
         }
     }
 
@@ -102,7 +102,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 return resultSet.getInt("quantity") > 0;
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to check client existence: " + e.getMessage());
+            throw new CouldNotExecuteSql("Failed to check client existence: " + e.getMessage());
         }
         return false;
     }
@@ -123,7 +123,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
                 return Optional.of(get(set));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Find all statement was not executed " + e.getMessage());
+            throw new CouldNotExecuteSql("Find all statement was not executed " + e.getMessage());
         }
         return Optional.empty();
     }
@@ -141,7 +141,7 @@ public class JdbcApartmentRepository implements SortableCrudRepository<Apartment
             put(statement, entity);
             statement.execute();
         } catch (SQLException e) {
-            throw new RuntimeException("Update statement was not executed {}" + e.getMessage());
+            throw new CouldNotExecuteSql("Update statement was not executed {}" + e.getMessage());
         }
     }
 

@@ -168,14 +168,11 @@ public final class JdbcClientRepository implements SortableCrudRepository<Client
 
     @Override
     public void update(Client entity) {
-        final String updateQuery = String.format("""
-                        UPDATE client
-                        SET name = %s, status = %s
-                        WHERE id = ?
-                        """,
-                entity.getName(),
-                entity.getStatus().name()
-        );
+        final String updateQuery = """
+                UPDATE client
+                SET name = ?, status = ?
+                WHERE id = ?
+                """;
         final String insertApartmentQuery = """
                 INSERT INTO client_apartment (client_id, apartment_id)
                 VALUES (?, ?)
@@ -187,12 +184,14 @@ public final class JdbcClientRepository implements SortableCrudRepository<Client
             connection.setAutoCommit(false);
 
             final UUID entityId = entity.getId();
-            updateStatement.setObject(1, entityId, H2Type.UUID);
+            updateStatement.setObject(1, entity.getName(), H2Type.VARCHAR);
+            updateStatement.setObject(2, entity.getStatus().name(), H2Type.VARCHAR);
+            updateStatement.setObject(3, entityId, H2Type.UUID);
             updateStatement.executeUpdate();
 
             deleteClientApartments(entityId);
 
-            for (ApartmentEntity apartment :  entity.getApartments()) {
+            for (ApartmentEntity apartment : entity.getApartments()) {
                 insertApartmentStatement.setObject(1, entityId, H2Type.UUID);
                 insertApartmentStatement.setObject(2, apartment.id(), H2Type.UUID);
                 insertApartmentStatement.addBatch();
