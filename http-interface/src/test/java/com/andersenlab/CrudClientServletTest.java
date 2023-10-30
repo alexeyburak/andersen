@@ -3,6 +3,8 @@ package com.andersenlab;
 import com.andersenlab.hotel.HotelModule;
 
 import com.andersenlab.hotel.http.ServletStarter;
+import com.andersenlab.hotel.model.Apartment;
+import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientEntity;
 import com.andersenlab.hotel.model.ClientSort;
@@ -20,6 +22,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URI;
 
 import java.net.URISyntaxException;
@@ -46,11 +50,15 @@ class CrudClientServletTest {
     private Client client2;
     private Client client3;
 
+    private Apartment apartment1;
+    private Apartment apartment2;
+
     @BeforeEach
     void setUp() {
         path = String.format("test%d.json", integer.incrementAndGet());
-        context = new ContextBuilder().initInFileRepositories(path)
-                .changeabilityOfApartmentStatus(true)
+        context = new ContextBuilder().initFile(path)
+                .initServices()
+                .initCheckInCheckOut(true)
                 .build();
         starter = ServletStarter.forModule(context);
         starter.run();
@@ -63,6 +71,12 @@ class CrudClientServletTest {
 
         client3 = new Client(UUID.fromString("00000000-0000-0000-0000-000000000003"),
                 "name-3", ClientStatus.ADVANCED);
+
+        apartment1 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000003"),
+                BigDecimal.TEN, BigInteger.TEN, true, ApartmentStatus.AVAILABLE);
+
+        apartment2 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000004"),
+                BigDecimal.ONE, BigInteger.TWO, true, ApartmentStatus.AVAILABLE);
     }
 
     @AfterEach
@@ -274,6 +288,45 @@ class CrudClientServletTest {
             Assertions.fail(e.getMessage());
         }
     }
+
+    @Test
+    void calculatePrice_ExistingEntity_ShouldReturnPrice() {
+        context.clientService().save(client1);
+        context.apartmentService().save(apartment1);
+        context.apartmentService().save(apartment2);
+        context.checkInClientUseCase().checkIn(client1.getId(), apartment1.getId());
+        context.checkInClientUseCase().checkIn(client1.getId(), apartment2.getId());
+
+        try (HttpClient client = HttpClient.newHttpClient()) {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://localhost:8080/clients/stay?clientId="+client1.getId()))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            assertThat(new BigDecimal(resp.body())).isEqualTo(apartment1.getPrice().add(apartment2.getPrice()));
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            Assertions.fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void calculatePrice_NotExistingEntity_ShouldReturnSC_BAD_REQUEST() {
+        try (HttpClient client = HttpClient.newHttpClient()) {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://localhost:8080/clients/stay?clientId="+client1.getId()))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            assertThat(resp.statusCode()).isEqualTo(HttpServletResponse.SC_BAD_REQUEST);
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            Assertions.fail(e.getMessage());
+        }
+    }
+
 
     @SneakyThrows
     private String clientWithTrimmedApartments(Client client) {

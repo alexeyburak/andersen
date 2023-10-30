@@ -36,13 +36,14 @@ public class ContextBuilder {
     private CheckInClientUseCase checkInClientUseCase;
     private CheckOutClientUseCase checkOutClientUseCase;
 
+
     public ContextBuilder() {
         this.clientRepository = new InMemoryClientRepository();
         this.apartmentRepository = new InMemoryApartmentRepository();
     }
 
     @SneakyThrows
-    public ContextBuilder initInFileRepositories(final String filePath) {
+    public ContextBuilder initFile(final String filePath) {
         final File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();
@@ -51,7 +52,10 @@ public class ContextBuilder {
                 writer.write("{\"apartments\":{},\"clients\":{}}");
             }
         }
+        return this.initInFileRepositories(file);
+    }
 
+    private ContextBuilder initInFileRepositories(final File file) {
         this.apartmentRepository = new InFileApartmentRepository(file);
         this.clientRepository = new InFileClientRepository(file);
 
@@ -60,7 +64,13 @@ public class ContextBuilder {
         return this;
     }
 
-    public ContextBuilder changeabilityOfApartmentStatus(boolean changeability) {
+    public ContextBuilder initServices() {
+        this.apartmentService = new ApartmentService(apartmentRepository);
+        this.clientService = new ClientService(clientRepository, apartmentService);
+        return this;
+    }
+
+    public ContextBuilder initCheckInCheckOut(boolean changeability) {
         if (changeability) {
             this.checkInClientUseCase = clientService;
             this.checkOutClientUseCase = clientService;
@@ -76,9 +86,6 @@ public class ContextBuilder {
     }
 
     public HotelModule build() {
-        this.apartmentService = new ApartmentService(apartmentRepository);
-        this.clientService = new ClientService(clientRepository, apartmentService);
-
         return new HotelModule(clientService, apartmentService, apartmentService,
                 clientService, checkOutClientUseCase, checkInClientUseCase, apartmentService,
                 clientService);
