@@ -4,7 +4,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 /target
-/logs
+**/logs
 dependency-reduced-pom.xml
 db.json
 
