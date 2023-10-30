@@ -7,7 +7,7 @@ import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientSort;
 import com.andersenlab.hotel.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
-import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
+import com.andersenlab.hotel.repository.jdbc.JdbcApartmentRepository;
 import com.andersenlab.hotel.repository.jdbc.JdbcClientRepository;
 import com.andersenlab.hotel.repository.jdbc.JdbcConnector;
 import com.andersenlab.hotel.service.impl.ApartmentService;
@@ -16,9 +16,6 @@ import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.usecase.impl.BlockedCheckIn;
 import com.andersenlab.hotel.usecase.impl.BlockedCheckOut;
-import lombok.SneakyThrows;
-
-import java.io.File;
 
 public class Main {
 
@@ -41,8 +38,7 @@ public class Main {
         JdbcConnector jdbc = new JdbcConnector(jdbcUrl, jdbcUser, jdbcPassword)
                 .migrate();
 
-        final File file = getFile(location);
-        final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);
+        final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new JdbcApartmentRepository(jdbc);
         final SortableCrudRepository<Client, ClientSort> clientRepository = new JdbcClientRepository(jdbc);
 
         final ApartmentService apartmentService = new ApartmentService(apartmentRepository);
@@ -64,12 +60,4 @@ public class Main {
                 clientService);
     }
 
-    @SneakyThrows
-    public static File getFile(String path) {
-        final File file = new File(path);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        return file;
-    }
 }
