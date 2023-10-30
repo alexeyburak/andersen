@@ -29,16 +29,16 @@ class JdbcApartmentRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        JdbcConnector connector = new JdbcConnector("jdbc:h2:~/ht-"+integer.incrementAndGet(), "sa")
+        JdbcConnector connector = new JdbcConnector("jdbc:h2:~/ht-" + integer.incrementAndGet(), "sa", "password")
                 .migrate();
 
         target = new JdbcApartmentRepository(connector);
 
         apartment1 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000001"),
-                BigDecimal.valueOf(1.0), BigInteger.ONE,true, ApartmentStatus.AVAILABLE);
+                BigDecimal.valueOf(1.0), BigInteger.ONE, true, ApartmentStatus.AVAILABLE);
 
         apartment2 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000002"),
-                BigDecimal.valueOf(2.0), BigInteger.TWO,false, ApartmentStatus.RESERVED);
+                BigDecimal.valueOf(2.0), BigInteger.TWO, false, ApartmentStatus.RESERVED);
 
         apartment3 = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000003"),
                 BigDecimal.valueOf(10.0), BigInteger.TEN, true, ApartmentStatus.AVAILABLE);
@@ -73,7 +73,7 @@ class JdbcApartmentRepositoryTest {
         target.save(apartment3);
         target.save(apartment2);
 
-        List<Apartment> actual = (List<Apartment>)target.findAllSorted(sort);
+        List<Apartment> actual = (List<Apartment>) target.findAllSorted(sort);
 
         List<Apartment> expected = Stream.of(apartment1, apartment2, apartment3)
                 .sorted(sort.getComparator()).toList();
@@ -88,7 +88,7 @@ class JdbcApartmentRepositoryTest {
         target.save(apartment3);
         target.save(apartment2);
 
-        List<Apartment> actual = (List<Apartment>)target.findAllSorted(sort);
+        List<Apartment> actual = (List<Apartment>) target.findAllSorted(sort);
 
         List<Apartment> expected = Stream.of(apartment1, apartment2, apartment3)
                 .sorted(sort.getComparator()).toList();
@@ -103,7 +103,7 @@ class JdbcApartmentRepositoryTest {
         target.save(apartment3);
         target.save(apartment2);
 
-        List<Apartment> actual = (List<Apartment>)target.findAllSorted(sort);
+        List<Apartment> actual = (List<Apartment>) target.findAllSorted(sort);
 
         List<Apartment> expected = Stream.of(apartment1, apartment2, apartment3)
                 .sorted(sort.getComparator()).toList();
@@ -118,7 +118,7 @@ class JdbcApartmentRepositoryTest {
         target.save(apartment3);
         target.save(apartment2);
 
-        List<Apartment> actual = (List<Apartment>)target.findAllSorted(sort);
+        List<Apartment> actual = (List<Apartment>) target.findAllSorted(sort);
 
         List<Apartment> expected = Stream.of(apartment1, apartment2, apartment3)
                 .sorted(sort.getComparator()).toList();

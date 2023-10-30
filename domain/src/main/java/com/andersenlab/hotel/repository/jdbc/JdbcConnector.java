@@ -11,11 +11,12 @@ public class JdbcConnector {
 
     private final HikariDataSource dataSource;
 
-    public JdbcConnector(final String url, final String user) {
+    public JdbcConnector(final String url, final String user, final String password) {
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("org.h2.jdbcx.JdbcDataSource");
         config.addDataSourceProperty("URL", url);
         config.addDataSourceProperty("user", user);
+        config.addDataSourceProperty("password", password);
         this.dataSource = new HikariDataSource(config);
     }
 
