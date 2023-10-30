@@ -38,7 +38,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-class CrudClientServletTest {
+class ClientServletsTest {
+    final String url = "http://localhost:8080/clients";
 
     AtomicInteger integer = new AtomicInteger(0);
     String path;
@@ -90,7 +91,7 @@ class CrudClientServletTest {
         context.clientService().save(client1);
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients"))
+                    .uri(new URI(url))
                     .method("DELETE", HttpRequest.BodyPublishers.ofString("{\"id\":\"" +
                             client1.getId() + "\"}"))
                     .build();
@@ -107,7 +108,7 @@ class CrudClientServletTest {
     void delete_NotExistingClient_ShouldShouldReturnSC_BAD_REQUEST() {
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients"))
+                    .uri(new URI(url))
                     .method("DELETE", HttpRequest.BodyPublishers.ofString("{\"id\":\"" +
                             client1.getId() + "\"}"))
                     .build();
@@ -131,7 +132,7 @@ class CrudClientServletTest {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients"))
+                    .uri(new URI(url))
                     .method("POST", HttpRequest.BodyPublishers.ofString(clientJson))
                     .build();
 
@@ -151,7 +152,7 @@ class CrudClientServletTest {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients"))
+                    .uri(new URI(url))
                     .method("POST", HttpRequest.BodyPublishers.ofString(clientJson))
                     .build();
 
@@ -174,7 +175,7 @@ class CrudClientServletTest {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients/" + client1.getId()))
+                    .uri(new URI(url + "/" + client1.getId()))
                     .GET()
                     .build();
 
@@ -190,7 +191,7 @@ class CrudClientServletTest {
     void getById_ValidClient_ShouldReturnSC_BAD_REQUEST() {
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients/" + client1.getId()))
+                    .uri(new URI(url + "/" + client1.getId()))
                     .GET()
                     .build();
 
@@ -217,7 +218,7 @@ class CrudClientServletTest {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients?sort=" + sort.name()))
+                    .uri(new URI(url + "?sort=" + sort.name()))
                     .GET()
                     .build();
 
@@ -246,7 +247,7 @@ class CrudClientServletTest {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients?sort=" + sort.name()))
+                    .uri(new URI(url + "?sort=" + sort.name()))
                     .GET()
                     .build();
 
@@ -275,7 +276,7 @@ class CrudClientServletTest {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients?sort=" + sort.name()))
+                    .uri(new URI(url + "?sort=" + sort.name()))
                     .GET()
                     .build();
 
@@ -299,7 +300,7 @@ class CrudClientServletTest {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients/stay?clientId="+client1.getId()))
+                    .uri(new URI(url + "/stay?clientId=" + client1.getId()))
                     .GET()
                     .build();
 
@@ -315,7 +316,7 @@ class CrudClientServletTest {
     void calculatePrice_NotExistingEntity_ShouldReturnSC_BAD_REQUEST() {
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/clients/stay?clientId="+client1.getId()))
+                    .uri(new URI(url + "/stay?clientId=" + client1.getId()))
                     .GET()
                     .build();
 
