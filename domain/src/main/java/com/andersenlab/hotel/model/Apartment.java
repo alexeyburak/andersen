@@ -17,9 +17,15 @@ public final class Apartment {
     public Apartment(UUID id, BigDecimal price, BigInteger capacity, boolean availability) {
         this(id, price, capacity, availability, ApartmentStatus.AVAILABLE);
     }
-
+    public Apartment() {
+    }
     public Apartment(UUID id) {
         this.id = id;
+    }
+
+    public Apartment(UUID id, BigDecimal price) {
+        this.id = id;
+        this.price = price;
     }
 
     public Apartment(UUID id, BigDecimal price, BigInteger capacity, boolean availability, ApartmentStatus status) {
@@ -30,8 +36,7 @@ public final class Apartment {
         this.status = status;
     }
 
-    public Apartment() {
-    }
+
 
 }
 
