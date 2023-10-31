@@ -24,35 +24,31 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.UUID;
-
 import static com.andersenlab.hotel.model.ApartmentStatus.RESERVED;
-
 class ApartmentServletIntegrationTest {
-
     private ApartmentService apartmentService;
-    private URI uri;
-    private UUID id;
+    private final URI uri = new URI("http://localhost:8080/apartments");
+    private final UUID id = UUID.fromString("00000000-0000-0000-0000-000000000000");
     private ObjectMapper objectMapper;
     private String path;
     private ServletStarter servletStarter;
     private HotelModule context;
 
+    ApartmentServletIntegrationTest() throws URISyntaxException {
+    }
+
     @BeforeEach
-    void setUp() throws URISyntaxException {
+    void setUp(){
         path = "test-db.json";
         context = new ContextBuilder().initFile(path)
                 .initServices()
                 .initCheckInCheckOut(true)
                 .build();
-
         apartmentService = (ApartmentService) context.apartmentService();
-        uri = new URI("http://localhost:8080/apartments");
-        id = UUID.randomUUID();
         objectMapper = new ObjectMapper();
         servletStarter = ServletStarter.forModule(context);
         servletStarter.run();
     }
-
     @AfterEach
     void teardown() {
         new File(path).delete();
@@ -63,24 +59,18 @@ class ApartmentServletIntegrationTest {
     @Tag("GET")
     void getApartmentByNonExistingId_shouldRespondBadRequest() {
         HttpClient client = HttpClient.newHttpClient();
-
         HttpRequest request;
         try {
-
             request = HttpRequest.newBuilder()
                     .uri(new URI(uri + "/" + id))
                     .GET()
                     .build();
-
         } catch (URISyntaxException e) {
             throw new RuntimeException("Request was failed " + e);
         }
-
         HttpResponse<String> response;
-
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Response was failed " + e);
         }
@@ -95,22 +85,17 @@ class ApartmentServletIntegrationTest {
     @Tag("GET")
     void getApartmentById_shouldRespondStatusOk() {
         apartmentService.save(new Apartment(id));
-
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request;
-
         try {
             request = HttpRequest.newBuilder()
                     .uri(new URI(uri + "/" + id))
                     .GET()
                     .build();
-
         } catch (URISyntaxException e) {
             throw new RuntimeException("Request was failed " + e);
         }
-
         HttpResponse<String> response;
-
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -124,28 +109,22 @@ class ApartmentServletIntegrationTest {
 
     }
 
-
     @Test
     @Tag("GET")
     void getApartmentWithNonExistingId_shouldRespondEmptyApartment() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request;
-
         try {
             request = HttpRequest.newBuilder()
                     .uri(new URI(uri + "/" + id))
                     .GET()
                     .build();
-
         } catch (URISyntaxException e) {
             throw new RuntimeException("Request was failed " + e);
         }
-
         HttpResponse<String> response;
-
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Response was failed " + e);
         }
@@ -158,22 +137,17 @@ class ApartmentServletIntegrationTest {
     void getListOfApartments_shouldReturnStatusCode200() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request;
-
         try {
             request = HttpRequest.newBuilder()
                     .uri(uri)
                     .GET()
                     .build();
-
         } catch (Exception e) {
             throw new RuntimeException("Request was failed " + e);
         }
-
         HttpResponse<String> response;
-
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Response was failed " + e);
         }
@@ -185,22 +159,17 @@ class ApartmentServletIntegrationTest {
     @Tag("DELETE")
     void deleteApartmentWithExistingId_shouldReturnStatusCode200() {
         apartmentService.save(new Apartment(id));
-
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request;
-
         try {
             request = HttpRequest.newBuilder()
                     .uri(uri)
                     .method("DELETE", HttpRequest.BodyPublishers.ofString("{\"id\":\"" + id + "\"}"))
                     .build();
-
         } catch (Exception e) {
             throw new RuntimeException("Request was failed " + e);
         }
-
         HttpResponse<String> response;
-
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -213,29 +182,22 @@ class ApartmentServletIntegrationTest {
         Assertions.assertThat(response.statusCode()).isEqualTo(200);
     }
 
-
     @Test
     @Tag("DELETE")
     void deleteApartmentNonWithExistingId_shouldReturnBadRequest() {
         HttpClient client = HttpClient.newHttpClient();
-
         HttpRequest request;
-
         try {
             request = HttpRequest.newBuilder()
                     .uri(uri)
                     .method("DELETE", HttpRequest.BodyPublishers.ofString("{\"id\":\"" + id + "\"}"))
                     .build();
-
         } catch (Exception e) {
             throw new RuntimeException("Request was failed " + e);
         }
-
-
         HttpResponse<String> response;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Response was failed " + e);
         }
@@ -245,32 +207,24 @@ class ApartmentServletIntegrationTest {
         Assertions.assertThat(response.statusCode()).isEqualTo(400);
     }
 
-
     @Test
     @Tag("POST")
     void addApartment_shouldAddApartmentAndReturnStatusCodeOk() {
         String jsonBody;
-
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request;
-
         try {
             jsonBody = objectMapper.writeValueAsString(new Apartment(id, new BigDecimal(34), BigInteger.valueOf(4), true, RESERVED));
             request = HttpRequest.newBuilder()
                     .uri(uri)
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
-
         } catch (IOException e) {
             throw new RuntimeException("Request was failed. Try to also check object mapper " + e);
         }
-
-
         HttpResponse<String> response;
-
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Response was failed");
         }
@@ -285,26 +239,20 @@ class ApartmentServletIntegrationTest {
     void addExistingApartment_shouldReturnBadRequest() {
         apartmentService.save(new Apartment(id));
         String jsonBody;
-
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request;
-
         try {
             jsonBody = objectMapper.writeValueAsString(new Apartment(id, new BigDecimal(34), BigInteger.valueOf(4), true, RESERVED));
             request = HttpRequest.newBuilder()
                     .uri(uri)
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
-
         } catch (IOException e) {
             throw new RuntimeException("Request was failed. Try to also check object mapper " + e);
         }
-
         HttpResponse<String> response;
-
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Response was failed " + e);
         }
@@ -320,32 +268,24 @@ class ApartmentServletIntegrationTest {
         apartmentService.save(new Apartment(id, new BigDecimal(34), BigInteger.valueOf(4), true, RESERVED));
         BigDecimal newPrice = new BigDecimal(245);
         String jsonBody;
-
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request;
-
         try {
             jsonBody = objectMapper.writeValueAsString(new Apartment(id, newPrice, BigInteger.valueOf(4), true, RESERVED));
             request = HttpRequest.newBuilder()
                     .uri(new URI("http://localhost:8080/apartments/adjust"))
                     .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
-
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException("Request was failed. Try to also check object mapper " + e);
         }
-
-
         HttpResponse<String> response;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Response was failed " + e);
         }
-
         ApartmentEntity apartment = apartmentService.getById(id);
-
         Assertions.assertThat(apartment.price()).isEqualTo(newPrice);
 
         Assertions.assertThat(response.statusCode()).isEqualTo(200);
@@ -355,26 +295,20 @@ class ApartmentServletIntegrationTest {
     @Tag("adjust-apartment-price")
     void notAdjustApartmentPriceIfIdNotExist_shouldReturnBadRequest() {
         String jsonBody;
-
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request;
-
         try {
             jsonBody = objectMapper.writeValueAsString(new Apartment(id, new BigDecimal(678), BigInteger.valueOf(4), true, RESERVED));
             request = HttpRequest.newBuilder()
                     .uri(new URI("http://localhost:8080/apartments/adjust"))
                     .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
-
         } catch (IOException | URISyntaxException e){
             throw new RuntimeException("Request was failed " + e);
         }
-
         HttpResponse<String> response;
-
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Response was failed " + e);
         }

@@ -17,8 +17,10 @@ public final class Apartment {
     public Apartment(UUID id, BigDecimal price, BigInteger capacity, boolean availability) {
         this(id, price, capacity, availability, ApartmentStatus.AVAILABLE);
     }
+
     public Apartment() {
     }
+
     public Apartment(UUID id) {
         this.id = id;
     }

@@ -20,7 +20,6 @@ public class AdjustServlet extends JsonServlet {
         UUID apartmentId = UUID.fromString(body.get("id"));
         BigDecimal price = new BigDecimal(body.get("price"));
         useCase.adjust(apartmentId, price);
-        System.out.println(body);
         return new Response(body);
     }
 }
