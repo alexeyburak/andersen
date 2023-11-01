@@ -1,4 +1,4 @@
-package com.andersenlab.hotel.reader;
+package com.andersenlab.hotel.common.reader;
 
 import lombok.Data;
 import lombok.SneakyThrows;

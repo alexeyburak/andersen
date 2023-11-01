@@ -2,14 +2,17 @@ package com.andersenlab;
 
 import com.andersenlab.hotel.HotelModule;
 
+import com.andersenlab.hotel.common.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.http.ServletStarter;
 import com.andersenlab.hotel.model.Apartment;
+import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientEntity;
 import com.andersenlab.hotel.model.ClientSort;
 import com.andersenlab.hotel.model.ClientStatus;
-import com.andersenlab.hotel.service.ContextBuilder;
+import com.andersenlab.hotel.common.service.ContextBuilder;
+import com.andersenlab.hotel.repository.jdbc.JdbcConnector;
 import com.andersenlab.hotel.service.CrudService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,10 +20,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -39,10 +44,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 class ClientServletsTest {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ClientServletsTest.class);
+    private static String user;
+    private static String password;
+
     final String url = "http://localhost:8080/clients";
 
     AtomicInteger integer = new AtomicInteger(0);
-    String path;
+
     ServletStarter starter;
     HotelModule context;
     ObjectMapper mapper = new ObjectMapper();
@@ -54,13 +64,25 @@ class ClientServletsTest {
     private Apartment apartment1;
     private Apartment apartment2;
 
+    @BeforeAll
+    static void beforeAll() {
+        final PropertyReaderFromFile reader = new PropertyReaderFromFile("application.properties");
+        user = reader.readProperty("jdbc.user");
+        password = reader.readProperty("jdbc.password");
+    }
+
     @BeforeEach
     void setUp() {
-        path = String.format("test%d.json", integer.incrementAndGet());
-        context = new ContextBuilder().initFile(path)
+        String db = "ht21-" + integer.incrementAndGet();
+        JdbcConnector connector = new JdbcConnector("jdbc:h2:~/" + db, user, password)
+                .migrate();
+
+        context = new ContextBuilder().initJdbc(connector)
+                .doRepositoryThreadSafe()
                 .initServices()
                 .initCheckInCheckOut(true)
                 .build();
+
         starter = ServletStarter.forModule(context);
         starter.run();
 
@@ -82,7 +104,18 @@ class ClientServletsTest {
 
     @AfterEach
     void tearDown() {
-        new File(path).delete();
+        try {
+            CrudService<Apartment, ApartmentEntity> apartmentService = context.apartmentService();
+            CrudService<Client, ClientEntity> clientService = context.clientService();
+
+            clientService.delete(client1.getId());
+            clientService.delete(client2.getId());
+            clientService.delete(client3.getId());
+            apartmentService.delete(apartment1.getId());
+            apartmentService.delete(apartment2.getId());
+        } catch (RuntimeException e) {
+            LOG.warn("Failed to tear down {}", e.toString());
+        }
         starter.stop();
     }
 
@@ -188,7 +221,7 @@ class ClientServletsTest {
     }
 
     @Test
-    void getById_ValidClient_ShouldReturnSC_BAD_REQUEST() {
+    void getById_NotValidClient_ShouldReturnSC_BAD_REQUEST() {
         try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(url + "/" + client1.getId()))
@@ -306,7 +339,7 @@ class ClientServletsTest {
 
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            assertThat(new BigDecimal(resp.body())).isEqualTo(apartment1.getPrice().add(apartment2.getPrice()));
+            assertThat(new BigDecimal(resp.body())).isEqualByComparingTo(apartment1.getPrice().add(apartment2.getPrice()));
         } catch (URISyntaxException | IOException | InterruptedException e) {
             Assertions.fail(e.getMessage());
         }
