@@ -1,6 +1,7 @@
 package com.andersenlab;
 
 import com.andersenlab.hotel.HotelModule;
+import com.andersenlab.hotel.common.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.http.ServletStarter;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
@@ -10,6 +11,7 @@ import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -32,6 +34,9 @@ class ApartmentServletIntegrationTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(ApartmentServletIntegrationTest.class);
 
+    private static String user;
+    private static String password;
+
     JdbcConnector connector;
     AtomicInteger integer = new AtomicInteger(0);
 
@@ -41,10 +46,17 @@ class ApartmentServletIntegrationTest {
     private ObjectMapper objectMapper;
     private ServletStarter servletStarter;
 
+    @BeforeAll
+    static void beforeAll() {
+        final PropertyReaderFromFile reader = new PropertyReaderFromFile("application.properties");
+        user = reader.readProperty("jdbc.user");
+        password = reader.readProperty("jdbc.password");
+    }
+
     @BeforeEach
     void setUp() {
         String db = "ht2-" + integer.incrementAndGet();
-        connector = new JdbcConnector("jdbc:h2:~/" + db, "sa", "")
+        connector = new JdbcConnector("jdbc:h2:~/" + db, user, password)
                 .migrate();
 
         HotelModule context = new ContextBuilder().initJdbc(connector)
