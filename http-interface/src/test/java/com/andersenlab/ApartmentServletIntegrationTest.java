@@ -4,7 +4,8 @@ import com.andersenlab.hotel.HotelModule;
 import com.andersenlab.hotel.http.ServletStarter;
 import com.andersenlab.hotel.model.Apartment;
 import com.andersenlab.hotel.model.ApartmentEntity;
-import com.andersenlab.hotel.service.ContextBuilder;
+import com.andersenlab.hotel.repository.jdbc.JdbcConnector;
+import com.andersenlab.hotel.common.service.ContextBuilder;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
@@ -12,8 +13,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -22,24 +24,35 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.andersenlab.hotel.model.ApartmentStatus.RESERVED;
 
 class ApartmentServletIntegrationTest {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ApartmentServletIntegrationTest.class);
+
+    JdbcConnector connector;
+    AtomicInteger integer = new AtomicInteger(0);
+
     private ApartmentService apartmentService;
     private final String uri = "http://localhost:8080/apartments";
     private final UUID id = UUID.fromString("00000000-0000-0000-0000-000000000000");
     private ObjectMapper objectMapper;
-    private String path;
     private ServletStarter servletStarter;
 
     @BeforeEach
     void setUp() {
-        path = "test-db.json";
-        HotelModule context = new ContextBuilder().initFile(path)
+        String db = "ht-" + integer.incrementAndGet();
+        connector = new JdbcConnector("jdbc:h2:~/" + db, "sa", "")
+                .migrate();
+
+        HotelModule context = new ContextBuilder().initJdbc(connector)
+                .doRepositoryThreadSafe()
                 .initServices()
                 .initCheckInCheckOut(true)
                 .build();
+
         apartmentService = (ApartmentService) context.apartmentService();
         objectMapper = new ObjectMapper();
         servletStarter = ServletStarter.forModule(context);
@@ -48,7 +61,11 @@ class ApartmentServletIntegrationTest {
 
     @AfterEach
     void teardown() {
-        new File(path).delete();
+        try {
+            apartmentService.delete(id);
+        } catch (RuntimeException e) {
+            LOG.warn("Tear down with exception {}", e.toString());
+        }
         servletStarter.stop();
     }
 
@@ -197,7 +214,7 @@ class ApartmentServletIntegrationTest {
                 .send(request, HttpResponse.BodyHandlers.ofString());
 
         ApartmentEntity apartment = apartmentService.getById(id);
-        Assertions.assertThat(apartment.price()).isEqualTo(newPrice);
+        Assertions.assertThat(apartment.price()).isEqualByComparingTo(newPrice);
         Assertions.assertThat(response.statusCode()).isEqualTo(202);
     }
 

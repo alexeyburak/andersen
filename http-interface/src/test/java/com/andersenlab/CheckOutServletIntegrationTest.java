@@ -7,7 +7,8 @@ import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientStatus;
-import com.andersenlab.hotel.service.ContextBuilder;
+import com.andersenlab.hotel.common.service.ContextBuilder;
+import com.andersenlab.hotel.repository.jdbc.JdbcConnector;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +18,9 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.File;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URI;
@@ -31,6 +34,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CheckOutServletIntegrationTest {
+    private static final Logger LOG = LoggerFactory.getLogger(CheckOutServletIntegrationTest.class);
+
     private ClientService clientService;
     private ApartmentService apartmentService;
 
@@ -45,17 +50,21 @@ class CheckOutServletIntegrationTest {
 
     AtomicInteger integer = new AtomicInteger(0);
 
-    String path;
+    JdbcConnector connector;
 
     @BeforeEach
     @SneakyThrows
     void setUp() {
-        path = String.format("test-cio%d.json", integer.incrementAndGet());
+        String db = "ht1-" + integer.incrementAndGet();
+        connector = new JdbcConnector("jdbc:h2:~/" + db, "sa", "")
+                .migrate();
 
-        HotelModule context = new ContextBuilder().initFile(path)
+        HotelModule context = new ContextBuilder().initJdbc(connector)
+                .doRepositoryThreadSafe()
                 .initServices()
                 .initCheckInCheckOut(true)
                 .build();
+
         starter = ServletStarter.forModule(context);
         starter.run();
 
@@ -73,36 +82,16 @@ class CheckOutServletIntegrationTest {
 
         uri = new URI("http://localhost:8080/clients/check-out");
         objectMapper = new ObjectMapper();
-//        databaseFile = new File("db.json");
-//
-//        apartmentService = new ApartmentService(new InFileApartmentRepository(databaseFile));
-//        clientService = new ClientService(new InFileClientRepository(databaseFile), apartmentService);
-//
-//        apartmentEntity = new ApartmentEntity(UUID.fromString("00000000-0000-0000-0000-000000000001"),
-//                new BigDecimal(1), BigInteger.ONE, true, ApartmentStatus.AVAILABLE);
-//        apartment = new Apartment(UUID.fromString("00000000-0000-0000-0000-000000000001"),
-//                new BigDecimal(1), BigInteger.ONE, true, ApartmentStatus.AVAILABLE);
-//        client = new Client(UUID.fromString("00000000-0000-0000-0000-000000000001"), "John", ClientStatus.NEW, new HashSet<>(Set.of(apartmentEntity)));
-//
-//        uri = new URI("http://localhost:8080/clients/check-out");
-//        objectMapper = new ObjectMapper();
-//
-//        path = String.format("test-cio%d.json", integer.incrementAndGet());
-//
-//        var context = new ContextBuilder().initFile(path)
-//                .initServices()
-//                .initCheckInCheckOut(true)
-//                .build();
-//        starter = ServletStarter.forModule(context);
-//        starter.run();
     }
 
     @AfterEach
     void tearDown() {
-        apartmentService.delete(apartment.getId());
-        clientService.delete(client.getId());
-
-        new File(path).delete();
+        try {
+            clientService.delete(client.getId());
+            apartmentService.delete(apartment.getId());
+        } catch (RuntimeException e) {
+            LOG.warn("Tear down with exception {}", e.toString());
+        }
         starter.stop();
     }
 

@@ -25,7 +25,7 @@ class JdbcClientRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        JdbcConnector connector = new JdbcConnector("jdbc:h2:~/ht-" + integer.incrementAndGet(), "sa", "password")
+        JdbcConnector connector = new JdbcConnector("jdbc:h2:~/ht-" + integer.incrementAndGet(), "sa", "")
                 .migrate();
 
         target = new JdbcClientRepository(connector);

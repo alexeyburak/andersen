@@ -7,7 +7,8 @@ import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientStatus;
-import com.andersenlab.hotel.service.ContextBuilder;
+import com.andersenlab.hotel.common.service.ContextBuilder;
+import com.andersenlab.hotel.repository.jdbc.JdbcConnector;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +18,9 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.File;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URI;
@@ -31,6 +34,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CheckInServletIntegrationTest {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CheckInServletIntegrationTest.class);
+
     private ClientService clientService;
     private ApartmentService apartmentService;
 
@@ -43,17 +49,21 @@ class CheckInServletIntegrationTest {
 
     ServletStarter starter;
     AtomicInteger integer = new AtomicInteger(0);
-    String path;
+    JdbcConnector connector;
 
     @BeforeEach
     @SneakyThrows
     void setUp() {
-        path = String.format("test-cio%d.json", integer.incrementAndGet());
+        String db = "ht1-" + integer.incrementAndGet();
+        connector = new JdbcConnector("jdbc:h2:~/" + db, "sa", "")
+                .migrate();
 
-        HotelModule context = new ContextBuilder().initFile(path)
+        HotelModule context = new ContextBuilder().initJdbc(connector)
+                .doRepositoryThreadSafe()
                 .initServices()
                 .initCheckInCheckOut(true)
                 .build();
+
         starter = ServletStarter.forModule(context);
         starter.run();
 
@@ -75,10 +85,12 @@ class CheckInServletIntegrationTest {
 
     @AfterEach
     void tearDown() {
-        apartmentService.delete(apartment.getId());
-        clientService.delete(client.getId());
-
-        new File(path).delete();
+        try {
+            clientService.delete(client.getId());
+            apartmentService.delete(apartment.getId());
+        } catch (RuntimeException e) {
+            LOG.warn("Tear down with exception {}", e.toString());
+        }
         starter.stop();
     }
 
