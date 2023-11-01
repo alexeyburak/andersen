@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -66,7 +67,7 @@ class JdbcClientRepositoryTest {
     }
 
     @Test
-    void findAllSorted_EntityPrice_ShouldSortEntitiesFromStoreByPrice() {
+    void findAllSorted_EntityName_ShouldSortEntitiesFromStoreByPrice() {
         ClientSort sort = ClientSort.NAME;
         target.save(client2);
         target.save(client1);
@@ -82,19 +83,19 @@ class JdbcClientRepositoryTest {
     }
 
     @Test
-    void findAllSorted_EntityCapacity_ShouldSortEntitiesFromStoreByCapacity() {
+    void findAllSorted_EntityStatus_ShouldSortEntitiesFromStoreByCapacity() {
         ClientSort sort = ClientSort.STATUS;
         target.save(client1);
+        client2.setStatus(ClientStatus.ADVANCED);
         target.save(client2);
+        List<Client> expected = List.of(
+                client2,
+                client1
+        );
 
         Collection<Client> actual = target.findAllSorted(sort);
 
-        Map<UUID, Client> expected = Map.of(
-                client1.getId(), client1,
-                client2.getId(), client2
-        );
-
-        assertThat(actual).containsExactlyInAnyOrderElementsOf(expected.values());
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test

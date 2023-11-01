@@ -294,34 +294,34 @@ class ClientServletsTest {
         }
     }
 
-//    @Test
-//    void findAllSorted_ClientStatus_ShouldReturnStoredByStatusInJson() {
-//        ClientSort sort = ClientSort.STATUS;
-//        CrudService<Client, ClientEntity> clientService = context.clientService();
-//
-//        clientService.save(client1);
-//        clientService.save(client3);
-//        clientService.save(client2);
-//
-//        List<Client> expected = Stream.of(client1, client2, client3)
-//                .sorted(sort.getComparator())
-//                .toList();
-//
-//        try (HttpClient client = HttpClient.newHttpClient()) {
-//            HttpRequest request = HttpRequest.newBuilder()
-//                    .uri(new URI(url + "?sort=" + sort.name()))
-//                    .GET()
-//                    .build();
-//
-//            HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
-//            List<Client> actual = mapper.readValue(resp.body(), new TypeReference<>() {
-//            });
-//
-//            assertThat(actual).isEqualTo(expected);
-//        } catch (URISyntaxException | IOException | InterruptedException e) {
-//            Assertions.fail(e.getMessage());
-//        }
-//    }
+    @Test
+    void findAllSorted_ClientStatus_ShouldReturnStoredByStatusInJson() {
+        ClientSort sort = ClientSort.STATUS;
+        CrudService<Client, ClientEntity> clientService = context.clientService();
+
+        clientService.save(client1);
+        clientService.save(client3);
+        clientService.save(client2);
+
+        List<Client> expected = Stream.of(client1, client2, client3)
+                .sorted(sort.getComparator())
+                .toList();
+
+        try (HttpClient client = HttpClient.newHttpClient()) {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(url + "?sort=" + sort.name()))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
+            List<Client> actual = mapper.readValue(resp.body(), new TypeReference<>() {
+            });
+
+            assertThat(actual).isEqualTo(expected);
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            Assertions.fail(e.getMessage());
+        }
+    }
 
     @Test
     void calculatePrice_ExistingEntity_ShouldReturnPrice() {
