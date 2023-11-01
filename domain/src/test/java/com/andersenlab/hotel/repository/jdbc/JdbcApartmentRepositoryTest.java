@@ -29,7 +29,7 @@ class JdbcApartmentRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        JdbcConnector connector = new JdbcConnector("jdbc:h2:~/ht-" + integer.incrementAndGet(), "sa", "")
+        JdbcConnector connector = new JdbcConnector("jdbc:h2:~/ht1-" + integer.incrementAndGet(), "sa", "")
                 .migrate();
 
         target = new JdbcApartmentRepository(connector);
