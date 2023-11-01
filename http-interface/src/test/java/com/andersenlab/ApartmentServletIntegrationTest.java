@@ -43,7 +43,7 @@ class ApartmentServletIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        String db = "ht-" + integer.incrementAndGet();
+        String db = "ht2-" + integer.incrementAndGet();
         connector = new JdbcConnector("jdbc:h2:~/" + db, "sa", "")
                 .migrate();
 
