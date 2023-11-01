@@ -1,7 +1,6 @@
 package com.andersenlab.hotel.model;
 
 import lombok.Data;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.UUID;
@@ -37,8 +36,4 @@ public final class Apartment {
         this.availability = availability;
         this.status = status;
     }
-
-
-
 }
-

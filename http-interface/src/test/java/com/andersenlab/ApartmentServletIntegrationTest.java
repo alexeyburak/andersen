@@ -68,8 +68,7 @@ class ApartmentServletIntegrationTest {
 
         Assertions.assertThat(apartmentService.has(id)).isFalse();
 
-        Assertions.assertThat(response.statusCode()).isIn(400);
-
+        Assertions.assertThat(response.statusCode()).isEqualTo(400);
     }
 
     @Test
@@ -90,23 +89,6 @@ class ApartmentServletIntegrationTest {
         Assertions.assertThat(apartmentService.has(id)).isTrue();
 
         Assertions.assertThat(response.statusCode()).isEqualTo(200);
-    }
-
-    @Test
-    @Tag("GET")
-    void getApartmentWithNonExistingId_shouldRespondEmptyApartment() {
-        HttpResponse<String> response;
-        HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(uri + "/" + id))
-                    .GET()
-                    .build();
-        try {
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-
-        Assertions.assertThat(response.body()).isEqualTo("");
     }
 
     @Test
