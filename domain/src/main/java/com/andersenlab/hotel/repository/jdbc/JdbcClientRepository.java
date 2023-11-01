@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
@@ -60,7 +60,7 @@ public final class JdbcClientRepository implements SortableCrudRepository<Client
                         """,
                 sort.name().toLowerCase(Locale.ROOT)
         );
-        Map<UUID, Client> clientMap = new HashMap<>();
+        Map<UUID, Client> clientMap = new LinkedHashMap<>();
 
         try (Connection connection = config.getConnection();
              ResultSet resultSet = connection.createStatement().executeQuery(query)) {

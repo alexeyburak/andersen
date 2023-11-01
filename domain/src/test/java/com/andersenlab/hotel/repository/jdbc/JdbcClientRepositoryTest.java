@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -55,15 +54,14 @@ class JdbcClientRepositoryTest {
         ClientSort sort = ClientSort.ID;
         target.save(client2);
         target.save(client1);
+        List<Client> expected = List.of(
+                client1,
+                client2
+        );
 
         Collection<Client> actual = target.findAllSorted(sort);
 
-        Map<UUID, Client> expected = Map.of(
-                client1.getId(), client1,
-                client2.getId(), client2
-        );
-
-        assertThat(actual).containsExactlyInAnyOrderElementsOf(expected.values());
+        assertThat(actual).containsExactlyElementsOf(expected);
     }
 
     @Test
@@ -71,15 +69,14 @@ class JdbcClientRepositoryTest {
         ClientSort sort = ClientSort.NAME;
         target.save(client2);
         target.save(client1);
+        List<Client> expected = List.of(
+                client1,
+                client2
+        );
 
         Collection<Client> actual = target.findAllSorted(sort);
 
-        Map<UUID, Client> expected = Map.of(
-                client1.getId(), client1,
-                client2.getId(), client2
-        );
-
-        assertThat(actual).containsExactlyInAnyOrderElementsOf(expected.values());
+        assertThat(actual).containsExactlyElementsOf(expected);
     }
 
     @Test
@@ -93,9 +90,9 @@ class JdbcClientRepositoryTest {
                 client1
         );
 
-        Collection<Client> actual = target.findAllSorted(sort);
+        Collection<Client> actual =  target.findAllSorted(sort);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).containsExactlyElementsOf(expected);
     }
 
     @Test
