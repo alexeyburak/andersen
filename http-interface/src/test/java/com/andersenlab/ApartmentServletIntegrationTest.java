@@ -87,7 +87,7 @@ class ApartmentServletIntegrationTest {
     @Tag("GET")
     void getListOfApartments_shouldReturnStatusCode200() throws IOException, InterruptedException {
         final HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
+                .uri(URI.create(uri + "?sort=ID"))
                 .GET()
                 .build();
 
@@ -198,7 +198,7 @@ class ApartmentServletIntegrationTest {
 
         ApartmentEntity apartment = apartmentService.getById(id);
         Assertions.assertThat(apartment.price()).isEqualTo(newPrice);
-        Assertions.assertThat(response.statusCode()).isEqualTo(200);
+        Assertions.assertThat(response.statusCode()).isEqualTo(202);
     }
 
     @Test
