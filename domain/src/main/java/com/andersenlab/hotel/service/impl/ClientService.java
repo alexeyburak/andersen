@@ -5,15 +5,18 @@ import com.andersenlab.hotel.model.ApartmentEntity;
 import com.andersenlab.hotel.model.ApartmentStatus;
 import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientEntity;
-import com.andersenlab.hotel.model.ClientStatus;
 import com.andersenlab.hotel.model.ClientSort;
+import com.andersenlab.hotel.model.ClientStatus;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
 import com.andersenlab.hotel.service.CrudService;
 import com.andersenlab.hotel.usecase.CalculateClientStayCurrentPriceUseCase;
 import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.usecase.ListClientsUseCase;
-import com.andersenlab.hotel.usecase.exception.*;
+import com.andersenlab.hotel.usecase.exception.ApartmentReservedException;
+import com.andersenlab.hotel.usecase.exception.ClientBannedException;
+import com.andersenlab.hotel.usecase.exception.ClientIsAlreadyExistsException;
+import com.andersenlab.hotel.usecase.exception.ClientNotfoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +71,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
 
     @Override
     public List<ClientEntity> list(ClientSort sort) {
-        return store.findAllSorted(ClientSort.valueOf(sort.toString()))
+        return store.findAllSorted(sort)
                 .stream()
                 .map(this::toEntityMapper)
                 .toList();
@@ -135,7 +138,7 @@ public final class ClientService implements CalculateClientStayCurrentPriceUseCa
         return new ClientEntity(client.getId(), client.getName(), client.getStatus(), client.getApartments());
     }
 
-    private Client toClientMapper(ClientEntity client){
+    private Client toClientMapper(ClientEntity client) {
         return new Client(client.id(), client.name(), client.status(), client.apartments());
     }
 }
