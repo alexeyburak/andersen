@@ -6,15 +6,16 @@ import com.andersenlab.hotel.repository.SortableCrudRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
-public class ApartmentRepository implements SortableCrudRepository<Apartment, ApartmentSort> {//
+public class JpaApartmentRepository implements SortableCrudRepository<Apartment, ApartmentSort> {
     EntityManagerFactory entityManagerFactory;
     EntityManager entityManager;
 
-    ApartmentRepository(String JPAUnitName) {
+    JpaApartmentRepository(String JPAUnitName) {
         entityManagerFactory = Persistence.createEntityManagerFactory(JPAUnitName);
         entityManager = entityManagerFactory.createEntityManager();
 
@@ -61,6 +62,12 @@ public class ApartmentRepository implements SortableCrudRepository<Apartment, Ap
     public void update(Apartment entity) {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
+        entityManager.getTransaction().commit();
+    }
+
+    public void truncateTable(){
+        entityManager.getTransaction().begin();
+        entityManager.createNativeQuery("TRUNCATE table apartment").executeUpdate();
         entityManager.getTransaction().commit();
     }
 }

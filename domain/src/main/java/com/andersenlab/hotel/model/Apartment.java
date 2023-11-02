@@ -1,6 +1,7 @@
 package com.andersenlab.hotel.model;
 
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ import java.math.BigInteger;
 import java.util.UUID;
 
 @Data
+@Entity
 public final class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
