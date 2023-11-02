@@ -61,8 +61,8 @@ public class ContextBuilder {
     }
 
     public ContextBuilder initJdbc(JdbcConnector connector) {
-        this.clientRepository = new JdbcClientRepository(connector);
-        this.apartmentRepository = new JdbcApartmentRepository(connector);
+        this.clientRepository = new JdbcClientRepository(connector.getDatasourse());
+        this.apartmentRepository = new JdbcApartmentRepository(connector.getDatasourse());
         return this;
     }
 
