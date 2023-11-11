@@ -1,5 +1,6 @@
 package com.andersenlab.hotel.http;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
@@ -14,7 +15,7 @@ import java.util.Optional;
 public abstract class JsonServlet extends HttpServlet {
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
-    Response get(String uri, Map<String, String[]> parameters) {
+    Response get(String uri, Map<String, String[]> parameters) throws JsonProcessingException {
         return new Response(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 
@@ -51,7 +52,8 @@ public abstract class JsonServlet extends HttpServlet {
                 resp,
                 post(
                         req.getRequestURI(),
-                        objectMapper.readValue(req.getReader(), new TypeReference<>() {})
+                        objectMapper.readValue(req.getReader(), new TypeReference<>() {
+                        })
                 )
         );
     }
@@ -62,18 +64,16 @@ public abstract class JsonServlet extends HttpServlet {
                 resp,
                 put(
                         req.getRequestURI(),
-                        objectMapper.readValue(req.getReader(), new TypeReference<>() {})
+                        objectMapper.readValue(req.getReader(), new TypeReference<>() {
+                        })
                 )
         );
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        respond(
-                resp,
-                delete(
-                        req.getRequestURI(),
-                        objectMapper.readValue(req.getReader(), new TypeReference<>() {})
+        respond(resp, delete(req.getRequestURI(),objectMapper.readValue(req.getReader(), new TypeReference<>() {
+                        })
                 )
         );
     }

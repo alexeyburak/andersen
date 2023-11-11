@@ -1,13 +1,11 @@
 package com.andersenlab.hotel;
 
-import com.andersenlab.hotel.model.Apartment;
-import com.andersenlab.hotel.model.ApartmentSort;
-import com.andersenlab.hotel.model.Client;
-import com.andersenlab.hotel.model.ClientSort;
+import com.andersenlab.hotel.model.*;
 import com.andersenlab.hotel.reader.PropertyReaderFromFile;
 import com.andersenlab.hotel.repository.SortableCrudRepository;
-import com.andersenlab.hotel.repository.infile.InFileApartmentRepository;
 import com.andersenlab.hotel.repository.infile.InFileClientRepository;
+import com.andersenlab.hotel.repository.jdbc.ApartmentJdbcRepository;
+import com.andersenlab.hotel.repository.jpa.ApartmentJpaRepository;
 import com.andersenlab.hotel.service.impl.ApartmentService;
 import com.andersenlab.hotel.service.impl.ClientService;
 import com.andersenlab.hotel.http.ServletStarter;
@@ -15,13 +13,16 @@ import com.andersenlab.hotel.usecase.CheckInClientUseCase;
 import com.andersenlab.hotel.usecase.CheckOutClientUseCase;
 import com.andersenlab.hotel.usecase.impl.BlockedCheckIn;
 import com.andersenlab.hotel.usecase.impl.BlockedCheckOut;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import lombok.SneakyThrows;
-
 import java.io.File;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
+
         final HotelModule context = initContext();
         getStarter(context).run();
     }
@@ -36,7 +37,10 @@ public class Main {
         String abilityApartmentToChange = propertyReaderFromFile.readProperty("apartment.change.enabled");
 
         final File file = getFile(location);
-        final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new InFileApartmentRepository(file);
+
+        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        final EntityManager entityManager = entityManagerFactory.createEntityManager();
+        final SortableCrudRepository<Apartment, ApartmentSort> apartmentRepository = new ApartmentJpaRepository(entityManagerFactory, entityManager);
         final SortableCrudRepository<Client, ClientSort> clientRepository = new InFileClientRepository(file);
 
         final ApartmentService apartmentService = new ApartmentService(apartmentRepository);

@@ -11,17 +11,18 @@ import com.andersenlab.hotel.model.Client;
 import com.andersenlab.hotel.model.ClientEntity;
 import com.andersenlab.hotel.model.Entity;
 import com.andersenlab.hotel.service.CrudService;
+import com.andersenlab.hotel.service.impl.ApartmentService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.EnumUtils;
+import org.hibernate.service.spi.InjectService;
 
 import java.io.PrintStream;
+import java.math.BigInteger;
 import java.util.List;
 
 @AllArgsConstructor
 public final class CreateEntityCommand implements Command {
-
     private static final ApplicationCommand APPLICATION_COMMAND = ApplicationCommand.CREATE;
-
     private final CrudService<Client, ClientEntity> clientService;
     private final CrudService<Apartment, ApartmentEntity> apartmentService;
 

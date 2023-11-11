@@ -32,7 +32,6 @@ class ApartmentServletIntegrationTest {
     private String path;
     private ServletStarter servletStarter;
     private HotelModule context;
-
     @BeforeEach
     void setUp() {
         path = "test-db.json";
